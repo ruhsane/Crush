@@ -14,6 +14,10 @@
 		9D1938022106899B007EE5EC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D1938002106899B007EE5EC /* LaunchScreen.storyboard */; };
 		9D19380D2106899B007EE5EC /* CrushTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D19380C2106899B007EE5EC /* CrushTests.swift */; };
 		9D1938182106899B007EE5EC /* CrushUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1938172106899B007EE5EC /* CrushUITests.swift */; };
+		9D28970821078F1300EAADFC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D28970721078F1300EAADFC /* GoogleService-Info.plist */; };
+		9D28970921078F1300EAADFC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D28970721078F1300EAADFC /* GoogleService-Info.plist */; };
+		9D28970A21078F1300EAADFC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D28970721078F1300EAADFC /* GoogleService-Info.plist */; };
+		E77BEA1C02450A9D1D49B06F /* Pods_Crush.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34BC8388796A50937F95AE80 /* Pods_Crush.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +38,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		049BAFC4728F040ABFB49F54 /* Pods-Crush.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Crush.release.xcconfig"; path = "Pods/Target Support Files/Pods-Crush/Pods-Crush.release.xcconfig"; sourceTree = "<group>"; };
+		34BC8388796A50937F95AE80 /* Pods_Crush.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Crush.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C5574F4C73C2CF9234ED458 /* Pods-Crush.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Crush.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Crush/Pods-Crush.debug.xcconfig"; sourceTree = "<group>"; };
 		9D1937F42106899A007EE5EC /* Crush.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Crush.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D1937F72106899A007EE5EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9D1937F92106899A007EE5EC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +54,7 @@
 		9D1938132106899B007EE5EC /* CrushUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CrushUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D1938172106899B007EE5EC /* CrushUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrushUITests.swift; sourceTree = "<group>"; };
 		9D1938192106899C007EE5EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9D28970721078F1300EAADFC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E77BEA1C02450A9D1D49B06F /* Pods_Crush.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +90,8 @@
 				9D19380B2106899B007EE5EC /* CrushTests */,
 				9D1938162106899B007EE5EC /* CrushUITests */,
 				9D1937F52106899A007EE5EC /* Products */,
+				F7886D56AF04FCBCD4EC349C /* Pods */,
+				DB9B7AA26FFAF08D9B044846 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -97,6 +108,7 @@
 		9D1937F62106899A007EE5EC /* Crush */ = {
 			isa = PBXGroup;
 			children = (
+				9D28970721078F1300EAADFC /* GoogleService-Info.plist */,
 				9D1937F72106899A007EE5EC /* AppDelegate.swift */,
 				9D1937F92106899A007EE5EC /* ViewController.swift */,
 				9D1937FB2106899A007EE5EC /* Main.storyboard */,
@@ -125,6 +137,23 @@
 			path = CrushUITests;
 			sourceTree = "<group>";
 		};
+		DB9B7AA26FFAF08D9B044846 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				34BC8388796A50937F95AE80 /* Pods_Crush.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F7886D56AF04FCBCD4EC349C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7C5574F4C73C2CF9234ED458 /* Pods-Crush.debug.xcconfig */,
+				049BAFC4728F040ABFB49F54 /* Pods-Crush.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -132,9 +161,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9D19381C2106899C007EE5EC /* Build configuration list for PBXNativeTarget "Crush" */;
 			buildPhases = (
+				7296A029713600590C978EC3 /* [CP] Check Pods Manifest.lock */,
 				9D1937F02106899A007EE5EC /* Sources */,
 				9D1937F12106899A007EE5EC /* Frameworks */,
 				9D1937F22106899A007EE5EC /* Resources */,
+				E7E7107F2C5A501874BA9DC7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -230,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D1938022106899B007EE5EC /* LaunchScreen.storyboard in Resources */,
+				9D28970821078F1300EAADFC /* GoogleService-Info.plist in Resources */,
 				9D1937FF2106899B007EE5EC /* Assets.xcassets in Resources */,
 				9D1937FD2106899A007EE5EC /* Main.storyboard in Resources */,
 			);
@@ -239,6 +271,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D28970921078F1300EAADFC /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,10 +279,54 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D28970A21078F1300EAADFC /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7296A029713600590C978EC3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Crush-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E7E7107F2C5A501874BA9DC7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Crush/Pods-Crush-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Crush/Pods-Crush-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9D1937F02106899A007EE5EC /* Sources */ = {
@@ -428,6 +505,7 @@
 		};
 		9D19381D2106899C007EE5EC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7C5574F4C73C2CF9234ED458 /* Pods-Crush.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -446,6 +524,7 @@
 		};
 		9D19381E2106899C007EE5EC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 049BAFC4728F040ABFB49F54 /* Pods-Crush.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
