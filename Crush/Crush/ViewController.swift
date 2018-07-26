@@ -12,15 +12,44 @@ import Alamofire
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var enterNumberTextField: UITextField!
+    @IBAction func sendButton(_ sender: UIButton) {
+        sendText()
+    }
+    
+    func showKeyboard() {
+        self.enterNumberTextField.becomeFirstResponder()
+    }
+    
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-       
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+
+        view.addGestureRecognizer(tap)
+    }
+
+    @objc func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+
+    func sendText() {
         let accountSID = "ACc89f0f2bdefcc860202e3dce683e8855"
         let authToken = "42a5ab35149266391e7649e0c7927c74"
         
         let url = "https://api.twilio.com/2010-04-01/Accounts/\(accountSID)/Messages"
-        let parameters = ["From": "9032943794", "To": "9293539492", "Body": "Someone labeled you as his/her crush on 'Crush' app. Download the app to see."]
+        let int = Int(enterNumberTextField.text!)!
+        let str = String(int)
+        let parameters = ["From": "9032943794", "To": str, "Body": "Someone labeled you as his/her crush on 'Crush' app. Download the app to see."] as [String : Any]
         
         Alamofire.request(url, method: .post, parameters: parameters)
             .authenticate(user: accountSID, password: authToken)
@@ -29,15 +58,7 @@ class ViewController: UIViewController {
         }
         
         RunLoop.main.run()
-        
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    func 
 
 }
 
