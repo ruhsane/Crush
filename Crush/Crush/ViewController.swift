@@ -12,16 +12,26 @@ import Alamofire
 
 class ViewController: UIViewController {
 
+    @IBAction func loginButton(_ sender: UIButton) {
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        let vc = storyboard.instantiateViewController(withIdentifier: "LoginPage")
+//        self.present(vc, animated: true, completion: nil)
+    }
+    
     @IBOutlet weak var enterNumberTextField: UITextField!
     @IBAction func sendButton(_ sender: UIButton) {
+//        print ( "text sent" )
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil);
+//        let vc = storyboard.instantiateViewController(withIdentifier: "WaitForResponse")
+//        self.present(vc, animated: true, completion: nil)
         sendText()
+
     }
+    
     
     func showKeyboard() {
         self.enterNumberTextField.becomeFirstResponder()
     }
-    
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
