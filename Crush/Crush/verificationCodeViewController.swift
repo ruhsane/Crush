@@ -38,6 +38,8 @@ class verificationCodeViewController: UIViewController {
                 let userInfo = user?.providerData[0]
                 print("Provider ID: \(String(describing: userInfo?.providerID))")
                 self.performSegue(withIdentifier: "logged", sender: Any?.self)
+                
+
             }
         }
     }

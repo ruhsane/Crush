@@ -1,6 +1,5 @@
 PODS:
   - Alamofire (4.7.3)
-  - CountryPickerSwift (1.7.1)
   - Firebase/Auth (5.4.1):
     - Firebase/CoreOnly
     - FirebaseAuth (= 5.0.2)
@@ -9,6 +8,9 @@ PODS:
     - FirebaseAnalytics (= 5.0.1)
   - Firebase/CoreOnly (5.4.1):
     - FirebaseCore (= 5.0.6)
+  - Firebase/Database (5.4.1):
+    - Firebase/CoreOnly
+    - FirebaseDatabase (= 5.0.2)
   - FirebaseAnalytics (5.0.1):
     - FirebaseCore (~> 5.0)
     - FirebaseInstanceID (~> 3.0)
@@ -19,67 +21,55 @@ PODS:
     - GTMSessionFetcher/Core (~> 1.1)
   - FirebaseCore (5.0.6):
     - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
+  - FirebaseDatabase (5.0.2):
+    - FirebaseCore (~> 5.0)
+    - leveldb-library (~> 1.18)
   - FirebaseInstanceID (3.1.1):
     - FirebaseCore (~> 5.0)
-  - FirebaseUI/Auth (5.1.3):
-    - Firebase/Auth (~> 5.0)
   - GoogleToolboxForMac/Defines (2.1.4)
   - "GoogleToolboxForMac/NSData+zlib (2.1.4)":
     - GoogleToolboxForMac/Defines (= 2.1.4)
   - GTMSessionFetcher/Core (1.2.0)
+  - leveldb-library (1.20)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
-  - PhoneNumberKit (2.0.0):
-    - PhoneNumberKit/PhoneNumberKitCore (= 2.0.0)
-    - PhoneNumberKit/UIKit (= 2.0.0)
-  - PhoneNumberKit/PhoneNumberKitCore (2.0.0)
-  - PhoneNumberKit/UIKit (2.0.0):
-    - PhoneNumberKit/PhoneNumberKitCore
-  - PhoneVerificationController (2.0.2):
-    - CountryPickerSwift (~> 1.4)
-    - PhoneNumberKit (~> 2.0.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
   - Firebase/Auth
   - Firebase/Core
-  - FirebaseUI/Auth
-  - PhoneVerificationController
+  - Firebase/Database
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
-    - CountryPickerSwift
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
     - FirebaseCore
+    - FirebaseDatabase
     - FirebaseInstanceID
-    - FirebaseUI
     - GoogleToolboxForMac
     - GTMSessionFetcher
+    - leveldb-library
     - nanopb
-    - PhoneNumberKit
-    - PhoneVerificationController
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
-  CountryPickerSwift: d46dcaadc64fd6e0f00c98dd23a432de858a5193
   Firebase: 355bd535bfdacaa82a7fe8d9784115edefd6fc03
   FirebaseAnalytics: b3628aea54c50464c32c393fb2ea032566e7ecc2
   FirebaseAuth: 096e457cdd4274412a66c4a35874787e411f5a03
   FirebaseCore: 4c28e3b9708ba48a765e76515f913a71596eb5dd
+  FirebaseDatabase: 27be5ac5bc75e0b17537b2bbfada8258addcc8cd
   FirebaseInstanceID: f3f0657372592ecdfdfe2cac604a5a75758376a6
-  FirebaseUI: 6d3f86249a4de8288424e154c9ff1a976aae3910
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
   GTMSessionFetcher: 0c4baf0a73acd0041bf9f71ea018deedab5ea84e
+  leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
-  PhoneNumberKit: 073b3cef30c2a64ddcd623ea5953bc84bb5b3fc4
-  PhoneVerificationController: 74cf58ebd517135d350011ffbff05a9429a72e51
 
-PODFILE CHECKSUM: 57c97f2f9867af3c51fb2fc55c5e7d224f1998bb
+PODFILE CHECKSUM: 9c8e977f50fa66c0202fbe554176768600a4d5de
 
 COCOAPODS: 1.5.3

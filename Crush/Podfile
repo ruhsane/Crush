@@ -7,8 +7,7 @@ target 'Crush' do
         
 		pod 'Firebase/Core'
         pod 'Firebase/Auth'
-        pod 'PhoneVerificationController'
-        pod 'FirebaseUI/Auth'
+        pod 'Firebase/Database'
         pod 'Alamofire', '~> 4.7'
 
 end
