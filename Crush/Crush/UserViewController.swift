@@ -7,29 +7,85 @@
 //
 
 import UIKit
+import Alamofire
+import FirebaseAuth
+import FirebaseDatabase
+
 
 class UserViewController: UIViewController {
-
+    //user part
+    
+    @IBOutlet weak var crushNumber: UITextField!
+    @IBAction func checkButton(_ sender: Any) {
+    }
+    
+    //crush part
+    @IBOutlet weak var enterNumberTextField: UITextField!
+    
+    @IBAction func sendButton(_ sender: UIButton) {
+        
+        sendText { (completed) in
+            
+            if completed == true{
+                let user = Auth.auth().currentUser
+                let userAtt = ["CrushNumber": self.enterNumberTextField.text]
+                let ref = Database.database().reference().child("Users").child((user?.uid)!)
+                
+                ref.updateChildValues(userAtt)
+                
+            }
+        }
+        
+        
+    }
+    
+    func showKeyboard() {
+        self.enterNumberTextField.becomeFirstResponder()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        // Do any additional setup after loading the view, typically from a nib.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        
+        view.addGestureRecognizer(tap)
     }
-
+    
+    
+    @objc func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func sendText(completion: @escaping(Bool)->()) {
+        let accountSID = "ACc89f0f2bdefcc860202e3dce683e8855"
+        let authToken = "42a5ab35149266391e7649e0c7927c74"
+        
+        let url = "https://api.twilio.com/2010-04-01/Accounts/\(accountSID)/Messages"
+        let int = Int(enterNumberTextField.text!)!
+        let str = String(int)
+        let parameters = ["From": "9032943794", "To": str, "Body": "Someone labeled you as his/her crush on 'Crush' app. Download the app to see."] as [String : Any]
+        
+        Alamofire.request(url, method: .post, parameters: parameters)
+            .authenticate(user: accountSID, password: authToken)
+            .responseJSON { response in
+                let status = response.response?.statusCode
+                print(status)
+                if status! > 200 && status! < 299{
+                    return completion (true)
+                }
+                else{
+                    return completion(false)
+                }
+        }
+        
+        RunLoop.main.run()
     }
-    */
-
+    
 }
