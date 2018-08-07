@@ -8,6 +8,8 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseDatabase
+
 
 class verificationCodeViewController: UIViewController {
 
@@ -39,7 +41,11 @@ class verificationCodeViewController: UIViewController {
                 print("Provider ID: \(String(describing: userInfo?.providerID))")
                 self.performSegue(withIdentifier: "logged", sender: Any?.self)
                 
-
+                //save number to firebase
+                let userRef = Database.database().reference().child("Users").child((user?.uid)!)
+                
+                let userAtt = ["myNumber": user?.phoneNumber]
+                userRef.setValue(userAtt)
             }
         }
     }
