@@ -13,13 +13,18 @@ import FirebaseDatabase
 
 
 class UserViewController: UIViewController {
-    //user part
+    var ref: DatabaseReference!
+
     
-    @IBOutlet weak var crushNumber: UITextField!
-    @IBAction func checkButton(_ sender: Any) {
+    @IBAction func SignOut(_ sender: UIButton) {
+        UserDefaults.standard.set(false, forKey:  "isLoggedIn")
+        UserDefaults.standard.synchronize()
+        
+        let LoginController = LoginPage()
+        present(LoginController, animated: true, completion: nil)
     }
     
-    //crush part
+    @IBOutlet weak var account: UILabel!
     @IBOutlet weak var enterNumberTextField: UITextField!
     
     @IBAction func sendButton(_ sender: UIButton) {
@@ -27,11 +32,11 @@ class UserViewController: UIViewController {
         sendText { (completed) in
             
             if completed == true{
+
                 let user = Auth.auth().currentUser
                 let userAtt = ["CrushNumber": self.enterNumberTextField.text]
-                let ref = Database.database().reference().child("Users").child((user?.uid)!)
-                
-                ref.updateChildValues(userAtt)
+                self.ref.child("Users").child((user?.uid)!)
+                self.ref.updateChildValues(userAtt)
                 
             }
         }
@@ -45,12 +50,16 @@ class UserViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        let ref = Database.database().reference()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         tap.cancelsTouchesInView = false
         
         view.addGestureRecognizer(tap)
     }
+    
+    fileprivate func isLoggedIn() -> Bool {
+        return UserDefaults.standard.bool(forKey: "isLoggedIn")
+     }
     
     
     @objc func dismissKeyboard() {
@@ -89,3 +98,4 @@ class UserViewController: UIViewController {
     }
     
 }
+

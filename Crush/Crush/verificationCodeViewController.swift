@@ -46,6 +46,13 @@ class verificationCodeViewController: UIViewController {
                 
                 let userAtt = ["myNumber": user?.phoneNumber]
                 userRef.setValue(userAtt)
+                
+                let rootViewController = UIApplication.shared.keyWindow?.rootViewController
+                guard let UserViewController = rootViewController as? UserViewController else{return}
+  
+            
+                UserDefaults.standard.set(true, forKey: "isLoggedIn")
+                UserDefaults.standard.synchronize() 
             }
         }
     }

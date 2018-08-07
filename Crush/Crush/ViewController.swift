@@ -13,6 +13,7 @@ import FirebaseDatabase
 
 
 class ViewController: UIViewController {
+    var ref: DatabaseReference!
 
     @IBAction func loginButton(_ sender: UIButton) {
 //        let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -29,10 +30,13 @@ class ViewController: UIViewController {
             if completed == true{
                 let user = Auth.auth().currentUser
                 let userAtt = ["CrushNumber": self.enterNumberTextField.text]
-                let ref = Database.database().reference().child("Users").child((user?.uid)!)
+                self.ref.child("Users").child((user?.uid)!)
 
-                ref.updateChildValues(userAtt)
+                self.ref.updateChildValues(userAtt)
                 
+                self.ref.child("Loved").child("some number")
+                self.ref.setValue(["Number":"Your number"])
+
             }
         }
 
@@ -46,7 +50,8 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        let ref = Database.database().reference()
+
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         tap.cancelsTouchesInView = false
 
