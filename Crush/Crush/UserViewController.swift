@@ -17,8 +17,16 @@ class UserViewController: UIViewController {
 
     
     @IBAction func SignOut(_ sender: UIButton) {
-        UserDefaults.standard.set(false, forKey:  "isLoggedIn")
-        UserDefaults.standard.synchronize()
+        do{
+            try Auth.auth().signOut()
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let loginVC = storyboard.instantiateViewController(withIdentifier: "loginVC")
+            
+            self.present(loginVC,animated: true)
+        }
+        catch{
+            
+        }
         
         let LoginController = LoginPage()
         present(LoginController, animated: true, completion: nil)

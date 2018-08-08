@@ -30,20 +30,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UIApplication.shared.registerForRemoteNotifications()
         }
     
-//        let user = Auth.auth().currentUser
-//
-//        if user != nil{
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            let mainVC = storyboard.instantiateViewController(withIdentifier: "mainVC")
-//            window?.rootViewController = mainVC
-//            window?.makeKeyAndVisible()
-//        } else {
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            let loginVC = storyboard.instantiateViewController(withIdentifier: "loginVC")
-//            window?.rootViewController = loginVC
-//            window?.makeKeyAndVisible()
-//        }
-//        
+        let user = Auth.auth().currentUser
+
+        if user != nil{
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let mainVC = storyboard.instantiateViewController(withIdentifier: "mainVC")
+            window?.rootViewController = mainVC
+            window?.makeKeyAndVisible()
+        } else {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let loginVC = storyboard.instantiateViewController(withIdentifier: "loginVC")
+            window?.rootViewController = loginVC
+            window?.makeKeyAndVisible()
+        }
+        
         return true
    }
 

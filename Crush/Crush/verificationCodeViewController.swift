@@ -40,8 +40,10 @@ class verificationCodeViewController: UIViewController {
                 let userInfo = user?.providerData[0]
                 print("Provider ID: \(String(describing: userInfo?.providerID))")
                 self.performSegue(withIdentifier: "logged", sender: Any?.self)
-                
-                //save number to firebase
+        
+//                let mainVC = self.storyboard?.instantiateViewController(withIdentifier: "mainVC") as! mainVC
+
+
                 let userRef = Database.database().reference().child("Users").child((user?.uid)!)
                 
                 let userAtt = ["myNumber": user?.phoneNumber]
@@ -49,10 +51,10 @@ class verificationCodeViewController: UIViewController {
                 
                 let rootViewController = UIApplication.shared.keyWindow?.rootViewController
                 guard let UserViewController = rootViewController as? UserViewController else{return}
-  
-            
+
+
                 UserDefaults.standard.set(true, forKey: "isLoggedIn")
-                UserDefaults.standard.synchronize() 
+                UserDefaults.standard.synchronize()
             }
         }
     }
