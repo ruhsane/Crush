@@ -27,9 +27,8 @@ class UserViewController: UIViewController {
         catch{
             
         }
-        
-        let LoginController = LoginPage()
-        present(LoginController, animated: true, completion: nil)
+//        let LoginController = LoginPage()
+//        present(LoginController, animated: true, completion: nil)
     }
     
     @IBOutlet weak var account: UILabel!
@@ -40,18 +39,16 @@ class UserViewController: UIViewController {
         sendText { (completed) in
             
             if completed == true{
-
-                let user = Auth.auth().currentUser
-                let userAtt = ["CrushNumber": self.enterNumberTextField.text]
-                self.ref.child("Users").child((user?.uid)!)
-                self.ref.updateChildValues(userAtt)
+                let ref = Database.database().reference()
                 
-                self.ref.child("Loved").child("some number")
-                self.ref.setValue(["Number":"Your number"])
+                //add crush number under user uid
+                let user = Auth.auth().currentUser
+                
+                ref.child("Users").child((user?.uid)!).child("CrushNumber").setValue(self.enterNumberTextField.text)
+
+                ref.child("Loved").child(self.enterNumberTextField.text!).child("Followers").updateChildValues([(user?.phoneNumber)! : true])
             }
         }
-        
-        
     }
     
     func showKeyboard() {
@@ -60,7 +57,6 @@ class UserViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let ref = Database.database().reference()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         tap.cancelsTouchesInView = false
         

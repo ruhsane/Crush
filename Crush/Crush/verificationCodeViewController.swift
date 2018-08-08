@@ -40,14 +40,11 @@ class verificationCodeViewController: UIViewController {
                 let userInfo = user?.providerData[0]
                 print("Provider ID: \(String(describing: userInfo?.providerID))")
                 self.performSegue(withIdentifier: "logged", sender: Any?.self)
-        
-//                let mainVC = self.storyboard?.instantiateViewController(withIdentifier: "mainVC") as! mainVC
-
 
                 let userRef = Database.database().reference().child("Users").child((user?.uid)!)
                 
                 let userAtt = ["myNumber": user?.phoneNumber]
-                userRef.setValue(userAtt)
+                userRef.updateChildValues(userAtt)
                 
                 let rootViewController = UIApplication.shared.keyWindow?.rootViewController
                 guard let UserViewController = rootViewController as? UserViewController else{return}
