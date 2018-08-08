@@ -191,7 +191,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter YOUR crush's number..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k08-YY-PCA">
-                                        <rect key="frame" x="60" y="222" width="255" height="30"/>
+                                        <rect key="frame" x="32" y="222" width="309" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <rect key="contentStretch" x="1" y="0.0" width="1" height="1"/>
                                         <nil key="textColor"/>
@@ -221,6 +221,9 @@
                                         <rect key="frame" x="90" y="318" width="194" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Check if the numbers match"/>
+                                        <connections>
+                                            <action selector="checkButton:" destination="W6X-Tq-Cko" eventType="touchUpInside" id="f1Z-Q8-oWg"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MeS-0O-Zfv">
                                         <rect key="frame" x="157" y="500" width="60" height="30"/>
@@ -247,10 +250,10 @@
             </objects>
             <point key="canvasLocation" x="2504.8000000000002" y="-177.66116941529236"/>
         </scene>
-        <!--View Controller-->
+        <!--Not Matched-->
         <scene sceneID="Rzd-u9-dxO">
             <objects>
-                <viewController id="JNb-2g-rUp" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="notMatched" id="JNb-2g-rUp" customClass="notMatched" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rGI-fF-CbR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -283,10 +286,10 @@
             </objects>
             <point key="canvasLocation" x="3416.8000000000002" y="297.30134932533736"/>
         </scene>
-        <!--View Controller-->
+        <!--Matched-->
         <scene sceneID="SVG-6h-xOj">
             <objects>
-                <viewController id="HYy-el-8XB" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Matched" id="HYy-el-8XB" customClass="Matched" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Mt4-wm-cns">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

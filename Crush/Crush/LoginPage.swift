@@ -8,22 +8,34 @@
 
 import UIKit
 import FirebaseAuth
+import CountryPickerView
 
 
-class LoginPage: UIViewController {
+class LoginPage: UIViewController, CountryPickerViewDelegate {
 
+    var code = "+1"
+    func countryPickerView(_ countryPickerView: CountryPickerView, didSelectCountry country: Country) {
+        self.code = country.code
+    }
+    
     @IBOutlet weak var enterPhoneNumber: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let cpv = CountryPickerView(frame: CGRect(x: 0, y: 0, width: 100, height: 20))
+        cpv.delegate = self
+        enterPhoneNumber.leftView = cpv
+        enterPhoneNumber.leftViewMode = .always
+
     }
     
     @IBAction func confirmButton(_ sender: Any) {
-        let alert = UIAlertController(title: "Phone number", message: "Is this your phone number? \n \(enterPhoneNumber.text!)", preferredStyle: .alert)
+        let num = self.code + self.enterPhoneNumber.text!
+        let alert = UIAlertController(title: "Phone number", message: "Is this your phone number? \n \(num)", preferredStyle: .alert)
         let action = UIAlertAction(title: "Yes", style: .default) { (UIAlertAction) in
             // check if phone numberis proper and do stuff with it?
             
-            PhoneAuthProvider.provider().verifyPhoneNumber(self.enterPhoneNumber.text!, uiDelegate: nil) { (verificationID, error) in
+            PhoneAuthProvider.provider().verifyPhoneNumber(num, uiDelegate: nil) { (verificationID, error) in
                 if error != nil {
                     print("error: \(String(describing: error?.localizedDescription))")
                 } else {

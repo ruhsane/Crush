@@ -10,11 +10,12 @@ import UIKit
 import Alamofire
 import FirebaseAuth
 import FirebaseDatabase
+import CountryPickerView
 
+class UserViewController: UIViewController, CountryPickerViewDelegate {
 
-class UserViewController: UIViewController {
     var ref: DatabaseReference!
-
+    var code = "+1"
     
     @IBAction func SignOut(_ sender: UIButton) {
         do{
@@ -31,8 +32,21 @@ class UserViewController: UIViewController {
 //        present(LoginController, animated: true, completion: nil)
     }
     
-    @IBOutlet weak var account: UILabel!
     @IBOutlet weak var enterNumberTextField: UITextField!
+    
+    @IBAction func checkButton(_ sender: Any) {
+        
+        //if the number is under loved/Auth.phonenumber/
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let Matched = storyboard.instantiateViewController(withIdentifier: "Matched")
+        self.present(Matched,animated: true)
+        
+//        else
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        let notMatched = storyboard.instantiateViewController(withIdentifier: "notMatched")
+//        self.present(notMatched,animated: true)
+
+    }
     
     @IBAction func sendButton(_ sender: UIButton) {
         
@@ -43,10 +57,10 @@ class UserViewController: UIViewController {
                 
                 //add crush number under user uid
                 let user = Auth.auth().currentUser
-                
-                ref.child("Users").child((user?.uid)!).child("CrushNumber").setValue(self.enterNumberTextField.text)
+                let num = self.code + self.enterNumberTextField.text!
+                ref.child("Users").child((user?.uid)!).child("CrushNumber").setValue(num)
 
-                ref.child("Loved").child(self.enterNumberTextField.text!).child("Followers").updateChildValues([(user?.phoneNumber)! : true])
+            ref.child("Loved").child(num).child("Followers").updateChildValues([(user?.phoneNumber)! : true])
             }
         }
     }
@@ -57,11 +71,18 @@ class UserViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let cpv = CountryPickerView(frame: CGRect(x: 0, y: 0, width: 100, height: 20))
+        cpv.delegate = self
+        enterNumberTextField.leftView = cpv
+        enterNumberTextField.leftViewMode = .always
+
+    
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         tap.cancelsTouchesInView = false
         
         view.addGestureRecognizer(tap)
     }
+
     
     fileprivate func isLoggedIn() -> Bool {
         return UserDefaults.standard.bool(forKey: "isLoggedIn")
@@ -85,7 +106,10 @@ class UserViewController: UIViewController {
         let url = "https://api.twilio.com/2010-04-01/Accounts/\(accountSID)/Messages"
         let int = Int(enterNumberTextField.text!)!
         let str = String(int)
-        let parameters = ["From": "9032943794", "To": str, "Body": "Someone labeled you as his/her crush on 'Crush' app. Download the app to see."] as [String : Any]
+        
+    //    let code = Country.phoneCode
+        let num = self.code + str
+        let parameters = ["From": "9032943794", "To": num, "Body": "Someone labeled you as his/her crush on 'Crush' app. Download the app to see."] as [String : Any]
         
         Alamofire.request(url, method: .post, parameters: parameters)
             .authenticate(user: accountSID, password: authToken)
@@ -102,6 +126,8 @@ class UserViewController: UIViewController {
         
         RunLoop.main.run()
     }
-    
+    func countryPickerView(_ countryPickerView: CountryPickerView, didSelectCountry country: Country) {
+         self.code = country.code
+    }
 }
 
