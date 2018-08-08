@@ -25,22 +25,11 @@ class ViewController: UIViewController {
     
     @IBAction func sendButton(_ sender: UIButton) {
 
-        sendText { (completed) in
-            
-            if completed == true{
-                let user = Auth.auth().currentUser
-                let userAtt = ["CrushNumber": self.enterNumberTextField.text]
-                self.ref.child("Users").child((user?.uid)!)
-
-                self.ref.updateChildValues(userAtt)
-                
-                self.ref.child("Loved").child("some number")
-                self.ref.setValue(["Number":"Your number"])
-
-            }
-        }
-
-        
+        //alert: login first
+        let alert = UIAlertController(title: "Login First", message: "Please Login First", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+        alert.addAction(ok)
+        self.present(alert, animated: true, completion: nil)
     }
     
     
@@ -50,7 +39,6 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let ref = Database.database().reference()
 
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         tap.cancelsTouchesInView = false
@@ -69,30 +57,6 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    func sendText(completion: @escaping(Bool)->()) {
-        let accountSID = "ACc89f0f2bdefcc860202e3dce683e8855"
-        let authToken = "42a5ab35149266391e7649e0c7927c74"
-        
-        let url = "https://api.twilio.com/2010-04-01/Accounts/\(accountSID)/Messages"
-        let int = Int(enterNumberTextField.text!)!
-        let str = String(int)
-        let parameters = ["From": "9032943794", "To": str, "Body": "Someone labeled you as his/her crush on 'Crush' app. Download the app to see."] as [String : Any]
-        
-        Alamofire.request(url, method: .post, parameters: parameters)
-            .authenticate(user: accountSID, password: authToken)
-            .responseJSON { response in
-                let status = response.response?.statusCode
-                print(status)
-                if status! > 200 && status! < 299{
-                    return completion (true)
-                }
-                else{
-                    return completion(false)
-                }
-        }
-        
-        RunLoop.main.run()
-    }
 
 }
 

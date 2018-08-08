@@ -46,6 +46,8 @@ class UserViewController: UIViewController {
                 self.ref.child("Users").child((user?.uid)!)
                 self.ref.updateChildValues(userAtt)
                 
+                self.ref.child("Loved").child("some number")
+                self.ref.setValue(["Number":"Your number"])
             }
         }
         
