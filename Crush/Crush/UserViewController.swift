@@ -40,46 +40,52 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
         let ref = Database.database().reference()
         let user = Auth.auth().currentUser
         let num = self.code + self.enterNumberTextField.text!
-        ref.child("Users").child((user?.uid)!).child("CrushNumber").setValue(num)
+       
+        let alert = UIAlertController(title: "Phone number", message: "Is this your phone number? \n \(num)", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Yes", style: .default){ (UIAlertAction) in
+            ref.child("Users").child((user?.uid)!).child("CrushNumber").setValue(num)
 
-        ref.child("Loved").observe(.value) { (snapshot) in
-            if snapshot.hasChild((user?.phoneNumber)!){
-                ref.child("Loved").child((user?.phoneNumber)!).child("Followers").observe(.value) { (snapshot) in
-                    
-                    if snapshot.hasChild(num){
+            ref.child("Loved").observe(.value) { (snapshot) in
+                if snapshot.hasChild((user?.phoneNumber)!){
+                    ref.child("Loved").child((user?.phoneNumber)!).child("Followers").observe(.value) { (snapshot) in
                         
-                        print("matched")
-                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                        let Matched = storyboard.instantiateViewController(withIdentifier: "Matched")
-                        self.present(Matched,animated: true)
-                        let couple = ref.child("Matched").childByAutoId()
-                        couple.updateChildValues(["A" : user?.phoneNumber])
-                        couple.updateChildValues(["B" : num])
-                        
-                        ref.child("Loved").child(num).child("Followers").updateChildValues([(user?.phoneNumber)! : true])
-                        
+                        if snapshot.hasChild(num){
+                            
+                            print("matched")
+                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                            let Matched = storyboard.instantiateViewController(withIdentifier: "Matched")
+                            self.present(Matched,animated: true)
+                            let couple = ref.child("Matched").childByAutoId()
+                            couple.updateChildValues(["A" : user?.phoneNumber])
+                            couple.updateChildValues(["B" : num])
+                            
+                            ref.child("Loved").child(num).child("Followers").updateChildValues([(user?.phoneNumber)! : true])
+                            
 
-                    }else{
-                        
-                        print("not matched")
-                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                        let notMatched = storyboard.instantiateViewController(withIdentifier: "notMatched") as! NotMatchedViewController
-                        notMatched.phoneNumber = num
-                        self.present(notMatched,animated: true)
+                        }else{
+                            
+                            print("not matched")
+                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                            let notMatched = storyboard.instantiateViewController(withIdentifier: "notMatched") as! NotMatchedViewController
+                            notMatched.phoneNumber = num
+                            self.present(notMatched,animated: true)
+                        }
                     }
+                    
+                }else{
+                    
+                    print("no one labeled you as their crush.")
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let notMatched = storyboard.instantiateViewController(withIdentifier: "notMatched") as! NotMatchedViewController
+                    notMatched.phoneNumber = num
+                    self.present(notMatched,animated: true)
                 }
-                
-            }else{
-                
-                print("no one labeled you as their crush.")
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let notMatched = storyboard.instantiateViewController(withIdentifier: "notMatched") as! NotMatchedViewController
-                notMatched.phoneNumber = num
-                self.present(notMatched,animated: true)
             }
         }
-        
-
+        let cancel = UIAlertAction(title: "No", style: .cancel, handler: nil)
+        alert.addAction(action)
+        alert.addAction(cancel)
+        self.present(alert, animated: true, completion: nil)
 
     }
     

@@ -33,7 +33,7 @@ class LoginPage: UIViewController, CountryPickerViewDelegate {
         let num = self.code + self.enterPhoneNumber.text!
         let alert = UIAlertController(title: "Phone number", message: "Is this your phone number? \n \(num)", preferredStyle: .alert)
         let action = UIAlertAction(title: "Yes", style: .default) { (UIAlertAction) in
-            // check if phone numberis proper and do stuff with it?
+            // check if phone number is proper and do stuff with it?
             
             PhoneAuthProvider.provider().verifyPhoneNumber(num, uiDelegate: nil) { (verificationID, error) in
                 if error != nil {
