@@ -241,6 +241,7 @@
                         <viewLayoutGuide key="safeArea" id="ZYw-Sq-xRI"/>
                     </view>
                     <connections>
+                        <outlet property="countLabel" destination="3Ae-Nf-qAy" id="arH-pI-Xht"/>
                         <outlet property="enterNumberTextField" destination="k08-YY-PCA" id="fkC-HL-Gtr"/>
                     </connections>
                 </viewController>

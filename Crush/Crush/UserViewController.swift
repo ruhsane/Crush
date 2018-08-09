@@ -19,6 +19,9 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
     var crushes = [String]()
 
     
+    @IBOutlet weak var countLabel: UILabel!
+
+    
     @IBAction func SignOut(_ sender: UIButton) {
         do{
             try Auth.auth().signOut()
@@ -112,6 +115,22 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let ref = Database.database().reference()
+        let user = Auth.auth().currentUser
+        ref.child("Loved").observe(.value) { (snapshot) in
+            if snapshot.hasChild((user?.phoneNumber)!){
+                ref.child("Loved").child((user?.phoneNumber)!).child("Followers").observe(.value, with: { (snapshot: DataSnapshot!) in
+                    
+                    print("Got snapshot");
+                    print(snapshot.childrenCount)
+                    let crushCount = snapshot.childrenCount
+                    self.countLabel.text = String(crushCount) + " users have labeled you as their crush."
+                })
+            } else {
+                self.countLabel.text = "0 users have labeled you as their crush."
+
+            }
+        }
         let cpv = CountryPickerView(frame: CGRect(x: 0, y: 0, width: 100, height: 20))
         cpv.delegate = self
         enterNumberTextField.leftView = cpv
