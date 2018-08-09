@@ -13,6 +13,8 @@ import Alamofire
 
 class NotMatchedViewController: UIViewController {
 
+    @IBOutlet weak var askToSendLabel: UILabel!
+    
     @IBAction func sendToEnteredCrush(_ sender: Any) {
         sendText { (completed) in
             
@@ -33,6 +35,9 @@ class NotMatchedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        guard let number = phoneNumber else { return}
+        self.askToSendLabel.text = "Do you want to send anonymous text message to the number you entered?(" + number + ")"
+
         // Do any additional setup after loading the view.
     }
 
