@@ -7,4 +7,14 @@
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
+   <Group
+      location = "group:CrushTests"
+      name = "CrushTests">
+      <FileRef
+         location = "group:CrushTests/CrushTests.swift">
+      </FileRef>
+      <FileRef
+         location = "group:CrushTests/Info.plist">
+      </FileRef>
+   </Group>
 </Workspace>

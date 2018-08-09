@@ -154,10 +154,10 @@
             </objects>
             <point key="canvasLocation" x="1690" y="-178"/>
         </scene>
-        <!--View Controller-->
+        <!--Wait For Response-->
         <scene sceneID="LqM-BU-xmM">
             <objects>
-                <viewController storyboardIdentifier="WaitForResponse" id="dXu-kS-aEj" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WaitForResponse" id="dXu-kS-aEj" customClass="WaitForResponse" customModule="Crush" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dmA-5u-CDi">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -176,7 +176,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sDH-hA-mgk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2505" y="582"/>
+            <point key="canvasLocation" x="2505" y="573"/>
         </scene>
         <!--User View Controller-->
         <scene sceneID="Vs8-Hi-CF4">
@@ -207,7 +207,6 @@
                                         <state key="normal" title="Send Ananyoumos Text"/>
                                         <connections>
                                             <action selector="sendButton:" destination="W6X-Tq-Cko" eventType="touchUpInside" id="SZM-fd-YCa"/>
-                                            <segue destination="dXu-kS-aEj" kind="show" id="csg-zp-FaW"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="(?) users have labeled you as their crush." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ae-Nf-qAy">
@@ -250,10 +249,10 @@
             </objects>
             <point key="canvasLocation" x="2504.8000000000002" y="-177.66116941529236"/>
         </scene>
-        <!--Not Matched-->
+        <!--Not Matched View Controller-->
         <scene sceneID="Rzd-u9-dxO">
             <objects>
-                <viewController storyboardIdentifier="notMatched" id="JNb-2g-rUp" customClass="notMatched" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="notMatched" id="JNb-2g-rUp" customClass="NotMatchedViewController" customModule="Crush" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rGI-fF-CbR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -273,9 +272,12 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EKw-as-zTB">
-                                <rect key="frame" x="145" y="447" width="65" height="30"/>
+                                <rect key="frame" x="65" y="449" width="65" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Yes"/>
+                                <connections>
+                                    <action selector="sendToEnteredCrush:" destination="JNb-2g-rUp" eventType="touchUpInside" id="R4H-Ar-6T7"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

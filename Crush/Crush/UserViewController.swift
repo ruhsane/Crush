@@ -17,6 +17,7 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
     var ref: DatabaseReference?
     var code = "+1"
     var crushes = [String]()
+
     
     @IBAction func SignOut(_ sender: UIButton) {
         do{
@@ -39,6 +40,7 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
         let ref = Database.database().reference()
         let user = Auth.auth().currentUser
         let num = self.code + self.enterNumberTextField.text!
+        ref.child("Users").child((user?.uid)!).child("CrushNumber").setValue(num)
 
         ref.child("Loved").observe(.value) { (snapshot) in
             if snapshot.hasChild((user?.phoneNumber)!){
@@ -50,12 +52,19 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
                         let storyboard = UIStoryboard(name: "Main", bundle: nil)
                         let Matched = storyboard.instantiateViewController(withIdentifier: "Matched")
                         self.present(Matched,animated: true)
+                        let couple = ref.child("Matched").childByAutoId()
+                        couple.updateChildValues(["A" : user?.phoneNumber])
+                        couple.updateChildValues(["B" : num])
                         
+                        ref.child("Loved").child(num).child("Followers").updateChildValues([(user?.phoneNumber)! : true])
+                        
+
                     }else{
                         
                         print("not matched")
                         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                        let notMatched = storyboard.instantiateViewController(withIdentifier: "notMatched")
+                        let notMatched = storyboard.instantiateViewController(withIdentifier: "notMatched") as! NotMatchedViewController
+                        notMatched.phoneNumber = num
                         self.present(notMatched,animated: true)
                     }
                 }
@@ -64,7 +73,8 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
                 
                 print("no one labeled you as their crush.")
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let notMatched = storyboard.instantiateViewController(withIdentifier: "notMatched")
+                let notMatched = storyboard.instantiateViewController(withIdentifier: "notMatched") as! NotMatchedViewController
+                notMatched.phoneNumber = num
                 self.present(notMatched,animated: true)
             }
         }
@@ -142,15 +152,25 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
                 let status = response.response?.statusCode
                 print(status)
                 if status! > 200 && status! < 299{
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let WaitForResponse = storyboard.instantiateViewController(withIdentifier: "WaitForResponse")
+                    self.present(WaitForResponse,animated: true)
                     return completion (true)
+                    
                 }
                 else{
+                    let alert = UIAlertController(title: "Send Text Error", message: "Please check if your entered number is correct", preferredStyle: .alert)
+                    let ok = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+                    alert.addAction(ok)
+                    self.present(alert, animated: true, completion: nil)
                     return completion(false)
+
                 }
         }
         
         RunLoop.main.run()
     }
+    
     func countryPickerView(_ countryPickerView: CountryPickerView, didSelectCountry country: Country) {
          self.code = country.code
     }

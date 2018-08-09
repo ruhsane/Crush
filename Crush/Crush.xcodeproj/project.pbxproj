@@ -14,6 +14,8 @@
 		9D1938022106899B007EE5EC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D1938002106899B007EE5EC /* LaunchScreen.storyboard */; };
 		9D19380D2106899B007EE5EC /* CrushTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D19380C2106899B007EE5EC /* CrushTests.swift */; };
 		9D1938182106899B007EE5EC /* CrushUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1938172106899B007EE5EC /* CrushUITests.swift */; };
+		9D22086A211BD9ED0040D2EB /* NotMatchedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D220869211BD9ED0040D2EB /* NotMatchedViewController.swift */; };
+		9D22086C211CBC0B0040D2EB /* icons8-user_male_circle_filled.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D22086B211CBC0B0040D2EB /* icons8-user_male_circle_filled.png */; };
 		9D28970821078F1300EAADFC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D28970721078F1300EAADFC /* GoogleService-Info.plist */; };
 		9D28970921078F1300EAADFC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D28970721078F1300EAADFC /* GoogleService-Info.plist */; };
 		9D28970A21078F1300EAADFC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D28970721078F1300EAADFC /* GoogleService-Info.plist */; };
@@ -59,6 +61,8 @@
 		9D1938132106899B007EE5EC /* CrushUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CrushUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D1938172106899B007EE5EC /* CrushUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrushUITests.swift; sourceTree = "<group>"; };
 		9D1938192106899C007EE5EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9D220869211BD9ED0040D2EB /* NotMatchedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotMatchedViewController.swift; sourceTree = "<group>"; };
+		9D22086B211CBC0B0040D2EB /* icons8-user_male_circle_filled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-user_male_circle_filled.png"; sourceTree = "<group>"; };
 		9D28970721078F1300EAADFC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		9D4F37E5210A6B4B001E4002 /* WaitForResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitForResponse.swift; sourceTree = "<group>"; };
 		9D64E059210FA89E00386F69 /* verificationCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = verificationCodeViewController.swift; sourceTree = "<group>"; };
@@ -123,6 +127,7 @@
 				9D28970721078F1300EAADFC /* GoogleService-Info.plist */,
 				9D1937FB2106899A007EE5EC /* Main.storyboard */,
 				9DAF898121191A4600DBF36B /* UserViewController.swift */,
+				9D220869211BD9ED0040D2EB /* NotMatchedViewController.swift */,
 				9D1937F92106899A007EE5EC /* ViewController.swift */,
 				9D64E059210FA89E00386F69 /* verificationCodeViewController.swift */,
 				9DF48413210BC17A00B46D27 /* LoginPage.swift */,
@@ -131,6 +136,7 @@
 				9D1937FE2106899B007EE5EC /* Assets.xcassets */,
 				9D1938002106899B007EE5EC /* LaunchScreen.storyboard */,
 				9D1938032106899B007EE5EC /* Info.plist */,
+				9D22086B211CBC0B0040D2EB /* icons8-user_male_circle_filled.png */,
 				9DAF8987211A1F5A00DBF36B /* AppIcon.appiconset */,
 			);
 			path = Crush;
@@ -283,6 +289,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D1938022106899B007EE5EC /* LaunchScreen.storyboard in Resources */,
+				9D22086C211CBC0B0040D2EB /* icons8-user_male_circle_filled.png in Resources */,
 				9D28970821078F1300EAADFC /* GoogleService-Info.plist in Resources */,
 				9D1937FF2106899B007EE5EC /* Assets.xcassets in Resources */,
 				9DAF8988211A1F5A00DBF36B /* AppIcon.appiconset in Resources */,
@@ -363,6 +370,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D1937FA2106899A007EE5EC /* ViewController.swift in Sources */,
+				9D22086A211BD9ED0040D2EB /* NotMatchedViewController.swift in Sources */,
 				9DAF898221191A4600DBF36B /* UserViewController.swift in Sources */,
 				9D4F37E6210A6B4B001E4002 /* WaitForResponse.swift in Sources */,
 				9D64E05A210FA89E00386F69 /* verificationCodeViewController.swift in Sources */,
