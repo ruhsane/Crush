@@ -14,8 +14,9 @@ import CountryPickerView
 
 class UserViewController: UIViewController, CountryPickerViewDelegate {
 
-    var ref: DatabaseReference!
+    var ref: DatabaseReference?
     var code = "+1"
+    var crushes = [String]()
     
     @IBAction func SignOut(_ sender: UIButton) {
         do{
@@ -35,16 +36,40 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
     @IBOutlet weak var enterNumberTextField: UITextField!
     
     @IBAction func checkButton(_ sender: Any) {
+        let ref = Database.database().reference()
+        let user = Auth.auth().currentUser
+        let num = self.code + self.enterNumberTextField.text!
+
+        ref.child("Loved").observe(.value) { (snapshot) in
+            if snapshot.hasChild((user?.phoneNumber)!){
+                ref.child("Loved").child((user?.phoneNumber)!).child("Followers").observe(.value) { (snapshot) in
+                    
+                    if snapshot.hasChild(num){
+                        
+                        print("matched")
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let Matched = storyboard.instantiateViewController(withIdentifier: "Matched")
+                        self.present(Matched,animated: true)
+                        
+                    }else{
+                        
+                        print("not matched")
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let notMatched = storyboard.instantiateViewController(withIdentifier: "notMatched")
+                        self.present(notMatched,animated: true)
+                    }
+                }
+                
+            }else{
+                
+                print("no one labeled you as their crush.")
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let notMatched = storyboard.instantiateViewController(withIdentifier: "notMatched")
+                self.present(notMatched,animated: true)
+            }
+        }
         
-        //if the number is under loved/Auth.phonenumber/
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let Matched = storyboard.instantiateViewController(withIdentifier: "Matched")
-        self.present(Matched,animated: true)
-        
-//        else
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let notMatched = storyboard.instantiateViewController(withIdentifier: "notMatched")
-//        self.present(notMatched,animated: true)
+
 
     }
     
