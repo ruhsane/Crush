@@ -44,7 +44,7 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
         let user = Auth.auth().currentUser
         let num = self.code + self.enterNumberTextField.text!
        
-        let alert = UIAlertController(title: "Phone number", message: "Is this your phone number? \n \(num)", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Phone number", message: "Is this your crush's phone number? \n \(num)", preferredStyle: .alert)
         let action = UIAlertAction(title: "Yes", style: .default){ (UIAlertAction) in
             ref.child("Users").child((user?.uid)!).child("CrushNumber").setValue(num)
 
@@ -128,7 +128,6 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
                 })
             } else {
                 self.countLabel.text = "0 users have labeled you as their crush."
-
             }
         }
         let cpv = CountryPickerView(frame: CGRect(x: 0, y: 0, width: 100, height: 20))
@@ -164,35 +163,37 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
         let authToken = "42a5ab35149266391e7649e0c7927c74"
         
         let url = "https://api.twilio.com/2010-04-01/Accounts/\(accountSID)/Messages"
-        let int = Int(enterNumberTextField.text!)!
-        let str = String(int)
-        
+//        let int = Int(enterNumberTextField.text!)!
+//        let str = String(int)
+        if let str = enterNumberTextField.text{
     //    let code = Country.phoneCode
-        let num = self.code + str
-        let parameters = ["From": "9032943794", "To": num, "Body": "Someone labeled you as his/her crush on 'Crush' app. Download the app to see."] as [String : Any]
+            let num = self.code + str
         
-        Alamofire.request(url, method: .post, parameters: parameters)
-            .authenticate(user: accountSID, password: authToken)
-            .responseJSON { response in
-                let status = response.response?.statusCode
-                print(status)
-                if status! > 200 && status! < 299{
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let WaitForResponse = storyboard.instantiateViewController(withIdentifier: "WaitForResponse")
-                    self.present(WaitForResponse,animated: true)
-                    return completion (true)
-                    
-                }
-                else{
-                    let alert = UIAlertController(title: "Send Text Error", message: "Please check if your entered number is correct", preferredStyle: .alert)
-                    let ok = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
-                    alert.addAction(ok)
-                    self.present(alert, animated: true, completion: nil)
-                    return completion(false)
+            let parameters = ["From": "9032943794", "To": num, "Body": "Someone labeled you as his/her crush on 'Crush' app. Download the app to see."] as [String : Any]
+            
+            Alamofire.request(url, method: .post, parameters: parameters)
+                .authenticate(user: accountSID, password: authToken)
+                .responseJSON { response in
+                    let status = response.response?.statusCode
+                    print(status)
+                    if status! > 200 && status! < 299{
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let WaitForResponse = storyboard.instantiateViewController(withIdentifier: "WaitForResponse")
+                        self.present(WaitForResponse,animated: true)
+                        return completion (true)
+                        
+                    }
+                    else{
+                        let alert = UIAlertController(title: "Send Text Error", message: "Please check if your entered number is correct", preferredStyle: .alert)
+                        let ok = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+                        alert.addAction(ok)
+                        self.present(alert, animated: true, completion: nil)
+                        return completion(false)
 
-                }
-        }
-        
+                    }
+            }
+        }        else { print("emty")}
+
         RunLoop.main.run()
     }
     

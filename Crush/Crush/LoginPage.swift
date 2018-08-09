@@ -38,6 +38,11 @@ class LoginPage: UIViewController, CountryPickerViewDelegate {
             PhoneAuthProvider.provider().verifyPhoneNumber(num, uiDelegate: nil) { (verificationID, error) in
                 if error != nil {
                     print("error: \(String(describing: error?.localizedDescription))")
+                    let alert = UIAlertController(title: "Send Text Error", message: "Please check if your entered number is correct", preferredStyle: .alert)
+                    let ok = UIKit.UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+                    alert.addAction(ok)
+                    self.present(alert, animated: true, completion: nil)
+
                 } else {
                     let defaults = UserDefaults.standard
                     defaults.set(verificationID, forKey: "authVID")
