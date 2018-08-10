@@ -1,17 +1,15 @@
 //
-//  WaitForResponse.swift
+//  MatchedViewController.swift
 //  Crush
 //
-//  Created by Ruhsane Sawut on 7/26/18.
+//  Created by Ruhsane Sawut on 8/9/18.
 //  Copyright © 2018 Ruhsane Sawut. All rights reserved.
 //
 
 import UIKit
 import FirebaseAuth
-import FirebaseDatabase
 
-class WaitForResponse: UIViewController {
-    var phoneNumber: String?
+class MatchedViewController: UIViewController {
 
     @IBAction func SignOutButton(_ sender: Any) {
         do{
@@ -24,34 +22,17 @@ class WaitForResponse: UIViewController {
         catch{
             
         }
+        //        let LoginController = LoginPage()
+        //        present(LoginController, animated: true, completion: nil)
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let ref = Database.database().reference()
-        let user = Auth.auth().currentUser
-        guard let number = self.phoneNumber else { return}
-        print(number)
 
-
-        ref.child("Matched").childByAutoId().observe(.value) { (snapshot) in
-
-            if snapshot.hasChild((user?.phoneNumber)!){
-
-                print("matched")
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let Matched = storyboard.instantiateViewController(withIdentifier: "Matched")
-                self.present(Matched,animated: true)
-
-        }else{
-
-                return
-            }
-        }
+        // Do any additional setup after loading the view.
     }
 
-
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

@@ -16,6 +16,7 @@
 		9D1938182106899B007EE5EC /* CrushUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1938172106899B007EE5EC /* CrushUITests.swift */; };
 		9D22086A211BD9ED0040D2EB /* NotMatchedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D220869211BD9ED0040D2EB /* NotMatchedViewController.swift */; };
 		9D22086C211CBC0B0040D2EB /* icons8-user_male_circle_filled.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D22086B211CBC0B0040D2EB /* icons8-user_male_circle_filled.png */; };
+		9D22086E211D22990040D2EB /* MatchedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D22086D211D22990040D2EB /* MatchedViewController.swift */; };
 		9D28970821078F1300EAADFC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D28970721078F1300EAADFC /* GoogleService-Info.plist */; };
 		9D28970921078F1300EAADFC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D28970721078F1300EAADFC /* GoogleService-Info.plist */; };
 		9D28970A21078F1300EAADFC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D28970721078F1300EAADFC /* GoogleService-Info.plist */; };
@@ -63,6 +64,7 @@
 		9D1938192106899C007EE5EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D220869211BD9ED0040D2EB /* NotMatchedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotMatchedViewController.swift; sourceTree = "<group>"; };
 		9D22086B211CBC0B0040D2EB /* icons8-user_male_circle_filled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-user_male_circle_filled.png"; sourceTree = "<group>"; };
+		9D22086D211D22990040D2EB /* MatchedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchedViewController.swift; sourceTree = "<group>"; };
 		9D28970721078F1300EAADFC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		9D4F37E5210A6B4B001E4002 /* WaitForResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitForResponse.swift; sourceTree = "<group>"; };
 		9D64E059210FA89E00386F69 /* verificationCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = verificationCodeViewController.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				9D9CFC06210A86EC002A057A /* Crush.entitlements */,
 				9D28970721078F1300EAADFC /* GoogleService-Info.plist */,
 				9D1937FB2106899A007EE5EC /* Main.storyboard */,
+				9D22086D211D22990040D2EB /* MatchedViewController.swift */,
 				9DAF898121191A4600DBF36B /* UserViewController.swift */,
 				9D220869211BD9ED0040D2EB /* NotMatchedViewController.swift */,
 				9D1937F92106899A007EE5EC /* ViewController.swift */,
@@ -372,6 +375,7 @@
 				9D1937FA2106899A007EE5EC /* ViewController.swift in Sources */,
 				9D22086A211BD9ED0040D2EB /* NotMatchedViewController.swift in Sources */,
 				9DAF898221191A4600DBF36B /* UserViewController.swift in Sources */,
+				9D22086E211D22990040D2EB /* MatchedViewController.swift in Sources */,
 				9D4F37E6210A6B4B001E4002 /* WaitForResponse.swift in Sources */,
 				9D64E05A210FA89E00386F69 /* verificationCodeViewController.swift in Sources */,
 				9DF48414210BC17A00B46D27 /* LoginPage.swift in Sources */,

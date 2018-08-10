@@ -130,6 +130,19 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
                 self.countLabel.text = "0 users have labeled you as their crush."
             }
         }
+        
+        // if users/uid/ exists "crushNumber" {
+        //       if matched/ exists user phone number {
+        //              take to matched page
+        //            } else {
+        //              if loved/.. has user phone number {
+        //                     take to wait for response page
+        //              } else {
+        //                      take to check page
+        //          }
+        //      } else {
+        //  
+            
         let cpv = CountryPickerView(frame: CGRect(x: 0, y: 0, width: 100, height: 20))
         cpv.delegate = self
         enterNumberTextField.leftView = cpv

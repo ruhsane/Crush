@@ -15,6 +15,19 @@ class NotMatchedViewController: UIViewController {
 
     @IBOutlet weak var askToSendLabel: UILabel!
     
+    @IBAction func SignOutButton(_ sender: Any) {
+        do{
+            try Auth.auth().signOut()
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let loginVC = storyboard.instantiateViewController(withIdentifier: "loginVC")
+            
+            self.present(loginVC,animated: true)
+        }
+        catch{
+            
+        }
+    }
+    
     @IBAction func sendToEnteredCrush(_ sender: Any) {
         sendText { (completed) in
             

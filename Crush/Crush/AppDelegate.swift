@@ -33,6 +33,101 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let user = Auth.auth().currentUser
 
         if user != nil{
+            
+            //Here we want to loop through all the matches entry in our database and see if our number is inside that database
+            let number = user!.phoneNumber
+            let ref = Database.database().reference().child("Matched")
+            
+            let currentUserRef = Database.database().reference().child("Users").child(user!.uid)
+
+            
+            let currentUserSnap = currentUserRef.observe(.value) { (snapshot) in
+                let currentUser = snapshot.value as! [String: String]
+                //if the currentUser has a crushNumber inputed
+                if currentUser["CrushNumber"] != nil {
+                    
+                    
+                    let matchTree = ref.observe(.value) { (snapshot) in
+            
+            
+                            //first we want to check if we have a crush number
+            
+            
+                            let matches = snapshot.children.allObjects as! [DataSnapshot]
+            
+                            for match in matches {
+                                let object = match.value as! [String: String]
+                                if object["A"] == number || object["B"] == number {
+                                    // in here we will move to a specific viewController
+                                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                                    let mainVC = storyboard.instantiateViewController(withIdentifier: "Matched")
+                                    self.window?.rootViewController = mainVC
+                                    self.window?.makeKeyAndVisible()
+            
+            
+                                    print("We have matches! Omg!")
+                                }
+                            }
+            
+                        //after we check if the current User has a match, check if the current User's crushNumber is in the love database, checking if they sent a text message
+                        let crushNumber = currentUser["CrushNumber"]
+                        
+                        let loveRef = Database.database().reference().child("Loved")
+                        
+                        
+                        let loveTree = loveRef.observe(.value, with: { (snapshot) in
+                            //if the crush number key exists in the love database
+                            if snapshot.hasChild(crushNumber!) {
+                                print("my crush number is in the love database")
+                                
+                                let crushRef = loveRef.child(crushNumber!).child("Followers")
+                                crushRef.observe(.value, with: { (snapshot) in
+                                    let crushObject = snapshot.value as! [String: Bool]
+                                    if crushObject[number!] == true {
+                                        //here, display the waiting VC
+                                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                                        let mainVC = storyboard.instantiateViewController(withIdentifier: "WaitForResponse")
+                                        self.window?.rootViewController = mainVC
+                                        self.window?.makeKeyAndVisible()
+                                    }
+                                    
+                                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                                    let mainVC = storyboard.instantiateViewController(withIdentifier: "notMatched")
+                                    self.window?.rootViewController = mainVC
+                                    self.window?.makeKeyAndVisible()
+                                    
+                                    print("crushObject")
+//
+                                })
+                                
+                            } else {
+                                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                                let mainVC = storyboard.instantiateViewController(withIdentifier: "notMatched")
+                                self.window?.rootViewController = mainVC
+                                self.window?.makeKeyAndVisible()
+                            }
+                            
+                        })
+                        
+            
+                        }
+        
+                    //if the currentUser doesn't have a crushNumber
+                } else {
+                    
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let mainVC = storyboard.instantiateViewController(withIdentifier: "mainVC")
+                    self.window?.rootViewController = mainVC
+                    self.window?.makeKeyAndVisible()
+                    
+                    
+                }
+                
+            }
+            
+            
+//
+            
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let mainVC = storyboard.instantiateViewController(withIdentifier: "mainVC")
             window?.rootViewController = mainVC
