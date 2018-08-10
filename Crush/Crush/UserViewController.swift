@@ -62,7 +62,7 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
                             couple.updateChildValues(["A" : user?.phoneNumber])
                             couple.updateChildValues(["B" : num])
                             
-                            ref.child("Loved").child(num).child("Followers").updateChildValues([(user?.phoneNumber)! : true])
+//                            ref.child("Loved").child(num).child("Followers").updateChildValues([(user?.phoneNumber)! : true])
                             
 
                         }else{

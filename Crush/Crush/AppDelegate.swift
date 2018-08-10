@@ -68,7 +68,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                     print("We have matches! Omg!")
                                 }
                             }
-            
+                    
+                    }
                         //after we check if the current User has a match, check if the current User's crushNumber is in the love database, checking if they sent a text message
                         let crushNumber = currentUser["CrushNumber"]
                         
@@ -85,11 +86,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                     let crushObject = snapshot.value as! [String: Bool]
                                     if crushObject[number!] == true {
                                         //here, display the waiting VC
+                                        print("should wait")
                                         let storyboard = UIStoryboard(name: "Main", bundle: nil)
                                         let mainVC = storyboard.instantiateViewController(withIdentifier: "WaitForResponse")
                                         self.window?.rootViewController = mainVC
                                         self.window?.makeKeyAndVisible()
-                                    }
+                                    } else {
                                     
                                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                                     let mainVC = storyboard.instantiateViewController(withIdentifier: "notMatched")
@@ -97,7 +99,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                     self.window?.makeKeyAndVisible()
                                     
                                     print("crushObject")
-//
+                                        }
                                 })
                                 
                             } else {
@@ -105,12 +107,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 let mainVC = storyboard.instantiateViewController(withIdentifier: "notMatched")
                                 self.window?.rootViewController = mainVC
                                 self.window?.makeKeyAndVisible()
+                                print("go to not match")
                             }
                             
                         })
                         
             
-                        }
+                        
         
                     //if the currentUser doesn't have a crushNumber
                 } else {
