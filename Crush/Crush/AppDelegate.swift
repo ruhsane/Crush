@@ -74,8 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         let crushNumber = currentUser["CrushNumber"]
                         
                         let loveRef = Database.database().reference().child("Loved")
-                        
-                        
+
                         let loveTree = loveRef.observe(.value, with: { (snapshot) in
                             //if the crush number key exists in the love database
                             if snapshot.hasChild(crushNumber!) {
@@ -111,10 +110,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             }
                             
                         })
-                        
-            
-                        
-        
+                    
                     //if the currentUser doesn't have a crushNumber
                 } else {
                     
@@ -122,15 +118,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     let mainVC = storyboard.instantiateViewController(withIdentifier: "mainVC")
                     self.window?.rootViewController = mainVC
                     self.window?.makeKeyAndVisible()
-                    
-                    
                 }
-                
             }
-            
-            
-//
-            
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let mainVC = storyboard.instantiateViewController(withIdentifier: "mainVC")
             window?.rootViewController = mainVC

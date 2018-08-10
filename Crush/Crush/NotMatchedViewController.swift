@@ -48,10 +48,18 @@ class NotMatchedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let number = phoneNumber else { return}
-        self.askToSendLabel.text = "Do you want to send anonymous text message to the number you entered?(" + number + ")"
+//        guard let number = phoneNumber else { return}
+        let user = Auth.auth().currentUser
+        let ref = Database.database().reference().child("Matched")
+        let currentUserRef = Database.database().reference().child("Users").child(user!.uid)
+        let currentUserSnap = currentUserRef.observe(.value) { (snapshot) in
+            let currentUser = snapshot.value as! [String: String]
+
+            
+            self.askToSendLabel.text = "Do you want to send anonymous text message to the number you entered?(" +  currentUser["CrushNumber"]! + ")"
 
         // Do any additional setup after loading the view.
+    }
     }
 
     override func didReceiveMemoryWarning() {
@@ -88,9 +96,9 @@ class NotMatchedViewController: UIViewController {
                     alert.addAction(ok)
                     self.present(alert, animated: true, completion: nil)
                     return completion(false)
-
                 }
-        }
+            
+        } 
 
         RunLoop.main.run()
     }

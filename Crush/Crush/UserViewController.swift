@@ -61,11 +61,23 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
                             let couple = ref.child("Matched").childByAutoId()
                             couple.updateChildValues(["A" : user?.phoneNumber])
                             couple.updateChildValues(["B" : num])
+                            //notify B with text message saying you matched
+                            let accountSID = "ACc89f0f2bdefcc860202e3dce683e8855"
+                            let authToken = "42a5ab35149266391e7649e0c7927c74"
                             
-//                            ref.child("Loved").child(num).child("Followers").updateChildValues([(user?.phoneNumber)! : true])
-                            
+                            let url = "https://api.twilio.com/2010-04-01/Accounts/\(accountSID)/Messages"
 
-                        }else{
+                                let parameters = ["From": "9032943794", "To": num, "Body": "You have matched with your crush.😍 re-open the 'Crush' app to see."] as [String : Any]
+                                
+                                Alamofire.request(url, method: .post, parameters: parameters)
+                                    .authenticate(user: accountSID, password: authToken)
+                                    .responseJSON { response in
+                                        let status = response.response?.statusCode
+                                        print(status)
+                                }
+                            RunLoop.main.run()
+
+                            } else {
                             
                             print("not matched")
                             let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -85,6 +97,8 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
                 }
             }
         }
+        
+        
         let cancel = UIAlertAction(title: "No", style: .cancel, handler: nil)
         alert.addAction(action)
         alert.addAction(cancel)
