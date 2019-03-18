@@ -13,6 +13,10 @@ import FirebaseDatabase
 class WaitForResponse: UIViewController {
     var phoneNumber: String?
 
+    @IBAction func changeCrushBtn(_ sender: Any) {
+        
+    }
+    
     @IBAction func SignOutButton(_ sender: Any) {
         do{
             try Auth.auth().signOut()

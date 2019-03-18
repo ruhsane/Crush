@@ -10,5 +10,7 @@ target 'Crush' do
         pod 'Firebase/Database'
         pod 'CountryPickerView'
         pod 'Alamofire', '~> 4.7'
+        pod 'SCLAlertView'
+
 end
 

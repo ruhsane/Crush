@@ -398,11 +398,35 @@
                                     <action selector="SignOutButton:" destination="dXu-kS-aEj" eventType="touchUpInside" id="43W-hw-pn7"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wZq-GA-7UH">
+                                <rect key="frame" x="87.5" y="435" width="200" height="40"/>
+                                <color key="backgroundColor" red="0.203523115" green="0.76729655230000005" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="0wV-S3-pmd"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="2Mk-br-VH6"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="gm4-nr-kW6"/>
+                                    <constraint firstAttribute="width" constant="200" id="xhg-Zk-OTp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                <color key="tintColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Change Crush Number"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="7"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="changeCrushBtn:" destination="dXu-kS-aEj" eventType="touchUpInside" id="rJq-MY-PFs"/>
+                                    <action selector="sendButton:" destination="W6X-Tq-Cko" eventType="touchUpInside" id="vv0-Lm-Lv2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.60257024830000006" blue="0.73694082679999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="WhQ-s1-9oN" firstAttribute="centerX" secondItem="J4D-OV-awB" secondAttribute="centerX" id="5sq-Ag-ahT"/>
                             <constraint firstItem="DIc-vc-Uh2" firstAttribute="top" secondItem="J4D-OV-awB" secondAttribute="top" constant="155" id="74a-Al-MkV"/>
+                            <constraint firstItem="wZq-GA-7UH" firstAttribute="centerX" secondItem="J4D-OV-awB" secondAttribute="centerX" id="Be7-mq-nCJ"/>
+                            <constraint firstItem="WhQ-s1-9oN" firstAttribute="top" secondItem="wZq-GA-7UH" secondAttribute="bottom" constant="60" id="PKT-Pr-dgl"/>
                             <constraint firstItem="DIc-vc-Uh2" firstAttribute="leading" secondItem="J4D-OV-awB" secondAttribute="leading" constant="20" id="Qdj-pG-Lvc"/>
                             <constraint firstItem="J4D-OV-awB" firstAttribute="bottom" secondItem="WhQ-s1-9oN" secondAttribute="bottom" constant="100" id="UGv-lD-bfp"/>
                             <constraint firstItem="J4D-OV-awB" firstAttribute="trailing" secondItem="DIc-vc-Uh2" secondAttribute="trailing" constant="20" id="jTF-NM-TOU"/>
@@ -722,6 +746,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="zs4-0Q-kId"/>
-        <segue reference="hIn-qf-wv2"/>
+        <segue reference="OsN-89-6Il"/>
     </inferredMetricsTieBreakers>
 </document>
