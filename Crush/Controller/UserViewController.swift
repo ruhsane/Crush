@@ -20,7 +20,6 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
     var followersCount = 0
     
     @IBOutlet weak var countLabel: UILabel!
-
     
     @IBAction func SignOut(_ sender: UIButton) {
         do{
@@ -107,68 +106,57 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
     }
     
     @IBAction func sendButton(_ sender: UIButton) {
-        
+        // if 
         sendText { (completed) in
-            
             if completed == true{
-                
-                let ref = Database.database().reference()
-                let user = Auth.auth().currentUser
-    
-                let currentUserRef = Database.database().reference().child("Users").child(user!.uid)
-                currentUserRef.observeSingleEvent(of: .value) { (snapshot) in
-                    let currentUser = snapshot.value as! [String: String]
-                    
-                    //if the currentUser has a crushNumber already, update db
-                    if currentUser["CrushNumber"] != nil {
-                        let oldCrush = currentUser["CrushNumber"] as! String
-                        // go into old receiver in loved
-                        ref.child("Loved").child(oldCrush).child("Followers").observe(.value, with: { (snapshot: DataSnapshot!) in
-                            print(snapshot.childrenCount)
-                            if snapshot.childrenCount == 1 {
-                                // delete the whole oldcrush object in loved
-                                Database.database().reference(withPath: "Loved").child(oldCrush).removeValue()
-                            } else {
-                                // delete current user's number from followers list
-                                Database.database().reference(withPath: "Loved").child(oldCrush).child("Followers").child((user?.phoneNumber)!).removeValue()
-                            }
-                        })
-                    }
-                    
-                    // update/write crush number for user
-                    let num = self.code + self.enterNumberTextField.text!
-                    ref.child("Users").child((user?.uid)!).child("CrushNumber").setValue(num)
-                    
-                    // receiver phone number in db with sender number under followers
-                    ref.child("Loved").child(num).child("Followers").updateChildValues([(user?.phoneNumber)! : true])
-                    
-                }
+                self.updateDBAfterTxt()
             }
         }
         
     }
     
+    func updateDBAfterTxt() {
+        let ref = Database.database().reference()
+        let user = Auth.auth().currentUser
+        
+        let currentUserRef = Database.database().reference().child("Users").child(user!.uid)
+        currentUserRef.observeSingleEvent(of: .value) { (snapshot) in
+            let currentUser = snapshot.value as! [String: String]
+            
+            //if the currentUser has a crushNumber already, update db
+            if currentUser["CrushNumber"] != nil {
+                let oldCrush = currentUser["CrushNumber"] as! String
+                // go into old receiver in loved
+                ref.child("Loved").child(oldCrush).child("Followers").observe(.value, with: { (snapshot: DataSnapshot!) in
+                    print(snapshot.childrenCount)
+                    if snapshot.childrenCount == 1 {
+                        // if oldcrush only had current user as followers
+                        // delete the whole oldcrush object in loved
+                        Database.database().reference(withPath: "Loved").child(oldCrush).removeValue()
+                    } else {
+                        // if oldcrush had multiple followers
+                        // only delete current user's number from followers list
+                        Database.database().reference(withPath: "Loved").child(oldCrush).child("Followers").child((user?.phoneNumber)!).removeValue()
+                    }
+                })
+            }
+            
+            // update/write crush number for user
+            let num = self.code + self.enterNumberTextField.text!
+            ref.child("Users").child((user?.uid)!).child("CrushNumber").setValue(num)
+            
+            // receiver phone number in db with sender number under followers
+            ref.child("Loved").child(num).child("Followers").updateChildValues([(user?.phoneNumber)! : true])
+            
+        }
+    }
     func showKeyboard() {
         self.enterNumberTextField.becomeFirstResponder()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let ref = Database.database().reference()
-        let user = Auth.auth().currentUser
-        ref.child("Loved").observe(.value) { (snapshot) in
-            
-            if snapshot.hasChild((user?.phoneNumber)!){
-                ref.child("Loved").child((user?.phoneNumber)!).child("Followers").observe(.value, with: { (snapshot: DataSnapshot!) in
-                    
-                    print("Got snapshot");
-                    print(snapshot.childrenCount)
-                    self.followersCount = Int(snapshot.childrenCount)
-                })
-            }
-            self.countLabel.text = String(self.followersCount) + " users have labeled you as their crush."
-            
-        }
+        showFollowersNum()
             
         let cpv = CountryPickerView(frame: CGRect(x: 0, y: 0, width: 100, height: 20))
         cpv.delegate = self
@@ -182,6 +170,22 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
         view.addGestureRecognizer(tap)
     }
 
+    func showFollowersNum() {
+        let ref = Database.database().reference()
+        let user = Auth.auth().currentUser
+        ref.child("Loved").observe(.value) { (snapshot) in
+            
+            if snapshot.hasChild((user?.phoneNumber)!){
+                ref.child("Loved").child((user?.phoneNumber)!).child("Followers").observe(.value, with: { (snapshot: DataSnapshot!) in
+                    
+                    print("Got snapshot");
+                    print(Int(snapshot.childrenCount))
+                    self.followersCount = Int(snapshot.childrenCount)
+                })
+            }
+        }
+        self.countLabel.text = String(self.followersCount) + " users have labeled you as their crush."
+    }
     
     fileprivate func isLoggedIn() -> Bool {
         return UserDefaults.standard.bool(forKey: "isLoggedIn")
