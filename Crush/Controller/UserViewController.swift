@@ -17,7 +17,7 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
     var ref: DatabaseReference?
     var code = "+1"
     var crushes = [String]()
-
+    var followersCount = 0
     
     @IBOutlet weak var countLabel: UILabel!
 
@@ -111,14 +111,31 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
         sendText { (completed) in
             
             if completed == true{
-                let ref = Database.database().reference()
                 
-                //add crush number under user uid
+                let ref = Database.database().reference()
                 let user = Auth.auth().currentUser
-                let num = self.code + self.enterNumberTextField.text!
-                ref.child("Users").child((user?.uid)!).child("CrushNumber").setValue(num)
+    
+                let currentUserRef = Database.database().reference().child("Users").child(user!.uid)
+                currentUserRef.observe(.value) { (snapshot) in
+                    let currentUser = snapshot.value as! [String: String]
+                    //if the currentUser has a crushNumber inputed
+                    if currentUser["CrushNumber"] != nil {
+                        let oldCrush = currentUser["CrushNumber"] as! String
 
-            ref.child("Loved").child(num).child("Followers").updateChildValues([(user?.phoneNumber)! : true])
+                        if ref.child("Loved").child(oldCrush).child("Followers").accessibilityElementCount() == 1 {
+                            // delete the whole oldcrush object in loved
+                        } else {
+                            // delete current user's number from followers list
+                        }
+                    }
+//
+                    // update/write crush number for user
+                    let num = self.code + self.enterNumberTextField.text!
+                    ref.child("Users").child((user?.uid)!).child("CrushNumber").setValue(num)
+                    
+                    //
+                    ref.child("Loved").child(num).child("Followers").updateChildValues([(user?.phoneNumber)! : true])
+                }
             }
         }
     }
@@ -132,17 +149,17 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
         let ref = Database.database().reference()
         let user = Auth.auth().currentUser
         ref.child("Loved").observe(.value) { (snapshot) in
+            
             if snapshot.hasChild((user?.phoneNumber)!){
                 ref.child("Loved").child((user?.phoneNumber)!).child("Followers").observe(.value, with: { (snapshot: DataSnapshot!) in
                     
                     print("Got snapshot");
                     print(snapshot.childrenCount)
-                    let crushCount = snapshot.childrenCount
-                    self.countLabel.text = String(crushCount) + " users have labeled you as their crush."
+                    self.followersCount = Int(snapshot.childrenCount)
                 })
-            } else {
-                self.countLabel.text = "0 users have labeled you as their crush."
             }
+            self.countLabel.text = String(self.followersCount) + " users have labeled you as their crush."
+            
         }
             
         let cpv = CountryPickerView(frame: CGRect(x: 0, y: 0, width: 100, height: 20))

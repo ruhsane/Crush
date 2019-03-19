@@ -43,7 +43,6 @@ class WaitForResponse: UIViewController {
         let alert = SCLAlertView(appearance: appearance)
         
         alert.addButton("I am sure") {
-            print("take back to main screen")
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let main = storyboard.instantiateViewController(withIdentifier: "mainVC")
             self.present(main, animated: true)
