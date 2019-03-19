@@ -9,12 +9,13 @@
 import UIKit
 import FirebaseAuth
 import FirebaseDatabase
+import SCLAlertView
 
 class WaitForResponse: UIViewController {
     var phoneNumber: String?
 
     @IBAction func changeCrushBtn(_ sender: Any) {
-        
+        changeCrushAlert()
     }
     
     @IBAction func SignOutButton(_ sender: Any) {
@@ -28,6 +29,28 @@ class WaitForResponse: UIViewController {
         catch{
             
         }
+    }
+    
+    func changeCrushAlert() {
+        // Create the subview
+        let appearance = SCLAlertView.SCLAppearance(
+            kTitleFont: UIFont(name: "HelveticaNeue", size: 20)!,
+            kTextFont: UIFont(name: "HelveticaNeue", size: 14)!,
+            kButtonFont: UIFont(name: "HelveticaNeue-Bold", size: 14)!
+        )
+        
+        // Initialize SCLAlertView using custom Appearance
+        let alert = SCLAlertView(appearance: appearance)
+        
+        alert.addButton("I am sure") {
+            print("take back to main screen")
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let main = storyboard.instantiateViewController(withIdentifier: "mainVC")
+            self.present(main, animated: true)
+        }
+        
+        alert.showInfo("Are you sure you want to change?", subTitle: "We will update your crush number in our database and you will no longer receive further notification on the current crush status", closeButtonTitle: "Cancel",  colorStyle: 0x34C4F6)
+        
     }
     
     override func viewDidLoad() {
