@@ -11,6 +11,7 @@ import Alamofire
 import FirebaseAuth
 import FirebaseDatabase
 import CountryPickerView
+import SCLAlertView
 
 class UserViewController: UIViewController, CountryPickerViewDelegate {
 
@@ -47,69 +48,18 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
     @IBOutlet weak var enterNumberTextField: UITextField!
     
     @IBAction func checkButton(_ sender: Any) {
-        let ref = Database.database().reference()
-        let user = Auth.auth().currentUser
-        let num = self.code + self.enterNumberTextField.text!
-       
-        let alert = UIAlertController(title: "Phone number", message: "Is this your crush's phone number? \n \(num)", preferredStyle: .alert)
-        let action = UIAlertAction(title: "Yes", style: .default){ (UIAlertAction) in
-            ref.child("Users").child((user?.uid)!).child("CrushNumber").setValue(num)
-
-            ref.child("Loved").observe(.value) { (snapshot) in
-                if snapshot.hasChild((user?.phoneNumber)!){
-                    ref.child("Loved").child((user?.phoneNumber)!).child("Followers").observe(.value) { (snapshot) in
-                        
-                        if snapshot.hasChild(num){
-                            
-                            print("matched")
-                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                            let Matched = storyboard.instantiateViewController(withIdentifier: "Matched")
-                            self.present(Matched,animated: true)
-                            let couple = ref.child("Matched").childByAutoId()
-                            couple.updateChildValues(["A" : user?.phoneNumber])
-                            couple.updateChildValues(["B" : num])
-                            //notify B with text message saying you matched
-                            let accountSID = "ACc89f0f2bdefcc860202e3dce683e8855"
-                            let authToken = "42a5ab35149266391e7649e0c7927c74"
-                            
-                            let url = "https://api.twilio.com/2010-04-01/Accounts/\(accountSID)/Messages"
-
-                                let parameters = ["From": "9032943794", "To": num, "Body": "You have matched with your crush.😍 re-open the 'Crush' app to see."] as [String : Any]
-                                
-                                Alamofire.request(url, method: .post, parameters: parameters)
-                                    .authenticate(user: accountSID, password: authToken)
-                                    .responseJSON { response in
-                                        let status = response.response?.statusCode
-                                        print(status)
-                                }
-                            RunLoop.main.run()
-
-                            } else {
-                            
-                                print("not matched")
-                                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                                let notMatched = storyboard.instantiateViewController(withIdentifier: "notMatched") as! NotMatchedViewController
-                                notMatched.phoneNumber = num
-                                self.present(notMatched,animated: true)
-                        }
-                    }
-                    
-                }else{
-                    
-                    print("no one labeled you as their crush.")
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let notMatched = storyboard.instantiateViewController(withIdentifier: "notMatched") as! NotMatchedViewController
-                    notMatched.phoneNumber = num
-                    self.present(notMatched,animated: true)
-                }
-            }
-        }
-        
-        
-        let cancel = UIAlertAction(title: "No", style: .cancel, handler: nil)
-        alert.addAction(action)
-        alert.addAction(cancel)
-        self.present(alert, animated: true, completion: nil)
+        checkMatchAlert()
+//        let num = self.code + self.enterNumberTextField.text!
+//
+//        let alert = UIAlertController(title: "Is this your crush's phone number? \n \(num)", message: "you only have one chance to “check” who sent the message", preferredStyle: .alert)
+//        let action = UIAlertAction(title: "Yes", style: .default) { (UIAlertAction) in
+//            self.matchOrNo(num: num)
+//        }
+//
+//        let cancel = UIAlertAction(title: "No", style: .cancel, handler: nil)
+//        alert.addAction(action)
+//        alert.addAction(cancel)
+//        self.present(alert, animated: true, completion: nil)
 
     }
     
@@ -122,6 +72,73 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
             }
         }
         
+    }
+    
+    func checkMatchAlert() {
+        // Create the subview
+        let appearance = SCLAlertView.SCLAppearance(
+            kTitleFont: UIFont(name: "HelveticaNeue", size: 20)!,
+            kTextFont: UIFont(name: "HelveticaNeue", size: 14)!,
+            kButtonFont: UIFont(name: "HelveticaNeue-Bold", size: 14)!
+        )
+        
+//         Initialize SCLAlertView using custom Appearance
+        let alert = SCLAlertView(appearance: appearance)
+        let num = self.code + self.enterNumberTextField.text!
+
+//        let alert = SCLAlertView()
+
+        alert.addButton("I am sure") {
+            self.matchOrNo(num: num)
+        }
+        
+        alert.showInfo("Are you sure this is your crush's phone number? \n \(num)", subTitle: "you only have one chance to “check” who sent the message", closeButtonTitle: "Cancel",  colorStyle: 0x34C4F6)
+        
+    }
+    
+    func matchOrNo(num: String) {
+        let ref = Database.database().reference()
+        let user = Auth.auth().currentUser
+        
+        ref.child("Users").child((user?.uid)!).child("CrushNumber").setValue(num)
+        
+        ref.child("Loved").child((user?.phoneNumber)!).child("Followers").observe(.value) { (snapshot) in
+            
+            if snapshot.hasChild(num){
+                
+                print("matched")
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let Matched = storyboard.instantiateViewController(withIdentifier: "Matched")
+                self.present(Matched,animated: true)
+                let couple = ref.child("Matched").childByAutoId()
+                couple.updateChildValues(["A" : user?.phoneNumber])
+                couple.updateChildValues(["B" : num])
+                //notify B with text message saying you matched
+                let accountSID = "ACc89f0f2bdefcc860202e3dce683e8855"
+                let authToken = "42a5ab35149266391e7649e0c7927c74"
+                
+                let url = "https://api.twilio.com/2010-04-01/Accounts/\(accountSID)/Messages"
+                
+                let parameters = ["From": "9032943794", "To": num, "Body": "You have matched with your crush.😍 re-open the 'Crush' app to see."] as [String : Any]
+                
+                Alamofire.request(url, method: .post, parameters: parameters)
+                    .authenticate(user: accountSID, password: authToken)
+                    .responseJSON { response in
+                        let status = response.response?.statusCode
+                        print(status)
+                }
+                
+                RunLoop.main.run()
+                
+            } else {
+                
+                print("not matched")
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let notMatched = storyboard.instantiateViewController(withIdentifier: "notMatched") as! NotMatchedViewController
+                notMatched.phoneNumber = num
+                self.present(notMatched,animated: true)
+            }
+        }
     }
     
     func updateDBAfterTxt() {
