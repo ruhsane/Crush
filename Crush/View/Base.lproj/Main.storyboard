@@ -570,8 +570,10 @@
                         <viewLayoutGuide key="safeArea" id="ZYw-Sq-xRI"/>
                     </view>
                     <connections>
+                        <outlet property="checkButton" destination="Y5C-qP-mmF" id="48p-1C-g4l"/>
                         <outlet property="countLabel" destination="3Ae-Nf-qAy" id="arH-pI-Xht"/>
                         <outlet property="enterNumberTextField" destination="k08-YY-PCA" id="fkC-HL-Gtr"/>
+                        <outlet property="sendButton" destination="PGU-9p-pcq" id="A7t-1j-fTa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qix-fV-oPb" sceneMemberID="firstResponder"/>
@@ -624,7 +626,7 @@
                                             <constraint firstAttribute="height" constant="40" id="mk1-Xd-gSg"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                        <state key="normal" title="Check Different Number"/>
+                                        <state key="normal" title="Send Text to Different Number"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                 <integer key="value" value="7"/>
@@ -746,6 +748,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="BqI-Q0-Zno"/>
-        <segue reference="hIn-qf-wv2"/>
+        <segue reference="OsN-89-6Il"/>
     </inferredMetricsTieBreakers>
 </document>

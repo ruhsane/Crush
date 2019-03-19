@@ -14,10 +14,18 @@ import CountryPickerView
 
 class UserViewController: UIViewController, CountryPickerViewDelegate {
 
+    @IBOutlet weak var checkButton: UIButton!
+    @IBOutlet weak var sendButton: UIButton!
+    
     var ref: DatabaseReference?
     var code = "+1"
     var crushes = [String]()
-    var followersCount = 0
+    var followersCount = 0 {
+        didSet {
+            self.countLabel.text = String(self.followersCount) + " users have labeled you as their crush."
+            hideButton()
+        }
+    }
     
     @IBOutlet weak var countLabel: UILabel!
     
@@ -78,11 +86,11 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
 
                             } else {
                             
-                            print("not matched")
-                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                            let notMatched = storyboard.instantiateViewController(withIdentifier: "notMatched") as! NotMatchedViewController
-                            notMatched.phoneNumber = num
-                            self.present(notMatched,animated: true)
+                                print("not matched")
+                                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                                let notMatched = storyboard.instantiateViewController(withIdentifier: "notMatched") as! NotMatchedViewController
+                                notMatched.phoneNumber = num
+                                self.present(notMatched,animated: true)
                         }
                     }
                     
@@ -106,7 +114,8 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
     }
     
     @IBAction func sendButton(_ sender: UIButton) {
-        // if 
+        // if the number user sending  message to is user's followers, match them
+        // else : sendtext
         sendText { (completed) in
             if completed == true{
                 self.updateDBAfterTxt()
@@ -128,12 +137,12 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
                 let oldCrush = currentUser["CrushNumber"] as! String
                 // go into old receiver in loved
                 ref.child("Loved").child(oldCrush).child("Followers").observe(.value, with: { (snapshot: DataSnapshot!) in
-                    print(snapshot.childrenCount)
-                    if snapshot.childrenCount == 1 {
+                    print("old crush followers count", snapshot.childrenCount)
+                    if snapshot.childrenCount == 1 && snapshot.hasChild((user?.phoneNumber)!) {
                         // if oldcrush only had current user as followers
                         // delete the whole oldcrush object in loved
                         Database.database().reference(withPath: "Loved").child(oldCrush).removeValue()
-                    } else {
+                    } else if snapshot.hasChild((user?.phoneNumber)!) {
                         // if oldcrush had multiple followers
                         // only delete current user's number from followers list
                         Database.database().reference(withPath: "Loved").child(oldCrush).child("Followers").child((user?.phoneNumber)!).removeValue()
@@ -150,6 +159,19 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
             
         }
     }
+    
+    func hideButton() {
+        if self.followersCount == 0 {
+            // only show send button if user doesnt have follower
+            self.checkButton.isHidden = true
+            self.sendButton.isHidden = false
+        } else {
+            // only show check button if user has follower
+            self.checkButton.isHidden = false
+            self.sendButton.isHidden = true
+        }
+    }
+    
     func showKeyboard() {
         self.enterNumberTextField.becomeFirstResponder()
     }
@@ -179,12 +201,13 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
                 ref.child("Loved").child((user?.phoneNumber)!).child("Followers").observe(.value, with: { (snapshot: DataSnapshot!) in
                     
                     print("Got snapshot");
-                    print(Int(snapshot.childrenCount))
+                    print("user followers count ", Int(snapshot.childrenCount))
                     self.followersCount = Int(snapshot.childrenCount)
                 })
             }
         }
         self.countLabel.text = String(self.followersCount) + " users have labeled you as their crush."
+        hideButton()
     }
     
     fileprivate func isLoggedIn() -> Bool {
@@ -219,7 +242,6 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
                 .authenticate(user: accountSID, password: authToken)
                 .responseJSON { response in
                     let status = response.response?.statusCode
-                    print(status)
                     if status! > 200 && status! < 299{
                         let storyboard = UIStoryboard(name: "Main", bundle: nil)
                         let WaitForResponse = storyboard.instantiateViewController(withIdentifier: "WaitForResponse")
