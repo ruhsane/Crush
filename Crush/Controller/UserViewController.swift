@@ -116,28 +116,36 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
                 let user = Auth.auth().currentUser
     
                 let currentUserRef = Database.database().reference().child("Users").child(user!.uid)
-                currentUserRef.observe(.value) { (snapshot) in
+                currentUserRef.observeSingleEvent(of: .value) { (snapshot) in
                     let currentUser = snapshot.value as! [String: String]
-                    //if the currentUser has a crushNumber inputed
+                    
+                    //if the currentUser has a crushNumber already, update db
                     if currentUser["CrushNumber"] != nil {
                         let oldCrush = currentUser["CrushNumber"] as! String
-
-                        if ref.child("Loved").child(oldCrush).child("Followers").accessibilityElementCount() == 1 {
-                            // delete the whole oldcrush object in loved
-                        } else {
-                            // delete current user's number from followers list
-                        }
+                        // go into old receiver in loved
+                        ref.child("Loved").child(oldCrush).child("Followers").observe(.value, with: { (snapshot: DataSnapshot!) in
+                            print(snapshot.childrenCount)
+                            if snapshot.childrenCount == 1 {
+                                // delete the whole oldcrush object in loved
+                                Database.database().reference(withPath: "Loved").child(oldCrush).removeValue()
+                            } else {
+                                // delete current user's number from followers list
+                                Database.database().reference(withPath: "Loved").child(oldCrush).child("Followers").child((user?.phoneNumber)!).removeValue()
+                            }
+                        })
                     }
-//
+                    
                     // update/write crush number for user
                     let num = self.code + self.enterNumberTextField.text!
                     ref.child("Users").child((user?.uid)!).child("CrushNumber").setValue(num)
                     
-                    //
+                    // receiver phone number in db with sender number under followers
                     ref.child("Loved").child(num).child("Followers").updateChildValues([(user?.phoneNumber)! : true])
+                    
                 }
             }
         }
+        
     }
     
     func showKeyboard() {
