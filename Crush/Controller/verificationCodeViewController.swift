@@ -26,16 +26,7 @@ class verificationCodeViewController: UIViewController {
     @IBAction func Login(_ sender: Any) {
         let defaults = UserDefaults.standard
         let credential: PhoneAuthCredential = PhoneAuthProvider.provider().credential(withVerificationID: defaults.string(forKey: "authVID")!, verificationCode: enterCode.text!)
-//        Auth.auth().signInAndRetrieveData(with: credential) { (user, error) in
-//            if error != nil {
-//                print("error: \(String(describing: error?.localizedDescription))")
-//            } else {
-//                print("Phone number: \(String(describing: user?.phoneNumber))")
-//                let userInfo = user?.providerData[0]
-//                print("Provider ID: \(String(describing: userInfo?.providerID))")
-//                self.performSegue(withIdentifier: "logged", sender: Any?.self)
-//            }
-//        }
+
         Auth.auth().signIn(with: credential) { (user, error) in
             if error != nil {
                 print("error: \(String(describing: error?.localizedDescription))")
