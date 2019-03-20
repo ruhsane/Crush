@@ -49,18 +49,6 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
     
     @IBAction func checkButton(_ sender: Any) {
         checkMatchAlert()
-//        let num = self.code + self.enterNumberTextField.text!
-//
-//        let alert = UIAlertController(title: "Is this your crush's phone number? \n \(num)", message: "you only have one chance to “check” who sent the message", preferredStyle: .alert)
-//        let action = UIAlertAction(title: "Yes", style: .default) { (UIAlertAction) in
-//            self.matchOrNo(num: num)
-//        }
-//
-//        let cancel = UIAlertAction(title: "No", style: .cancel, handler: nil)
-//        alert.addAction(action)
-//        alert.addAction(cancel)
-//        self.present(alert, animated: true, completion: nil)
-
     }
     
     @IBAction func sendButton(_ sender: UIButton) {
@@ -82,11 +70,9 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
             kButtonFont: UIFont(name: "HelveticaNeue-Bold", size: 14)!
         )
         
-//         Initialize SCLAlertView using custom Appearance
+        // Initialize SCLAlertView using custom Appearance
         let alert = SCLAlertView(appearance: appearance)
         let num = self.code + self.enterNumberTextField.text!
-
-//        let alert = SCLAlertView()
 
         alert.addButton("I am sure") {
             self.matchOrNo(num: num)

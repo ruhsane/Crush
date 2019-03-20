@@ -10,8 +10,10 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabase
 import Alamofire
+import SCLAlertView
 
 class NotMatchedViewController: UIViewController {
+    var phoneNumber: String?
 
     @IBOutlet weak var askToSendLabel: UILabel!
     
@@ -29,37 +31,53 @@ class NotMatchedViewController: UIViewController {
     }
     
     @IBAction func sendToEnteredCrush(_ sender: Any) {
-        sendText { (completed) in
-            
+        let number = self.phoneNumber
+        sendText(number: number!) { (completed) in
+            // if text sent successfully
             if completed == true{
                 let ref = Database.database().reference()
-                
-                //add crush number under user uid
                 let user = Auth.auth().currentUser
-                guard let number = self.phoneNumber else { return}
-                print(number)
-                ref.child("Users").child((user?.uid)!).child("CrushNumber").setValue(number)
-                
-                ref.child("Loved").child(number).child("Followers").updateChildValues([(user?.phoneNumber)! : true])
+                // add receiver under loved
+                ref.child("Loved").child(number!).child("Followers").updateChildValues([(user?.phoneNumber)! : true])
             }
         }
     }
-    var phoneNumber: String?
+    
+    @IBAction func sendToDiffNum(_ sender: Any) {
+        popUpView()
+    }
+    
+    func popUpView() {
+        let alert = SCLAlertView()
+        let txt = alert.addTextField("Enter your crush's number")
+        print(txt)
+        
+        alert.addButton("Send Anonymous Text") {
+            
+            self.sendText(number: txt.text!) { (completed) in
+                // if text sent sucessfully
+                let number = txt.text
+                if completed == true{
+                    let ref = Database.database().reference()
+                    let user = Auth.auth().currentUser
+                    // add receiver under loved
+                    ref.child("Loved").child(number!).child("Followers").updateChildValues([(user?.phoneNumber)! : true])
+                }
+            }
+            
+        }
+        alert.showEdit("", subTitle: "")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        guard let number = phoneNumber else { return}
         let user = Auth.auth().currentUser
-        let ref = Database.database().reference().child("Matched")
         let currentUserRef = Database.database().reference().child("Users").child(user!.uid)
-        let currentUserSnap = currentUserRef.observe(.value) { (snapshot) in
+        currentUserRef.observe(.value) { (snapshot) in
             let currentUser = snapshot.value as! [String: String]
-
-            
+            self.phoneNumber = currentUser["CrushNumber"]!
             self.askToSendLabel.text = "Do you want to send anonymous text message to the number you entered?(" +  currentUser["CrushNumber"]! + ")"
-
-        // Do any additional setup after loading the view.
-    }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -67,9 +85,7 @@ class NotMatchedViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     } 
     
-    func sendText(completion: @escaping(Bool)->()) {
-        guard let number = phoneNumber else { return}
-        print(number)
+    func sendText(number: String, completion: @escaping(Bool)->()) {
 
         let accountSID = "ACc89f0f2bdefcc860202e3dce683e8855"
         let authToken = "42a5ab35149266391e7649e0c7927c74"

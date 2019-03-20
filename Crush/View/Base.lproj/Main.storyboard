@@ -633,7 +633,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="W6X-Tq-Cko" kind="show" id="OsN-89-6Il"/>
+                                            <action selector="sendToDiffNum:" destination="JNb-2g-rUp" eventType="touchUpInside" id="Ep3-93-vZb"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -748,6 +748,5 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="BqI-Q0-Zno"/>
-        <segue reference="OsN-89-6Il"/>
     </inferredMetricsTieBreakers>
 </document>
