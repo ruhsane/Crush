@@ -18,7 +18,7 @@ public class AlamofireRequest {
         let authToken = ProcessInfo.processInfo.environment["TWILIO_AUTH_TOKEN"]{
     
         let url = "https://api.twilio.com/2010-04-01/Accounts/\(accountSID)/Messages"
-        let parameters = ["From": "9032943794", "To": to, "Body": body]
+            let parameters = ["From": ProcessInfo.processInfo.environment["TWILIO_NUMBER"], "To": to, "Body": body] as! [String: String]
     
         Alamofire.request(url, method: .post, parameters: parameters)
             .authenticate(user: accountSID, password: authToken)
