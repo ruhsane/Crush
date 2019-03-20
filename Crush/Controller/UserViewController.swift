@@ -41,8 +41,6 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
         catch{
             
         }
-//        let LoginController = LoginPage()
-//        present(LoginController, animated: true, completion: nil)
     }
     
     @IBOutlet weak var enterNumberTextField: UITextField!
@@ -119,22 +117,6 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
                         print("notification text failed to send")
                     }
                 })
-                
-//                let accountSID = "ACc89f0f2bdefcc860202e3dce683e8855"
-//                let authToken = "42a5ab35149266391e7649e0c7927c74"
-//
-//                let url = "https://api.twilio.com/2010-04-01/Accounts/\(accountSID)/Messages"
-//
-//                let parameters = ["From": "9032943794", "To": num, "Body": "You have matched with your crush.😍 re-open the 'Crush' app to see."] as [String : Any]
-//
-//                Alamofire.request(url, method: .post, parameters: parameters)
-//                    .authenticate(user: accountSID, password: authToken)
-//                    .responseJSON { response in
-//                        let status = response.response?.statusCode
-//                        print(status)
-//                }
-//
-//                RunLoop.main.run()
                 
             } else {
                 
@@ -247,44 +229,6 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-//    func sendText(completion: @escaping(Bool)->()) {
-//        let accountSID = "ACc89f0f2bdefcc860202e3dce683e8855"
-//        let authToken = "42a5ab35149266391e7649e0c7927c74"
-//
-//        let url = "https://api.twilio.com/2010-04-01/Accounts/\(accountSID)/Messages"
-////        let int = Int(enterNumberTextField.text!)!
-////        let str = String(int)
-//        if let str = enterNumberTextField.text{
-//    //    let code = Country.phoneCode
-//            let num = self.code + str
-//
-//            let parameters = ["From": "9032943794", "To": num, "Body": "Someone labeled you as his/her crush on 'Crush' app. Download the app to see."] as [String : Any]
-//
-//            Alamofire.request(url, method: .post, parameters: parameters)
-//                .authenticate(user: accountSID, password: authToken)
-//                .responseJSON { response in
-//                    let status = response.response?.statusCode
-//                    if status! > 200 && status! < 299{
-//                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//                        let WaitForResponse = storyboard.instantiateViewController(withIdentifier: "WaitForResponse")
-//                        self.present(WaitForResponse,animated: true)
-//                        return completion (true)
-//
-//                    }
-//                    else{
-//                        let alert = UIAlertController(title: "Send Text Error", message: "Please check if your entered number is correct", preferredStyle: .alert)
-//                        let ok = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
-//                        alert.addAction(ok)
-//                        self.present(alert, animated: true, completion: nil)
-//                        return completion(false)
-//
-//                    }
-//            }
-//        }        else { print("emty")}
-//
-//        RunLoop.main.run()
-//    }
     
     func countryPickerView(_ countryPickerView: CountryPickerView, didSelectCountry country: Country) {
          self.code = country.code
