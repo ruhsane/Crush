@@ -14,12 +14,6 @@ import FirebaseDatabase
 
 class ViewController: UIViewController {
     var ref: DatabaseReference!
-
-    @IBAction func loginButton(_ sender: UIButton) {
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let vc = storyboard.instantiateViewController(withIdentifier: "LoginPage")
-//        self.present(vc, animated: true, completion: nil)
-    }
     
     @IBOutlet weak var enterNumberTextField: UITextField!
     

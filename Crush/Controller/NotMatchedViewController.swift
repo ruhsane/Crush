@@ -20,10 +20,10 @@ class NotMatchedViewController: UIViewController {
     @IBAction func SignOutButton(_ sender: Any) {
         do{
             try Auth.auth().signOut()
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let loginVC = storyboard.instantiateViewController(withIdentifier: "loginVC")
-            
-            self.present(loginVC,animated: true)
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let loginVC = storyboard.instantiateViewController(withIdentifier: "loginVC")
+//            self.present(loginVC,animated: true)
+            presentVC(sbName: "Main", identifier: "loginVC", fromVC: self)
         }
         catch{
             
@@ -35,10 +35,11 @@ class NotMatchedViewController: UIViewController {
         
         AlamofireRequest().twillioSendText(to: number, body: "Someone labeled you as his/her crush on 'Crush' app. Download the app to see.", completion: { (completion) in
             if completion == true{
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let WaitForResponse = storyboard.instantiateViewController(withIdentifier: "WaitForResponse")
-                self.present(WaitForResponse,animated: true)
-                
+//                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//                let WaitForResponse = storyboard.instantiateViewController(withIdentifier: "WaitForResponse")
+//                self.present(WaitForResponse,animated: true)
+                presentVC(sbName: "Main", identifier: "WaitForResponse", fromVC: self)
+
                 let ref = Database.database().reference()
                 let user = Auth.auth().currentUser
                 // add receiver under loved
@@ -66,10 +67,11 @@ class NotMatchedViewController: UIViewController {
         alert.addButton("Send Anonymous Text") {
             AlamofireRequest().twillioSendText(to: txt.text ?? "", body: "Someone labeled you as his/her crush on 'Crush' app. Download the app to see.", completion: { (completion) in
                 if completion == true{
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let WaitForResponse = storyboard.instantiateViewController(withIdentifier: "WaitForResponse")
-                    self.present(WaitForResponse,animated: true)
-
+//                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//                    let WaitForResponse = storyboard.instantiateViewController(withIdentifier: "WaitForResponse")
+//                    self.present(WaitForResponse,animated: true)
+                    presentVC(sbName: "Main", identifier: "WaitForResponse", fromVC: self)
+                    
                     let ref = Database.database().reference()
                     let user = Auth.auth().currentUser
                     let number = txt.text ?? ""

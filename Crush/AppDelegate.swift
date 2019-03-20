@@ -61,11 +61,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 let object = match.value as! [String: String]
                                 if object["A"] == number || object["B"] == number {
                                     // in here we will move to a specific viewController
-                                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                                    let mainVC = storyboard.instantiateViewController(withIdentifier: "Matched")
-                                    self.window?.rootViewController = mainVC
-                                    self.window?.makeKeyAndVisible()
-
+//                                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//                                    let mainVC = storyboard.instantiateViewController(withIdentifier: "Matched")
+//                                    self.window?.rootViewController = mainVC
+//                                    self.window?.makeKeyAndVisible()
+                                    self.setRootVC(identifier: "Matched")
 
                                     print("We have matches! Omg!")
                                 }
@@ -88,26 +88,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                     if crushObject[number!] == true {
                                         //here, display the waiting VC
                                         print("should wait")
-                                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                                        let mainVC = storyboard.instantiateViewController(withIdentifier: "WaitForResponse")
-                                        self.window?.rootViewController = mainVC
-                                        self.window?.makeKeyAndVisible()
+//                                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//                                        let mainVC = storyboard.instantiateViewController(withIdentifier: "WaitForResponse")
+//                                        self.window?.rootViewController = mainVC
+//                                        self.window?.makeKeyAndVisible()
+                                        self.setRootVC(identifier: "WaitForResponse")
+
                                     } else {
 
-                                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                                    let mainVC = storyboard.instantiateViewController(withIdentifier: "notMatched")
-                                    self.window?.rootViewController = mainVC
-                                    self.window?.makeKeyAndVisible()
+//                                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//                                    let mainVC = storyboard.instantiateViewController(withIdentifier: "notMatched")
+//                                    self.window?.rootViewController = mainVC
+//                                    self.window?.makeKeyAndVisible()
+                                    self.setRootVC(identifier: "notMatched")
 
                                     print("crushObject")
                                         }
                                 })
 
                             } else {
-                                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                                let mainVC = storyboard.instantiateViewController(withIdentifier: "notMatched")
-                                self.window?.rootViewController = mainVC
-                                self.window?.makeKeyAndVisible()
+//                                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//                                let mainVC = storyboard.instantiateViewController(withIdentifier: "notMatched")
+//                                self.window?.rootViewController = mainVC
+//                                self.window?.makeKeyAndVisible()
+                                self.setRootVC(identifier: "notMatched")
+
                                 print("go to not match")
                             }
 
@@ -116,25 +121,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     //if the currentUser doesn't have a crushNumber
                 } else {
 
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let mainVC = storyboard.instantiateViewController(withIdentifier: "mainVC")
-                    self.window?.rootViewController = mainVC
-                    self.window?.makeKeyAndVisible()
+//                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//                    let mainVC = storyboard.instantiateViewController(withIdentifier: "mainVC")
+//                    self.window?.rootViewController = mainVC
+//                    self.window?.makeKeyAndVisible()
+                    self.setRootVC(identifier: "mainVC")
+
                 }
             }
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let mainVC = storyboard.instantiateViewController(withIdentifier: "mainVC")
-            window?.rootViewController = mainVC
-            window?.makeKeyAndVisible()
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let mainVC = storyboard.instantiateViewController(withIdentifier: "mainVC")
+//            window?.rootViewController = mainVC
+//            window?.makeKeyAndVisible()
+            setRootVC(identifier: "mainVC")
+
         } else {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let loginVC = storyboard.instantiateViewController(withIdentifier: "loginVC")
-            window?.rootViewController = loginVC
-            window?.makeKeyAndVisible()
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let loginVC = storyboard.instantiateViewController(withIdentifier: "loginVC")
+//            window?.rootViewController = loginVC
+//            window?.makeKeyAndVisible()
+            setRootVC(identifier: "loginVC")
         }
         
         return true
    }
+
+    func setRootVC(identifier: String) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let rootVC = storyboard.instantiateViewController(withIdentifier: identifier)
+        self.window?.rootViewController = rootVC
+        self.window?.makeKeyAndVisible()
+    }
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

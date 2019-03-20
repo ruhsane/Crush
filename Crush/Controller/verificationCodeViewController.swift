@@ -43,9 +43,6 @@ class verificationCodeViewController: UIViewController {
                 
 //                let rootViewController = UIApplication.shared.keyWindow?.rootViewController
 //                guard let UserViewController = rootViewController as? UserViewController else{return}
-
-
-                
                 
                 UserDefaults.standard.set(true, forKey: "isLoggedIn")
                 UserDefaults.standard.synchronize()
@@ -82,11 +79,11 @@ class verificationCodeViewController: UIViewController {
                                     let object = match.value as! [String: String]
                                     if object["A"] == number || object["B"] == number {
                                         // in here we will move to a specific viewController
-                                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                                        let mainVC = storyboard.instantiateViewController(withIdentifier: "Matched")
-                                        
-                                        self.present(mainVC, animated: true)
-                                        
+//                                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//                                        let mainVC = storyboard.instantiateViewController(withIdentifier: "Matched")
+//                                        self.present(mainVC, animated: true)
+                                        presentVC(sbName: "Main", identifier: "Matched", fromVC: self)
+
                                         print("We have matches! Omg!")
                                     }
                                 }
@@ -107,23 +104,28 @@ class verificationCodeViewController: UIViewController {
                                         if crushObject[number!] == true {
                                             //here, display the waiting VC
                                             print("should wait")
-                                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                                            let mainVC = storyboard.instantiateViewController(withIdentifier: "WaitForResponse")
-                                            self.present(mainVC, animated: true)
+//                                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//                                            let mainVC = storyboard.instantiateViewController(withIdentifier: "WaitForResponse")
+//                                            self.present(mainVC, animated: true)
+                                            presentVC(sbName: "Main", identifier: "WaitForResponse", fromVC: self)
+
                                         } else {
                                             
-                                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                                            let mainVC = storyboard.instantiateViewController(withIdentifier: "notMatched")
-                                            self.present(mainVC, animated: true)
-                                            
+//                                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//                                            let mainVC = storyboard.instantiateViewController(withIdentifier: "notMatched")
+//                                            self.present(mainVC, animated: true)
+                                            presentVC(sbName: "Main", identifier: "notMatched", fromVC: self)
+
                                             print("crushObject")
                                         }
                                     })
                                     
                                 } else {
-                                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                                    let mainVC = storyboard.instantiateViewController(withIdentifier: "notMatched")
-                                    self.present(mainVC, animated: true)
+//                                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//                                    let mainVC = storyboard.instantiateViewController(withIdentifier: "notMatched")
+//                                    self.present(mainVC, animated: true)
+                                    presentVC(sbName: "Main", identifier: "notMatched", fromVC: self)
+
                                     print("go to not match")
                                 }
                                 
@@ -132,9 +134,11 @@ class verificationCodeViewController: UIViewController {
                             //if the currentUser doesn't have a crushNumber
                         } else {
                             
-                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                            let mainVC = storyboard.instantiateViewController(withIdentifier: "mainVC")
-                            self.present(mainVC, animated: true)
+//                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//                            let mainVC = storyboard.instantiateViewController(withIdentifier: "mainVC")
+//                            self.present(mainVC, animated: true)
+                            presentVC(sbName: "Main", identifier: "mainVC", fromVC: self)
+
                         }
                     }
                     

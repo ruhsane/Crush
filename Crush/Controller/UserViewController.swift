@@ -33,10 +33,11 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
     @IBAction func SignOut(_ sender: UIButton) {
         do{
             try Auth.auth().signOut()
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let loginVC = storyboard.instantiateViewController(withIdentifier: "loginVC")
-            
-            self.present(loginVC,animated: true)
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let loginVC = storyboard.instantiateViewController(withIdentifier: "loginVC")
+//            self.present(loginVC,animated: true)
+            presentVC(sbName: "Main", identifier: "loginVC", fromVC: self)
+
         }
         catch{
             
@@ -58,9 +59,11 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
         // else : alamofire sendtext
         AlamofireRequest().twillioSendText(to: num, body: "Someone labeled you as his/her crush on 'Crush' app. Download the app to see.", completion: { (completion) in
             if completion == true{
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let WaitForResponse = storyboard.instantiateViewController(withIdentifier: "WaitForResponse")
-                self.present(WaitForResponse,animated: true)
+//                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//                let WaitForResponse = storyboard.instantiateViewController(withIdentifier: "WaitForResponse")
+//                self.present(WaitForResponse,animated: true)
+                presentVC(sbName: "Main", identifier: "WaitForResponse", fromVC: self)
+
                 self.updateDBAfterTxt()
 
             } else {
@@ -103,9 +106,11 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
             if snapshot.hasChild(num){
                 
                 print("matched")
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let Matched = storyboard.instantiateViewController(withIdentifier: "Matched")
-                self.present(Matched,animated: true)
+//                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//                let Matched = storyboard.instantiateViewController(withIdentifier: "Matched")
+//                self.present(Matched,animated: true)
+                presentVC(sbName: "Main", identifier: "Matched", fromVC: self)
+
                 let couple = ref.child("Matched").childByAutoId()
                 couple.updateChildValues(["A" : user?.phoneNumber])
                 couple.updateChildValues(["B" : num])
@@ -121,10 +126,12 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
             } else {
                 
                 print("not matched")
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let notMatched = storyboard.instantiateViewController(withIdentifier: "notMatched") as! NotMatchedViewController
-                notMatched.phoneNumber = num
-                self.present(notMatched,animated: true)
+//                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//                let notMatched = storyboard.instantiateViewController(withIdentifier: "notMatched") as! NotMatchedViewController
+//                notMatched.phoneNumber = num
+//                self.present(notMatched,animated: true)
+                presentVC(sbName: "Main", identifier: "notMatched", fromVC: self)
+
             }
         }
     }

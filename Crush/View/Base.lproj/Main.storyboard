@@ -64,7 +64,6 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="loginButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3Ns-gq-KrM"/>
                                                             <segue destination="qzj-Dj-0dB" kind="show" id="BqI-Q0-Zno"/>
                                                         </connections>
                                                     </button>
