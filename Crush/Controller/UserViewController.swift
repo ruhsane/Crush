@@ -20,7 +20,7 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
     
     var ref: DatabaseReference?
     var code = "+1"
-    var crushes = [String]()
+    
     var followersCount = 0 {
         didSet {
             self.countLabel.text = String(self.followersCount) + " users have labeled you as their crush."
@@ -240,5 +240,6 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
     func countryPickerView(_ countryPickerView: CountryPickerView, didSelectCountry country: Country) {
          self.code = country.code
     }
+    
 }
 

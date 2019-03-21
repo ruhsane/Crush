@@ -11,9 +11,11 @@ import FirebaseAuth
 import FirebaseDatabase
 import Alamofire
 import SCLAlertView
+import CountryPickerView
 
-class NotMatchedViewController: UIViewController {
+class NotMatchedViewController: UIViewController, CountryPickerViewDelegate {
     var phoneNumber: String?
+    var code = "+1"
 
     @IBOutlet weak var askToSendLabel: UILabel!
     
@@ -23,7 +25,9 @@ class NotMatchedViewController: UIViewController {
 //            let storyboard = UIStoryboard(name: "Main", bundle: nil)
 //            let loginVC = storyboard.instantiateViewController(withIdentifier: "loginVC")
 //            self.present(loginVC,animated: true)
-            presentVC(sbName: "Main", identifier: "loginVC", fromVC: self)
+//            presentVC(sbName: "Main", identifier: "loginVC", fromVC: self)
+            view.window?.rootViewController = storyboard?.instantiateViewController(withIdentifier: "loginVC")
+            view.window?.makeKeyAndVisible()
         }
         catch{
             
@@ -61,23 +65,25 @@ class NotMatchedViewController: UIViewController {
     
     func popUpView() {
         let alert = SCLAlertView()
-        let txt = alert.addTextField("Enter your crush's number")
-        print(txt)
+        let txt = alert.addTextField()
+        let cpv = CountryPickerView(frame: CGRect(x: 0, y: 0, width: 85, height: 20))
+        cpv.delegate = self
+        txt.leftView = cpv
+        txt.leftViewMode = .always
+        
+        let num = txt.text ?? ""
+        let fullNum = self.code + num
         
         alert.addButton("Send Anonymous Text") {
-            AlamofireRequest().twillioSendText(to: txt.text ?? "", body: "Someone labeled you as his/her crush on 'Crush' app. Download the app to see.", completion: { (completion) in
+            AlamofireRequest().twillioSendText(to: fullNum, body: "Someone labeled you as his/her crush on 'Crush' app. Download the app to see.", completion: { (completion) in
                 if completion == true{
-//                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//                    let WaitForResponse = storyboard.instantiateViewController(withIdentifier: "WaitForResponse")
-//                    self.present(WaitForResponse,animated: true)
                     presentVC(sbName: "Main", identifier: "WaitForResponse", fromVC: self)
                     
                     let ref = Database.database().reference()
                     let user = Auth.auth().currentUser
-                    let number = txt.text ?? ""
-
+                    
                     // add receiver under loved
-                    ref.child("Loved").child(number).child("Followers").updateChildValues([(user?.phoneNumber)! : true])
+                    ref.child("Loved").child(fullNum).child("Followers").updateChildValues([(user?.phoneNumber)! : true])
                     
                 } else {
                     let alert = UIAlertController(title: "Send Text Error", message: "Please check if your entered number is correct", preferredStyle: .alert)
@@ -88,7 +94,7 @@ class NotMatchedViewController: UIViewController {
             })
         }
         
-        alert.showEdit("", subTitle: "")
+        alert.showEdit("", subTitle: "Enter your crush's number")
     }
     
     override func viewDidLoad() {
@@ -100,6 +106,7 @@ class NotMatchedViewController: UIViewController {
             self.phoneNumber = currentUser["CrushNumber"]!
             self.askToSendLabel.text = "Do you want to send anonymous text message to the number you entered?(" +  currentUser["CrushNumber"]! + ")"
         }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -107,6 +114,10 @@ class NotMatchedViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     } 
 
+    
+    func countryPickerView(_ countryPickerView: CountryPickerView, didSelectCountry country: Country) {
+        self.code = country.code
+    }
     /*
     // MARK: - Navigation
 

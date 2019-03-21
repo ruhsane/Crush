@@ -24,6 +24,7 @@ public class AlamofireRequest {
             .authenticate(user: accountSID, password: authToken)
             .responseJSON { response in
                 let status = response.response?.statusCode
+                print(status)
                 if status! > 200 && status! < 299{
                     return completion(true)
                 }
