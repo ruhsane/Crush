@@ -22,10 +22,6 @@ class NotMatchedViewController: UIViewController, CountryPickerViewDelegate {
     @IBAction func SignOutButton(_ sender: Any) {
         do{
             try Auth.auth().signOut()
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            let loginVC = storyboard.instantiateViewController(withIdentifier: "loginVC")
-//            self.present(loginVC,animated: true)
-//            presentVC(sbName: "Main", identifier: "loginVC", fromVC: self)
             view.window?.rootViewController = storyboard?.instantiateViewController(withIdentifier: "loginVC")
             view.window?.makeKeyAndVisible()
         }
@@ -48,13 +44,17 @@ class NotMatchedViewController: UIViewController, CountryPickerViewDelegate {
         let alert = SCLAlertView()
         let txt = alert.addTextField()
         let cpv = CountryPickerView(frame: CGRect(x: 0, y: 0, width: 85, height: 20))
+        cpv.showCountriesList(from: alert)
+        cpv.showCountryCodeInView = false
         cpv.delegate = self
+        
         txt.leftView = cpv
         txt.leftViewMode = .always
-
+        
         alert.addButton("Send Anonymous Text") {
             let num = txt.text ?? ""
             let fullNum = self.code + num
+            print(fullNum)
             self.sendText(num: fullNum)
         }
         
@@ -104,8 +104,9 @@ class NotMatchedViewController: UIViewController, CountryPickerViewDelegate {
 
     
     func countryPickerView(_ countryPickerView: CountryPickerView, didSelectCountry country: Country) {
-        self.code = country.code
+        self.code = country.phoneCode
     }
+    
     
     /*
     // MARK: - Navigation

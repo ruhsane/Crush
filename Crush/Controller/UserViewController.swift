@@ -237,7 +237,7 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
     }
     
     func countryPickerView(_ countryPickerView: CountryPickerView, didSelectCountry country: Country) {
-         self.code = country.code
+         self.code = country.phoneCode
     }
     
 }

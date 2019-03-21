@@ -15,7 +15,7 @@ class LoginPage: UIViewController, CountryPickerViewDelegate {
 
     var code = "+1"
     func countryPickerView(_ countryPickerView: CountryPickerView, didSelectCountry country: Country) {
-        self.code = country.code
+        self.code = country.phoneCode
     }
     
     @IBOutlet weak var enterPhoneNumber: UITextField!
