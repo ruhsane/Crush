@@ -196,7 +196,6 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
         cpv.delegate = self
         enterNumberTextField.leftView = cpv
         enterNumberTextField.leftViewMode = .always
-
     
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         tap.cancelsTouchesInView = false

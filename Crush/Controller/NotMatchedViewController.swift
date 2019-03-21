@@ -36,27 +36,8 @@ class NotMatchedViewController: UIViewController, CountryPickerViewDelegate {
     
     @IBAction func sendToEnteredCrush(_ sender: Any) {
         let number = self.phoneNumber ?? ""
-        
-        AlamofireRequest().twillioSendText(to: number, body: "Someone labeled you as his/her crush on 'Crush' app. Download the app to see.", completion: { (completion) in
-            if completion == true{
-//                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//                let WaitForResponse = storyboard.instantiateViewController(withIdentifier: "WaitForResponse")
-//                self.present(WaitForResponse,animated: true)
-                presentVC(sbName: "Main", identifier: "WaitForResponse", fromVC: self)
 
-                let ref = Database.database().reference()
-                let user = Auth.auth().currentUser
-                // add receiver under loved
-                ref.child("Loved").child(number).child("Followers").updateChildValues([(user?.phoneNumber)! : true])
-                
-            } else {
-                let alert = UIAlertController(title: "Send Text Error", message: "Please check if your entered number is correct", preferredStyle: .alert)
-                let ok = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
-                alert.addAction(ok)
-                self.present(alert, animated: true, completion: nil)
-            }
-        })
-        
+        sendText(num: number)
     }
     
     @IBAction func sendToDiffNum(_ sender: Any) {
@@ -70,31 +51,38 @@ class NotMatchedViewController: UIViewController, CountryPickerViewDelegate {
         cpv.delegate = self
         txt.leftView = cpv
         txt.leftViewMode = .always
-        
-        let num = txt.text ?? ""
-        let fullNum = self.code + num
-        
+
         alert.addButton("Send Anonymous Text") {
-            AlamofireRequest().twillioSendText(to: fullNum, body: "Someone labeled you as his/her crush on 'Crush' app. Download the app to see.", completion: { (completion) in
-                if completion == true{
-                    presentVC(sbName: "Main", identifier: "WaitForResponse", fromVC: self)
-                    
-                    let ref = Database.database().reference()
-                    let user = Auth.auth().currentUser
-                    
-                    // add receiver under loved
-                    ref.child("Loved").child(fullNum).child("Followers").updateChildValues([(user?.phoneNumber)! : true])
-                    
-                } else {
-                    let alert = UIAlertController(title: "Send Text Error", message: "Please check if your entered number is correct", preferredStyle: .alert)
-                    let ok = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
-                    alert.addAction(ok)
-                    self.present(alert, animated: true, completion: nil)
-                }
-            })
+            let num = txt.text ?? ""
+            let fullNum = self.code + num
+            self.sendText(num: fullNum)
         }
         
         alert.showEdit("", subTitle: "Enter your crush's number")
+    }
+    
+    func sendText(num: String) {
+        
+        AlamofireRequest().twillioSendText(to: num, body: "Someone labeled you as his/her crush on 'Crush' app. Download the app to see.", completion: { (completion) in
+            if completion == true{
+                presentVC(sbName: "Main", identifier: "WaitForResponse", fromVC: self)
+                
+                let ref = Database.database().reference()
+                let user = Auth.auth().currentUser
+                
+                // update/write crush number for user
+                ref.child("Users").child((user?.uid)!).child("CrushNumber").setValue(num)
+                
+                // add receiver under loved
+                ref.child("Loved").child(num).child("Followers").updateChildValues([(user?.phoneNumber)! : true])
+                
+            } else {
+                let alert = UIAlertController(title: "Send Text Error", message: "Please check if your entered number is correct", preferredStyle: .alert)
+                let ok = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+                alert.addAction(ok)
+                self.present(alert, animated: true, completion: nil)
+            }
+        })
     }
     
     override func viewDidLoad() {
@@ -118,6 +106,7 @@ class NotMatchedViewController: UIViewController, CountryPickerViewDelegate {
     func countryPickerView(_ countryPickerView: CountryPickerView, didSelectCountry country: Country) {
         self.code = country.code
     }
+    
     /*
     // MARK: - Navigation
 
