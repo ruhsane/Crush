@@ -33,11 +33,7 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
     @IBAction func SignOut(_ sender: UIButton) {
         do{
             try Auth.auth().signOut()
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            let loginVC = storyboard.instantiateViewController(withIdentifier: "loginVC")
-//            self.present(loginVC,animated: true)
             presentVC(sbName: "Main", identifier: "loginVC", fromVC: self)
-
         }
         catch{
             
@@ -51,6 +47,8 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
     }
     
     @IBAction func sendButton(_ sender: UIButton) {
+        self.showSpinner(onView: self.view)
+
         let str = enterNumberTextField.text ?? ""
         let num = self.code + str
         
@@ -58,6 +56,7 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
         
         // else : alamofire sendtext
         AlamofireRequest().twillioSendText(to: num, body: "Someone labeled you as his/her crush on 'Crush' app. Download the app to see.", completion: { (completion) in
+            self.removeSpinner()
             if completion == true{
 //                let storyboard = UIStoryboard(name: "Main", bundle: nil)
 //                let WaitForResponse = storyboard.instantiateViewController(withIdentifier: "WaitForResponse")
@@ -88,6 +87,7 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
         let num = self.code + self.enterNumberTextField.text!
 
         alert.addButton("I am sure") {
+            self.showSpinner(onView: self.view)
             self.matchOrNo(num: num)
         }
         
@@ -102,18 +102,16 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
         ref.child("Users").child((user?.uid)!).child("CrushNumber").setValue(num)
         
         ref.child("Loved").child((user?.phoneNumber)!).child("Followers").observe(.value) { (snapshot) in
-            
+            self.removeSpinner()
             if snapshot.hasChild(num){
                 
                 print("matched")
-//                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//                let Matched = storyboard.instantiateViewController(withIdentifier: "Matched")
-//                self.present(Matched,animated: true)
                 presentVC(sbName: "Main", identifier: "Matched", fromVC: self)
 
                 let couple = ref.child("Matched").childByAutoId()
                 couple.updateChildValues(["A" : user?.phoneNumber])
                 couple.updateChildValues(["B" : num])
+                
                 //notify B with text message saying you matched
                 AlamofireRequest().twillioSendText(to: num, body: "You have matched with your crush.😍 re-open the 'Crush' app to see.", completion: { (completion) in
                     if completion == true{
@@ -126,10 +124,6 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
             } else {
                 
                 print("not matched")
-//                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//                let notMatched = storyboard.instantiateViewController(withIdentifier: "notMatched") as! NotMatchedViewController
-//                notMatched.phoneNumber = num
-//                self.present(notMatched,animated: true)
                 presentVC(sbName: "Main", identifier: "notMatched", fromVC: self)
 
             }

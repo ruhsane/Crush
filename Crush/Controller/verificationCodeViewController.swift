@@ -24,10 +24,13 @@ class verificationCodeViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     @IBAction func Login(_ sender: Any) {
+        self.showSpinner(onView: self.view)
+
         let defaults = UserDefaults.standard
         let credential: PhoneAuthCredential = PhoneAuthProvider.provider().credential(withVerificationID: defaults.string(forKey: "authVID")!, verificationCode: enterCode.text!)
 
         Auth.auth().signIn(with: credential) { (user, error) in
+            self.removeSpinner()
             if error != nil {
                 print("error: \(String(describing: error?.localizedDescription))")
             } else {

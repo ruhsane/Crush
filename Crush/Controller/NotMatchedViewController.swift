@@ -31,8 +31,9 @@ class NotMatchedViewController: UIViewController, CountryPickerViewDelegate {
     }
     
     @IBAction func sendToEnteredCrush(_ sender: Any) {
-        let number = self.phoneNumber ?? ""
+        self.showSpinner(onView: self.view)
 
+        let number = self.phoneNumber ?? ""
         sendText(num: number)
     }
     
@@ -52,6 +53,7 @@ class NotMatchedViewController: UIViewController, CountryPickerViewDelegate {
         txt.leftViewMode = .always
         
         alert.addButton("Send Anonymous Text") {
+            self.showSpinner(onView: self.view)
             let num = txt.text ?? ""
             let fullNum = self.code + num
             print(fullNum)
@@ -64,6 +66,9 @@ class NotMatchedViewController: UIViewController, CountryPickerViewDelegate {
     func sendText(num: String) {
         
         AlamofireRequest().twillioSendText(to: num, body: "Someone labeled you as his/her crush on 'Crush' app. Download the app to see.", completion: { (completion) in
+            
+            self.removeSpinner()
+            
             if completion == true{
                 presentVC(sbName: "Main", identifier: "WaitForResponse", fromVC: self)
                 

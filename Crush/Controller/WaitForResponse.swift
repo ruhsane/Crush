@@ -21,9 +21,6 @@ class WaitForResponse: UIViewController {
     @IBAction func SignOutButton(_ sender: Any) {
         do{
             try Auth.auth().signOut()
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            let loginVC = storyboard.instantiateViewController(withIdentifier: "loginVC")
-//            self.present(loginVC,animated: true)
             presentVC(sbName: "Main", identifier: "loginVC", fromVC: self)
 
         }
@@ -44,9 +41,6 @@ class WaitForResponse: UIViewController {
         let alert = SCLAlertView(appearance: appearance)
         
         alert.addButton("I am sure") {
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            let main = storyboard.instantiateViewController(withIdentifier: "mainVC")
-//            self.present(main, animated: true)
             presentVC(sbName: "Main", identifier: "mainVC", fromVC: self)
 
         }
@@ -68,9 +62,6 @@ class WaitForResponse: UIViewController {
             if snapshot.hasChild((user?.phoneNumber)!){
 
                 print("matched")
-//                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//                let Matched = storyboard.instantiateViewController(withIdentifier: "Matched")
-//                self.present(Matched,animated: true)
                 presentVC(sbName: "Main", identifier: "Matched", fromVC: self)
 
         }else{

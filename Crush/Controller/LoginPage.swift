@@ -34,8 +34,10 @@ class LoginPage: UIViewController, CountryPickerViewDelegate {
         let alert = UIAlertController(title: "Phone number", message: "Is this your phone number? \n \(num)", preferredStyle: .alert)
         let action = UIAlertAction(title: "Yes", style: .default) { (UIAlertAction) in
             // check if phone number is proper and do stuff with it?
-            
+            self.showSpinner(onView: self.view)
+
             PhoneAuthProvider.provider().verifyPhoneNumber(num, uiDelegate: nil) { (verificationID, error) in
+                self.removeSpinner()
                 if error != nil {
                     print("error: \(String(describing: error?.localizedDescription))")
                     let alert = UIAlertController(title: "Send Text Error", message: "Please check if your entered number is correct", preferredStyle: .alert)

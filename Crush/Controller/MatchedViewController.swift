@@ -14,9 +14,6 @@ class MatchedViewController: UIViewController {
     @IBAction func SignOutButton(_ sender: Any) {
         do{
             try Auth.auth().signOut()
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            let loginVC = storyboard.instantiateViewController(withIdentifier: "loginVC")
-//            self.present(loginVC,animated: true)
             presentVC(sbName: "Main", identifier: "loginVC", fromVC: self)
 
         }
