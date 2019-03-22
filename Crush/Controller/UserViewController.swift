@@ -52,24 +52,26 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
         let str = enterNumberTextField.text ?? ""
         let num = self.code + str
         
-        // TODO: if the number user sending message to is in user's followers, match them
-        
-        // else : alamofire sendtext
-        AlamofireRequest().twillioSendText(to: num, body: "Someone labeled you as his/her crush on 'Crush' app. Download the app to see.", completion: { (completion) in
-            self.removeSpinner()
-            if completion == true{
-//                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//                let WaitForResponse = storyboard.instantiateViewController(withIdentifier: "WaitForResponse")
-//                self.present(WaitForResponse,animated: true)
-                presentVC(sbName: "Main", identifier: "WaitForResponse", fromVC: self)
-
-                self.updateDBAfterTxt()
-
-            } else {
-                let alert = UIAlertController(title: "Send Text Error", message: "Please check if your entered number is correct", preferredStyle: .alert)
-                let ok = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
-                alert.addAction(ok)
-                self.present(alert, animated: true, completion: nil)
+        //  if the number user sending message to is in user's followers, match them (takes care of matching in matchorno func). if not match, send text
+        self.matchOrNo(num: num, completion: { (matched) in
+            if matched == false {
+                AlamofireRequest().twillioSendText(to: num, body: "Someone labeled you as his/her crush on 'Crush' app. Download the app to see.", completion: { (completion) in
+                    self.removeSpinner()
+                    if completion == true{
+                        //                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        //                let WaitForResponse = storyboard.instantiateViewController(withIdentifier: "WaitForResponse")
+                        //                self.present(WaitForResponse,animated: true)
+                        presentVC(sbName: "Main", identifier: "WaitForResponse", fromVC: self)
+                        
+                        self.updateDBAfterTxt()
+                        
+                    } else {
+                        let alert = UIAlertController(title: "Send Text Error", message: "Please check if your entered number is correct", preferredStyle: .alert)
+                        let ok = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+                        alert.addAction(ok)
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                })
             }
         })
     }
@@ -88,46 +90,16 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
 
         alert.addButton("I am sure") {
             self.showSpinner(onView: self.view)
-            self.matchOrNo(num: num)
+            self.matchOrNo(num: num, completion: { (completion) in
+                if completion == false {
+                    print("not matched")
+                    presentVC(sbName: "Main", identifier: "notMatched", fromVC: self)
+                }
+            })
         }
         
         alert.showInfo("Are you sure this is your crush's phone number? \n \(num)", subTitle: "you only have one chance to “check” who sent the message", closeButtonTitle: "Cancel",  colorStyle: 0x34C4F6)
         
-    }
-    
-    func matchOrNo(num: String) {
-        let ref = Database.database().reference()
-        let user = Auth.auth().currentUser
-        
-        ref.child("Users").child((user?.uid)!).child("CrushNumber").setValue(num)
-        
-        ref.child("Loved").child((user?.phoneNumber)!).child("Followers").observe(.value) { (snapshot) in
-            self.removeSpinner()
-            if snapshot.hasChild(num){
-                
-                print("matched")
-                presentVC(sbName: "Main", identifier: "Matched", fromVC: self)
-
-                let couple = ref.child("Matched").childByAutoId()
-                couple.updateChildValues(["A" : user?.phoneNumber])
-                couple.updateChildValues(["B" : num])
-                
-                //notify B with text message saying you matched
-                AlamofireRequest().twillioSendText(to: num, body: "You have matched with your crush.😍 re-open the 'Crush' app to see.", completion: { (completion) in
-                    if completion == true{
-                        print("sent tonification to inform they got matched")
-                    } else {
-                        print("notification text failed to send")
-                    }
-                })
-                
-            } else {
-                
-                print("not matched")
-                presentVC(sbName: "Main", identifier: "notMatched", fromVC: self)
-
-            }
-        }
     }
     
     func updateDBAfterTxt() {

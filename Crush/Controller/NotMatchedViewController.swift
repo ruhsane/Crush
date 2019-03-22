@@ -44,7 +44,7 @@ class NotMatchedViewController: UIViewController, CountryPickerViewDelegate {
     func popUpView() {
         let alert = SCLAlertView()
         let txt = alert.addTextField()
-        let cpv = CountryPickerView(frame: CGRect(x: 0, y: 0, width: 85, height: 20))
+        let cpv = CountryPickerView(frame: CGRect(x: 0, y: 0, width: 50, height: 20))
         cpv.showCountriesList(from: alert)
         cpv.showCountryCodeInView = false
         cpv.delegate = self
@@ -57,7 +57,12 @@ class NotMatchedViewController: UIViewController, CountryPickerViewDelegate {
             let num = txt.text ?? ""
             let fullNum = self.code + num
             print(fullNum)
-            self.sendText(num: fullNum)
+            // if the number is already in follower, go to matched, else sendtext
+            self.matchOrNo(num: fullNum, completion: { (matched) in
+                if matched == false {
+                    self.sendText(num: fullNum)
+                }
+            })
         }
         
         alert.showEdit("", subTitle: "Enter your crush's number")
