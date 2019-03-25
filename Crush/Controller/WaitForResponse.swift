@@ -67,9 +67,11 @@ class WaitForResponse: UIViewController, CountryPickerViewDelegate {
             let fullNum = self.code + num
             print(fullNum)
 
-            //  if the number user sending message to is in user's followers, match them (takes care of matching in matchorno func). if not match, send text
+            //  if the number user sending message to is in user's followers, match them (takes care of matching in matchorno func).
             self.matchOrNo(num: fullNum, completion: { (matched) in
                 if matched == false {
+                    // TODO: check if the number was the same as the old num
+
                     self.sendText(fullNum: fullNum)
                 }
             })
@@ -136,18 +138,6 @@ class WaitForResponse: UIViewController, CountryPickerViewDelegate {
         guard let number = self.phoneNumber else { return}
         print(number)
 
-
-        ref.child("Matched").childByAutoId().observe(.value) { (snapshot) in
-
-            if snapshot.hasChild((user?.phoneNumber)!){
-
-                print("matched")
-                presentVC(sbName: "Main", identifier: "Matched", fromVC: self)
-
-        }else{
-                return
-            }
-        }
     }
     
     override func didReceiveMemoryWarning() {
