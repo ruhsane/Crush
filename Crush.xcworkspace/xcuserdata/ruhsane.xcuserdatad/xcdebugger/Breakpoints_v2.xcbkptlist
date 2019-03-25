@@ -308,7 +308,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Crush/AlamofireRequest.swift"
-            timestampString = "575237090.327338"
+            timestampString = "575237604.890003"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "15"
@@ -324,7 +324,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Crush/AlamofireRequest.swift"
-            timestampString = "575237090.327448"
+            timestampString = "575237604.8901089"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "17"
@@ -340,7 +340,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Crush/AlamofireRequest.swift"
-            timestampString = "575237090.327543"
+            timestampString = "575237604.890187"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "22"
@@ -356,7 +356,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Crush/AlamofireRequest.swift"
-            timestampString = "575237090.327603"
+            timestampString = "575237604.890251"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "37"
@@ -372,7 +372,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Crush/AlamofireRequest.swift"
-            timestampString = "575237090.327693"
+            timestampString = "575237604.890312"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "39"
@@ -388,7 +388,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Crush/Controller/NotMatchedViewController.swift"
-            timestampString = "575237090.3277611"
+            timestampString = "575237604.890412"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "73"
@@ -404,7 +404,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Crush/Controller/NotMatchedViewController.swift"
-            timestampString = "575237090.3278511"
+            timestampString = "575237604.8904901"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "79"
@@ -420,7 +420,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Crush/Controller/NotMatchedViewController.swift"
-            timestampString = "575237090.327944"
+            timestampString = "575237604.89056"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "94"
@@ -436,7 +436,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Crush/Controller/NotMatchedViewController.swift"
-            timestampString = "575237090.328018"
+            timestampString = "575237604.89063"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "97"
@@ -452,7 +452,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Crush/Controller/NotMatchedViewController.swift"
-            timestampString = "575237090.3281"
+            timestampString = "575237604.8907"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "87"
@@ -468,12 +468,12 @@
                   moduleName = "Crush"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ruhsane/dev/personal/Crush/Crush/Controller/NotMatchedViewController.swift"
-                  timestampString = "575236009.876538"
+                  timestampString = "575237609.55764"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "89"
                   endingLineNumber = "89"
-                  offsetFromSymbolStart = "1041">
+                  offsetFromSymbolStart = "932">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -483,12 +483,12 @@
                   moduleName = "Crush"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ruhsane/dev/personal/Crush/Crush/Controller/NotMatchedViewController.swift"
-                  timestampString = "575236009.878184"
+                  timestampString = "575237609.559625"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "89"
                   endingLineNumber = "89"
-                  offsetFromSymbolStart = "3322">
+                  offsetFromSymbolStart = "2872">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -500,7 +500,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Crush/Controller/verificationCodeViewController.swift"
-            timestampString = "575237090.328244"
+            timestampString = "575237604.890771"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "96"
@@ -516,12 +516,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Crush/Controller/verificationCodeViewController.swift"
-            timestampString = "575237090.328366"
+            timestampString = "575237604.8908401"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "89"
             endingLineNumber = "89"
-            landmarkName = "Login(_:)"
+            landmarkName = "setRootVC(identifier:vc:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -532,7 +532,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Crush/Controller/verificationCodeViewController.swift"
-            timestampString = "575237090.328458"
+            timestampString = "575237604.890905"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "33"
@@ -548,12 +548,12 @@
                   moduleName = "Crush"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ruhsane/dev/personal/Crush/Crush/Controller/verificationCodeViewController.swift"
-                  timestampString = "575236009.890188"
+                  timestampString = "575237609.575276"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "33"
                   endingLineNumber = "33"
-                  offsetFromSymbolStart = "1618">
+                  offsetFromSymbolStart = "1436">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -563,12 +563,12 @@
                   moduleName = "Crush"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ruhsane/dev/personal/Crush/Crush/Controller/verificationCodeViewController.swift"
-                  timestampString = "575236009.891836"
+                  timestampString = "575237609.577165"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "34"
                   endingLineNumber = "34"
-                  offsetFromSymbolStart = "58">
+                  offsetFromSymbolStart = "56">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -580,7 +580,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Crush/Controller/verificationCodeViewController.swift"
-            timestampString = "575237090.328523"
+            timestampString = "575237604.890973"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "37"
@@ -596,12 +596,188 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Crush/Controller/verificationCodeViewController.swift"
-            timestampString = "575237090.328611"
+            timestampString = "575237604.891039"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "35"
             endingLineNumber = "35"
             landmarkName = "Login(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Crush/Controller/UserViewController.swift"
+            timestampString = "575237604.8911099"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
+            landmarkName = "updateDBAfterTxt()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Crush.UserViewController.updateDBAfterTxt() -&gt; ()"
+                  moduleName = "Crush"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ruhsane/dev/personal/Crush/Crush/Controller/UserViewController.swift"
+                  timestampString = "575237609.593595"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "114"
+                  endingLineNumber = "114"
+                  offsetFromSymbolStart = "224">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Crush.UserViewController.updateDBAfterTxt() -&gt; ()"
+                  moduleName = "Crush"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ruhsane/dev/personal/Crush/Crush/Controller/UserViewController.swift"
+                  timestampString = "575237609.595286"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "114"
+                  endingLineNumber = "114"
+                  offsetFromSymbolStart = "1572">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Crush/Controller/UserViewController.swift"
+            timestampString = "575237604.891174"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
+            landmarkName = "updateDBAfterTxt()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.FIRDataSnapshot) -&gt; () in Crush.UserViewController.updateDBAfterTxt() -&gt; ()"
+                  moduleName = "Crush"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ruhsane/dev/personal/Crush/Crush/Controller/UserViewController.swift"
+                  timestampString = "575237609.6013629"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "140"
+                  endingLineNumber = "140"
+                  offsetFromSymbolStart = "2216">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.FIRDataSnapshot) -&gt; () in Crush.UserViewController.updateDBAfterTxt() -&gt; ()"
+                  moduleName = "Crush"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ruhsane/dev/personal/Crush/Crush/Controller/UserViewController.swift"
+                  timestampString = "575237609.603035"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "140"
+                  endingLineNumber = "140"
+                  offsetFromSymbolStart = "3784">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Crush/Controller/UserViewController.swift"
+            timestampString = "575237604.891243"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
+            landmarkName = "updateDBAfterTxt()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Crush/Controller/UserViewController.swift"
+            timestampString = "575237604.8913029"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
+            landmarkName = "sendButton(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Crush/Controller/UserViewController.swift"
+            timestampString = "575237604.891362"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "sendButton(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Crush/Controller/UserViewController.swift"
+            timestampString = "575237604.89142"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
+            landmarkName = "sendButton(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Crush/Controller/UserViewController.swift"
+            timestampString = "575237604.8914779"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "sendButton(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
