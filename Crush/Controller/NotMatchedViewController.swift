@@ -22,6 +22,9 @@ class NotMatchedViewController: UIViewController, CountryPickerViewDelegate {
     @IBAction func SignOutButton(_ sender: Any) {
         do{
             try Auth.auth().signOut()
+            UserDefaults.standard.setIsLoggedIn(value: false)
+
+
             view.window?.rootViewController = storyboard?.instantiateViewController(withIdentifier: "loginVC")
             view.window?.makeKeyAndVisible()
         }
@@ -74,13 +77,16 @@ class NotMatchedViewController: UIViewController, CountryPickerViewDelegate {
             self.removeSpinner()
             
             if completion == true{
+
                 presentVC(sbName: "Main", identifier: "WaitForResponse", fromVC: self)
                 
                 let ref = Database.database().reference()
                 let user = Auth.auth().currentUser
-                
+                //change status to wait
+                ref.child("Users").child((user?.phoneNumber)!).child("Status").setValue("Wait")
+
                 // update/write crush number for user
-                ref.child("Users").child((user?.uid)!).child("CrushNumber").setValue(num)
+                ref.child("Users").child((user?.phoneNumber)!).child("CrushNumber").setValue(num)
                 
                 // add receiver under loved
                 ref.child("Loved").child(num).child("Followers").updateChildValues([(user?.phoneNumber)! : true])
@@ -97,7 +103,7 @@ class NotMatchedViewController: UIViewController, CountryPickerViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         let user = Auth.auth().currentUser
-        let currentUserRef = Database.database().reference().child("Users").child(user!.uid)
+        let currentUserRef = Database.database().reference().child("Users").child(user!.phoneNumber!)
         currentUserRef.observe(.value) { (snapshot) in
             let currentUser = snapshot.value as! [String: String]
             self.phoneNumber = currentUser["CrushNumber"]!

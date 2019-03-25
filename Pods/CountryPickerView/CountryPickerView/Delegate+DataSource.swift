@@ -12,15 +12,15 @@ public protocol CountryPickerViewDelegate: class {
     /// Called when the user selects a country from the list.
     func countryPickerView(_ countryPickerView: CountryPickerView, didSelectCountry country: Country)
     
-    /// Called before the internal UITableViewController is presented or pushed.
-    /// If the presenting view controller is not a UINavigationController, the UITableViewController
-    /// is embedded in a UINavigationController.
-    func countryPickerView(_ countryPickerView: CountryPickerView, willShow viewController: UITableViewController)
+    /// Called before the internal CountryPickerViewController is presented or pushed.
+    /// If the CountryPickerViewController is presented(not pushed), it is embedded in a UINavigationController.
+    /// The CountryPickerViewController is a UITableViewController subclass.
+    func countryPickerView(_ countryPickerView: CountryPickerView, willShow viewController: CountryPickerViewController)
     
-    /// Called after the internal UITableViewController is presented or pushed.
-    /// If the presenting view controller is not a UINavigationController, the UITableViewController
-    /// is embedded in a UINavigationController.
-    func countryPickerView(_ countryPickerView: CountryPickerView, didShow viewController: UITableViewController)
+    /// Called after the internal CountryPickerViewController is presented or pushed.
+    /// If the CountryPickerViewController is presented(not pushed), it is embedded in a UINavigationController.
+    /// The CountryPickerViewController is a UITableViewController subclass.
+    func countryPickerView(_ countryPickerView: CountryPickerView, didShow viewController: CountryPickerViewController)
 }
 
 public protocol CountryPickerViewDataSource: class {
@@ -35,6 +35,26 @@ public protocol CountryPickerViewDataSource: class {
     
     /// This determines if only the preferred section is shown
     func showOnlyPreferredSection(in countryPickerView: CountryPickerView) -> Bool
+    
+    /// The desired font for the section title labels on the list. Can be used to configure the text size.
+    /// Default value is UIFont.boldSystemFont(ofSize: 17)
+    func sectionTitleLabelFont(in countryPickerView: CountryPickerView) -> UIFont
+
+    /// The desired text color for the section title labels on the list.
+    func sectionTitleLabelColor(in countryPickerView: CountryPickerView) -> UIColor?
+    
+    /// The desired font for the cell labels on the list. Can be used to configure the text size.
+    /// Default value is UIFont.systemFont(ofSize: 17)
+    func cellLabelFont(in countryPickerView: CountryPickerView) -> UIFont
+    
+    /// The desired text color for the country names on the list.
+    func cellLabelColor(in countryPickerView: CountryPickerView) -> UIColor?
+    
+    /// The desired size for the flag images on the list.
+    func cellImageViewSize(in countryPickerView: CountryPickerView) -> CGSize
+    
+    /// The desired corner radius for the flag images on the list. Default value is 2
+    func cellImageViewCornerRadius(in countryPickerView: CountryPickerView) -> CGFloat
     
     /// The navigation item title when the internal view controller is pushed/presented.
     func navigationTitle(in countryPickerView: CountryPickerView) -> String?
@@ -66,6 +86,30 @@ public extension CountryPickerViewDataSource {
         return false
     }
     
+    func sectionTitleLabelFont(in countryPickerView: CountryPickerView) -> UIFont {
+        return UIFont.boldSystemFont(ofSize: 17)
+    }
+
+    func sectionTitleLabelColor(in countryPickerView: CountryPickerView) -> UIColor? {
+        return nil
+    }
+    
+    func cellLabelFont(in countryPickerView: CountryPickerView) -> UIFont {
+        return UIFont.systemFont(ofSize: 17)
+    }
+    
+    func cellLabelColor(in countryPickerView: CountryPickerView) -> UIColor? {
+        return nil
+    }
+    
+    func cellImageViewCornerRadius(in countryPickerView: CountryPickerView) -> CGFloat {
+        return 2
+    }
+    
+    func cellImageViewSize(in countryPickerView: CountryPickerView) -> CGSize {
+        return CGSize(width: 34, height: 24)
+    }
+    
     func navigationTitle(in countryPickerView: CountryPickerView) -> String? {
         return nil
     }
@@ -87,12 +131,12 @@ public extension CountryPickerViewDataSource {
 // MARK:- CountryPickerViewDelegate default implementations
 public extension CountryPickerViewDelegate {
 
-    func countryPickerView(_ countryPickerView: CountryPickerView, willShow viewController: UITableViewController) {
-        
+    func countryPickerView(_ countryPickerView: CountryPickerView,
+                           willShow viewController: CountryPickerViewController) {
     }
     
-    func countryPickerView(_ countryPickerView: CountryPickerView, didShow viewController: UITableViewController) {
-
+    func countryPickerView(_ countryPickerView: CountryPickerView,
+                           didShow viewController: CountryPickerViewController) {
     }
 
 }

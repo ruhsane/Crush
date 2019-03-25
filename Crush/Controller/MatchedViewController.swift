@@ -14,8 +14,11 @@ class MatchedViewController: UIViewController {
     @IBAction func SignOutButton(_ sender: Any) {
         do{
             try Auth.auth().signOut()
-            presentVC(sbName: "Main", identifier: "loginVC", fromVC: self)
+            UserDefaults.standard.setIsLoggedIn(value: false)
 
+
+            presentVC(sbName: "Main", identifier: "loginVC", fromVC: self)
+//            dismiss(animated: true, completion: nil)
         }
         catch{
             print(error)

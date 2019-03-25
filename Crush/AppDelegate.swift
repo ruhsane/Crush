@@ -31,102 +31,50 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UIApplication.shared.registerUserNotificationSettings(notificationSettings)
             UIApplication.shared.registerForRemoteNotifications()
         }
-    
+        
+        let ref = Database.database().reference()
         let user = Auth.auth().currentUser
-
-        if user != nil{
-
-            //Here we want to loop through all the matches entry in our database and see if our number is inside that database
-            let number = user!.phoneNumber
-            let ref = Database.database().reference().child("Matched")
-
-            let currentUserRef = Database.database().reference().child("Users").child(user!.uid)
-
-
-            let currentUserSnap = currentUserRef.observe(.value) { (snapshot) in
-                let currentUser = snapshot.value as! [String: String]
-                //if the currentUser has a crushNumber inputed
-                if currentUser["CrushNumber"] != nil {
-
-
-                    let matchTree = ref.observe(.value) { (snapshot) in
-
-
-                            //first we want to check if we have a crush number
-
-                            let matches = snapshot.children.allObjects as! [DataSnapshot]
-
-                            for match in matches {
-                                let object = match.value as! [String: String]
-                                if object["A"] == number || object["B"] == number {
-                                    // in here we will move to a specific viewController
-                                    self.setRootVC(identifier: "Matched", vc: MatchedViewController.self)
-
-                                    print("We have matches! Omg!")
-                                }
-                            }
-
-                    }
-                        //after we check if the current User has a match, check if the current User's crushNumber is in the love database, checking if they sent a text message
-                        let crushNumber = currentUser["CrushNumber"]
-
-                        let loveRef = Database.database().reference().child("Loved")
-
-                        let loveTree = loveRef.observe(.value, with: { (snapshot) in
-                            //if the crush number key exists in the love database
-                            if snapshot.hasChild(crushNumber!) {
-                                print("my crush number is in the love database")
-
-                                let crushRef = loveRef.child(crushNumber!).child("Followers")
-                                crushRef.observe(.value, with: { (snapshot) in
-                                    let crushObject = snapshot.value as! [String: Bool]
-                                    if crushObject[number!] == true {
-                                        //here, display the waiting VC
-                                        print("should wait")
-                                        self.setRootVC(identifier: "WaitForResponse", vc: WaitForResponse.self)
-
-                                    } else {
-                                        self.setRootVC(identifier: "notMatched", vc: NotMatchedViewController.self)
-                                    print("crushObject")
-                                        }
-                                })
-
-                            } else {
-                                self.setRootVC(identifier: "notMatched", vc: NotMatchedViewController.self)
-                                print("go to not match")
-                            }
-
-                        })
-
-                    //if the currentUser doesn't have a crushNumber
+        
+        if UserDefaults.standard.isLoggedIn() == true {
+            ref.child("Users").child((user?.phoneNumber)!).observeSingleEvent(of: .value, with: { (snapshot) in
+                if snapshot.hasChild("Status"){
+                    // we have user
+                    let status = ref.child("Users").child((user?.phoneNumber)!).child("Status")
+                    status.observe(.value, with: { (snapshot) in
+                        let statusValue = snapshot.value as? String
+                        print(status)
+                        print(statusValue)
+                        if statusValue == "Matched"{
+                            self.setRootVC(identifier: "Matched", vc: MatchedViewController.self)
+                        } else if statusValue == "Not Matched" {
+                            self.setRootVC(identifier: "notMatched", vc: NotMatchedViewController.self)
+                        } else if statusValue == "Wait" {
+                            self.setRootVC(identifier: "WaitForResponse", vc: WaitForResponse.self)
+                        } else {
+                            self.setRootVC(identifier: "mainVC", vc: UserViewController.self)
+                        }
+                    })
                 } else {
-
                     self.setRootVC(identifier: "mainVC", vc: UserViewController.self)
-
                 }
-            }
-            setRootVC(identifier: "mainVC", vc: UserViewController.self)
-
+            })
         } else {
+            // we don't have user, show the first page
             setRootVC(identifier: "loginVC", vc: ViewController.self)
         }
-        
+
+
         return true
    }
 
     func setRootVC<T: UIViewController>(identifier: String, vc: T.Type) {
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let rootVC = storyboard.instantiateViewController(withIdentifier: identifier)
-//        self.window?.rootViewController = rootVC
-//        self.window?.makeKeyAndVisible()
-//
         if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: identifier) as? T {
             if let window = self.window, let rootViewController = window.rootViewController {
                 var currentController = rootViewController
                 while let presentedController = currentController.presentedViewController {
                     currentController = presentedController
                 }
-                currentController.present(controller, animated: true, completion: nil)
+                currentController.present(controller, animated: false, completion: nil)
             }
         }
     }

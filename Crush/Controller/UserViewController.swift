@@ -34,6 +34,8 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
         do{
             try Auth.auth().signOut()
             presentVC(sbName: "Main", identifier: "loginVC", fromVC: self)
+            UserDefaults.standard.setIsLoggedIn(value: false)
+
         }
         catch{
             
@@ -62,7 +64,7 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
                         //                let WaitForResponse = storyboard.instantiateViewController(withIdentifier: "WaitForResponse")
                         //                self.present(WaitForResponse,animated: true)
                         presentVC(sbName: "Main", identifier: "WaitForResponse", fromVC: self)
-                        
+
                         self.updateDBAfterTxt()
                         
                     } else {
@@ -93,6 +95,9 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
             self.matchOrNo(num: num, completion: { (completion) in
                 if completion == false {
                     print("not matched")
+                    let ref = Database.database().reference()
+                    let user = Auth.auth().currentUser
+                    ref.child("Users").child((user?.phoneNumber)!).child("Status").setValue("Not Matched")
                     presentVC(sbName: "Main", identifier: "notMatched", fromVC: self)
                 }
             })
@@ -105,8 +110,10 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
     func updateDBAfterTxt() {
         let ref = Database.database().reference()
         let user = Auth.auth().currentUser
-        
-        let currentUserRef = Database.database().reference().child("Users").child(user!.uid)
+        // set status as wait
+        ref.child("Users").child((user?.phoneNumber)!).child("Status").setValue("Wait")
+
+        let currentUserRef = Database.database().reference().child("Users").child((user?.phoneNumber)!)
         currentUserRef.observeSingleEvent(of: .value) { (snapshot) in
             let currentUser = snapshot.value as! [String: String]
             
@@ -130,7 +137,7 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
             
             // update/write crush number for user
             let num = self.code + self.enterNumberTextField.text!
-            ref.child("Users").child((user?.uid)!).child("CrushNumber").setValue(num)
+            ref.child("Users").child((user?.phoneNumber)!).child("CrushNumber").setValue(num)
             
             // receiver phone number in db with sender number under followers
             ref.child("Loved").child(num).child("Followers").updateChildValues([(user?.phoneNumber)! : true])
