@@ -45,9 +45,8 @@ class NotMatchedViewController: UIViewController, CountryPickerViewDelegate {
         let alert = SCLAlertView()
         let txt = alert.addTextField()
         let cpv = CountryPickerView(frame: CGRect(x: 0, y: 0, width: 50, height: 20))
-        cpv.showCountriesList(from: alert)
-        cpv.showCountryCodeInView = false
         cpv.delegate = self
+        cpv.showCountryCodeInView = false
         
         txt.leftView = cpv
         txt.leftViewMode = .always

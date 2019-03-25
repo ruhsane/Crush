@@ -55,7 +55,6 @@ class WaitForResponse: UIViewController, CountryPickerViewDelegate {
         let alert = SCLAlertView()
         let txt = alert.addTextField()
         let cpv = CountryPickerView(frame: CGRect(x: 0, y: 0, width: 50, height: 20))
-        cpv.showCountriesList(from: alert)
         cpv.showCountryCodeInView = false
         cpv.delegate = self
         
@@ -63,14 +62,15 @@ class WaitForResponse: UIViewController, CountryPickerViewDelegate {
         txt.leftViewMode = .always
         
         alert.addButton("Send Anonymous Text") {
-            self.showSpinner(onView: self.view)
+//            self.showSpinner(onView: self.view)
             let num = txt.text ?? ""
             let fullNum = self.code + num
             print(fullNum)
-            // if the number is already in follower, go to matched, else sendtext
+
+            //  if the number user sending message to is in user's followers, match them (takes care of matching in matchorno func). if not match, send text
             self.matchOrNo(num: fullNum, completion: { (matched) in
                 if matched == false {
-                    self.sendText(num: fullNum)
+                    self.sendText(fullNum: fullNum)
                 }
             })
         }
@@ -78,23 +78,12 @@ class WaitForResponse: UIViewController, CountryPickerViewDelegate {
         alert.showEdit("", subTitle: "Enter your crush's number")
     }
     
-    func sendText(num: String) {
-        
-        AlamofireRequest().twillioSendText(to: num, body: "Someone labeled you as his/her crush on 'Crush' app. Download the app to see.", completion: { (completion) in
-            
-            self.removeSpinner()
-            
+    func sendText(fullNum: String) {
+        AlamofireRequest().twillioSendText(to: fullNum, body: "Someone labeled you as his/her crush on 'Crush' app. Download the app to see.", completion: { (completion) in
+            print(completion)
             if completion == true{
-                presentVC(sbName: "Main", identifier: "WaitForResponse", fromVC: self)
                 
-                let ref = Database.database().reference()
-                let user = Auth.auth().currentUser
-                
-                // update/write crush number for user
-                ref.child("Users").child((user?.uid)!).child("CrushNumber").setValue(num)
-                
-                // add receiver under loved
-                ref.child("Loved").child(num).child("Followers").updateChildValues([(user?.phoneNumber)! : true])
+                self.updateDBAfterTxt(num: fullNum)
                 
             } else {
                 let alert = UIAlertController(title: "Send Text Error", message: "Please check if your entered number is correct", preferredStyle: .alert)
@@ -103,6 +92,41 @@ class WaitForResponse: UIViewController, CountryPickerViewDelegate {
                 self.present(alert, animated: true, completion: nil)
             }
         })
+    }
+    
+    func updateDBAfterTxt(num: String) {
+        let ref = Database.database().reference()
+        let user = Auth.auth().currentUser
+        
+        let currentUserRef = Database.database().reference().child("Users").child(user!.uid)
+        currentUserRef.observeSingleEvent(of: .value) { (snapshot) in
+            let currentUser = snapshot.value as! [String: String]
+            
+            //if the currentUser has a crushNumber already, update db
+            if currentUser["CrushNumber"] != nil {
+                let oldCrush = currentUser["CrushNumber"] as! String
+                // go into old receiver in loved
+                ref.child("Loved").child(oldCrush).child("Followers").observe(.value, with: { (snapshot: DataSnapshot!) in
+                    print("old crush followers count", snapshot.childrenCount)
+                    if snapshot.childrenCount == 1 && snapshot.hasChild((user?.phoneNumber)!) {
+                        // if oldcrush only had current user as followers
+                        // delete the whole oldcrush object in loved
+                        Database.database().reference(withPath: "Loved").child(oldCrush).removeValue()
+                    } else if snapshot.hasChild((user?.phoneNumber)!) {
+                        // if oldcrush had multiple followers
+                        // only delete current user's number from followers list
+                        Database.database().reference(withPath: "Loved").child(oldCrush).child("Followers").child((user?.phoneNumber)!).removeValue()
+                    }
+                })
+            }
+            
+            // update/write crush number for user
+            ref.child("Users").child((user?.uid)!).child("CrushNumber").setValue(num)
+            
+            // receiver phone number in db with sender number under followers
+            ref.child("Loved").child(num).child("Followers").updateChildValues([(user?.phoneNumber)! : true])
+
+        }
     }
     
     override func viewDidLoad() {
