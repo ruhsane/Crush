@@ -83,7 +83,7 @@ class WaitForResponse: UIViewController, CountryPickerViewDelegate {
     }
     
     func sendText(fullNum: String) {
-        AlamofireRequest().twillioSendText(to: fullNum, body: "Someone labeled you as his/her crush on 'Crush' app. Download the app to see.", completion: { (completion) in
+        self.twillioSendText(to: fullNum, body: "Someone labeled you as his/her crush on 'Crush' app. Download the app to see.", completion: { (completion) in
             print(completion)
             if completion == true{
                 

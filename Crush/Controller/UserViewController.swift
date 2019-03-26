@@ -57,9 +57,10 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
         //  if the number user sending message to is in user's followers, match them (takes care of matching in matchorno func). if not match, send text
         self.matchOrNo(num: num, completion: { (matched) in
             if matched == false {
-                AlamofireRequest().twillioSendText(to: num, body: "Someone labeled you as his/her crush on 'Crush' app. Download the app to see.", completion: { (completion) in
+                self.twillioSendText(to: num, body: "Someone labeled you as his/her crush on 'Crush' app. Download the app to see.", completion: { (completion) in
                     self.removeSpinner()
-                    if completion == true{
+                    print(completion)
+                    if completion {
                         //                let storyboard = UIStoryboard(name: "Main", bundle: nil)
                         //                let WaitForResponse = storyboard.instantiateViewController(withIdentifier: "WaitForResponse")
                         //                self.present(WaitForResponse,animated: true)
