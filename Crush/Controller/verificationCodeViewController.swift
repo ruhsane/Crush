@@ -30,15 +30,16 @@ class verificationCodeViewController: UIViewController {
         let defaults = UserDefaults.standard
         let credential: PhoneAuthCredential = PhoneAuthProvider.provider().credential(withVerificationID: defaults.string(forKey: "authVID")!, verificationCode: enterCode.text!)
 
-        Auth.auth().signIn(with: credential) { (user, error) in
+        Auth.auth().signInAndRetrieveData(with: credential) { (user, error) in
             self.removeSpinner()
             if error != nil {
-                print("error: \(String(describing: error?.localizedDescription))")
-            } else {
-                print("Phone number: \(String(describing: user?.phoneNumber))")
-                let userInfo = user?.providerData[0]
-                print("Provider ID: \(String(describing: userInfo?.providerID))")
+//                print("error: \(String(describing: error?.localizedDescription))")
+                let alert = UIAlertController(title: "Invalid Verification Code", message: "", preferredStyle: .alert)
+                let ok = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+                alert.addAction(ok)
+                self.present(alert, animated: true, completion: nil)
                 
+            } else {
                 UserDefaults.standard.setIsLoggedIn(value: true)
                 let ref = Database.database().reference()
                 let user = Auth.auth().currentUser
@@ -48,42 +49,20 @@ class verificationCodeViewController: UIViewController {
                         let status = ref.child("Users").child((user?.phoneNumber)!).child("Status")
                         status.observeSingleEvent(of: .value, with: { (snapshot) in
                             let statusValue = snapshot.value as? String
-                            print(status)
-                            print(statusValue)
                             if statusValue == "Matched"{
-                                //                        self.setRootVC(identifier: "Matched", vc: MatchedViewController.self)
                                 presentVC(sbName: "Main", identifier: "Matched", fromVC: self)
-                                
                             } else if statusValue == "Not Matched" {
                                 presentVC(sbName: "Main", identifier: "notMatched", fromVC: self)
-                                
-                                //                        self.setRootVC(identifier: "notMatched", vc: NotMatchedViewController.self)
                             } else if statusValue == "Wait" {
                                 presentVC(sbName: "Main", identifier: "WaitForResponse", fromVC: self)
-                                
-                                //                        self.setRootVC(identifier: "WaitForResponse", vc: WaitForResponse.self)
                             } else {
                                 presentVC(sbName: "Main", identifier: "mainVC", fromVC: self)
-                                
-                                //                        self.setRootVC(identifier: "mainVC", vc: UserViewController.self)
                             }
                         })
                     } else {
                         presentVC(sbName: "Main", identifier: "mainVC", fromVC: self)
                     }
                 })
-            }
-        }
-    }
-    
-    func setRootVC<T: UIViewController>(identifier: String, vc: T.Type) {
-        if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: identifier) as? T {
-            if let window = self.window, let rootViewController = window.rootViewController {
-                var currentController = rootViewController
-                while let presentedController = currentController.presentedViewController {
-                    currentController = presentedController
-                }
-                currentController.present(controller, animated: false, completion: nil)
             }
         }
     }
@@ -104,10 +83,4 @@ class verificationCodeViewController: UIViewController {
     }
     */
 
-}
-
-extension verificationCodeViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-//        <#code#>
-//    }
 }

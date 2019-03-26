@@ -275,7 +275,7 @@
         <!--Verification Code View Controller-->
         <scene sceneID="kap-v6-2tH">
             <objects>
-                <viewController id="Mwl-jC-cBn" customClass="verificationCodeViewController" customModule="Crush" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="verificationVC" id="Mwl-jC-cBn" customClass="verificationCodeViewController" customModule="Crush" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="W8M-Bd-QOo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
