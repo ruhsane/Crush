@@ -36,11 +36,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let user = Auth.auth().currentUser
         
         if UserDefaults.standard.isLoggedIn() == true {
+            // we have user
             ref.child("Users").child((user?.phoneNumber)!).observeSingleEvent(of: .value, with: { (snapshot) in
                 if snapshot.hasChild("Status"){
-                    // we have user
                     let status = ref.child("Users").child((user?.phoneNumber)!).child("Status")
-                    status.observe(.value, with: { (snapshot) in
+                    status.observeSingleEvent(of: .value, with: { (snapshot) in
                         let statusValue = snapshot.value as? String
                         print(status)
                         print(statusValue)

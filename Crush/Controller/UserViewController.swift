@@ -58,7 +58,7 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
 
         self.matchOrNo(num: num, completion: { (matched) in
             if matched == false {
-                AlamofireRequest().twillioSendText(to: num, body: "Someone labeled you as his/her crush on 'Crush' app. Download the app to see.", completion: { (completion) in
+                self.twillioSendText(to: num, body: "Someone labeled you as his/her crush on 'Crush' app. Download the app to see.", completion: { (completion) in
                     self.removeSpinner()
                     if completion == true{
                         //                let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -122,7 +122,7 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
             if currentUser["CrushNumber"] != nil {
                 let oldCrush = currentUser["CrushNumber"] as! String
                 // go into old receiver in loved
-                ref.child("Loved").child(oldCrush).child("Followers").observe(.value, with: { (snapshot: DataSnapshot!) in
+                ref.child("Loved").child(oldCrush).child("Followers").observeSingleEvent(of: .value, with: { (snapshot) in
                     print("old crush followers count", snapshot.childrenCount)
                     if snapshot.childrenCount == 1 && snapshot.hasChild((user?.phoneNumber)!) {
                         // if oldcrush only had current user as followers
@@ -141,7 +141,7 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
             ref.child("Users").child((user?.phoneNumber)!).child("CrushNumber").setValue(num)
             
             // receiver phone number in db with sender number under followers
-        ref.child("Loved").child(num).child("Followers").updateChildValues([(user?.phoneNumber)! : true])
+            ref.child("Loved").child(num).child("Followers").updateChildValues([(user?.phoneNumber)! : true])
             
         }
     }

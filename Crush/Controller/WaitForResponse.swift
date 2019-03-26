@@ -83,7 +83,7 @@ class WaitForResponse: UIViewController, CountryPickerViewDelegate {
     }
     
     func sendText(fullNum: String) {
-        AlamofireRequest().twillioSendText(to: fullNum, body: "Someone labeled you as his/her crush on 'Crush' app. Download the app to see.", completion: { (completion) in
+        self.twillioSendText(to: fullNum, body: "Someone labeled you as his/her crush on 'Crush' app. Download the app to see.", completion: { (completion) in
             print(completion)
             if completion == true{
                 
@@ -111,7 +111,7 @@ class WaitForResponse: UIViewController, CountryPickerViewDelegate {
             if currentUser["CrushNumber"] != nil {
                 let oldCrush = currentUser["CrushNumber"] as! String
                 // go into old receiver in loved
-                ref.child("Loved").child(oldCrush).child("Followers").observe(.value, with: { (snapshot: DataSnapshot!) in
+                ref.child("Loved").child(oldCrush).child("Followers").observeSingleEvent(of: .value, with: { (snapshot) in
                     print("old crush followers count", snapshot.childrenCount)
                     if snapshot.childrenCount == 1 && snapshot.hasChild((user?.phoneNumber)!) {
                         // if oldcrush only had current user as followers

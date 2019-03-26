@@ -56,7 +56,7 @@ class verificationCodeViewController: UIViewController {
                 ref.child("Users").child((user?.phoneNumber)!).observeSingleEvent(of: .value, with: { (snapshot) in
                     if snapshot.hasChild("Status"){
                         let status = ref.child("Users").child((user?.phoneNumber)!).child("Status")
-                        status.observe(.value, with: { (snapshot) in
+                        status.observeSingleEvent(of: .value, with: { (snapshot) in
                             let statusValue = snapshot.value as? String
                             print(status)
                             print(statusValue)
