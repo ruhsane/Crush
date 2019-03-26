@@ -243,7 +243,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="BYZ-38-t0r" kind="show" id="zs4-0Q-kId"/>
+                                            <action selector="backButton:" destination="qzj-Dj-0dB" eventType="touchUpInside" id="qNt-Ka-PNK"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -408,15 +408,15 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                 <color key="tintColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Change Crush Number"/>
+                                <state key="normal" title="Un-Crush"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="7"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="changeCrushBtn:" destination="dXu-kS-aEj" eventType="touchUpInside" id="rJq-MY-PFs"/>
                                     <action selector="sendButton:" destination="W6X-Tq-Cko" eventType="touchUpInside" id="vv0-Lm-Lv2"/>
+                                    <action selector="unCrushBtn:" destination="dXu-kS-aEj" eventType="touchUpInside" id="2IY-2t-hwA"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -433,6 +433,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="J4D-OV-awB"/>
                     </view>
+                    <connections>
+                        <outlet property="StatusLabel" destination="DIc-vc-Uh2" id="ksx-mN-QuF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sDH-hA-mgk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -745,7 +748,4 @@
     <resources>
         <image name="icons8-cat_profile_filled" width="50" height="50"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="BqI-Q0-Zno"/>
-    </inferredMetricsTieBreakers>
 </document>

@@ -44,7 +44,7 @@ class verificationCodeViewController: UIViewController {
 //
 //                let userAtt = ["myNumber": user?.phoneNumber]
 //                userRef.updateChildValues(userAtt)
-                Database.database().reference().child("Users").setValue(user?.phoneNumber)
+//                Database.database().reference().child("Users").setValue(user?.phoneNumber)
 
 //                let rootViewController = UIApplication.shared.keyWindow?.rootViewController
 //                guard let UserViewController = rootViewController as? UserViewController else{return}
