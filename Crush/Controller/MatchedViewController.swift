@@ -22,6 +22,20 @@ class MatchedViewController: UIViewController {
         }
     }
     
+    @IBAction func unmatchBtn(_ sender: Any) {
+        // alert
+        
+        // delete matched object
+        
+        // delete user's crush number
+        // delete user's status
+        // delete the other person under user's followers
+        
+        // delete other person's status
+        // delete user under other's followers
+        // delete user from other's crush
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
