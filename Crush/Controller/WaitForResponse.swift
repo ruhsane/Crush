@@ -24,6 +24,8 @@ class WaitForResponse: UIViewController, CountryPickerViewDelegate {
         do{
             try Auth.auth().signOut()
             presentVC(sbName: "Main", identifier: "loginVC", fromVC: self)
+            UserDefaults.standard.setIsLoggedIn(value: false)
+
 
         }
         catch{
@@ -99,8 +101,9 @@ class WaitForResponse: UIViewController, CountryPickerViewDelegate {
     func updateDBAfterTxt(num: String) {
         let ref = Database.database().reference()
         let user = Auth.auth().currentUser
-        
-        let currentUserRef = Database.database().reference().child("Users").child(user!.uid)
+        ref.child("Users").child((user?.phoneNumber)!).child("Status").setValue("Wait")
+
+        let currentUserRef = Database.database().reference().child("Users").child(user!.phoneNumber!)
         currentUserRef.observeSingleEvent(of: .value) { (snapshot) in
             let currentUser = snapshot.value as! [String: String]
             
@@ -123,7 +126,7 @@ class WaitForResponse: UIViewController, CountryPickerViewDelegate {
             }
             
             // update/write crush number for user
-            ref.child("Users").child((user?.uid)!).child("CrushNumber").setValue(num)
+            ref.child("Users").child((user?.phoneNumber)!).child("CrushNumber").setValue(num)
             
             // receiver phone number in db with sender number under followers
             ref.child("Loved").child(num).child("Followers").updateChildValues([(user?.phoneNumber)! : true])

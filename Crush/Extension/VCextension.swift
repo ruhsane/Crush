@@ -35,20 +35,30 @@ extension UIViewController {
         }
     }
     
+//    func logOut() {
+//    }
     
     func matchOrNo(num: String, completion: @escaping(Bool)->()) {
         let ref = Database.database().reference()
         let user = Auth.auth().currentUser
         
-        ref.child("Users").child((user?.uid)!).child("CrushNumber").setValue(num)
-        
+        ref.child("Users").child((user?.phoneNumber)!).child("CrushNumber").setValue(num)
         ref.child("Loved").child((user?.phoneNumber)!).child("Followers").observe(.value) { (snapshot) in
             self.removeSpinner()
             if snapshot.hasChild(num){
                 
                 print("matched")
+                // change status in db
+                ref.child("Users").child((user?.phoneNumber)!).child("Status").setValue("Matched")
+                // change the other one's status too
+                ref.child("Users").child(num).child("Status").setValue("Matched")
+
+
+//                ref.child("Users").child(num).child("Status").setValue("Matched")
+
+                //present matched vc
                 presentVC(sbName: "Main", identifier: "Matched", fromVC: self)
-                
+                //have a db object with who are matched
                 let couple = ref.child("Matched").childByAutoId()
                 couple.updateChildValues(["A" : user?.phoneNumber])
                 couple.updateChildValues(["B" : num])
