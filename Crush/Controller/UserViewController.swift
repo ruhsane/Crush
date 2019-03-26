@@ -53,27 +53,53 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
         let num = self.code + str
         
         //  if the number user sending message to is in user's followers, match them (takes care of matching in matchorno func). if not match, send text
-        self.matchOrNo(num: num, completion: { (matched) in
-            if matched == false {
-                AlamofireRequest().twillioSendText(to: num, body: "Someone labeled you as his/her crush on 'Crush' app. Download the app to see.", completion: { (completion) in
-                    self.removeSpinner()
-                    if completion == true{
-                        //                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                        //                let WaitForResponse = storyboard.instantiateViewController(withIdentifier: "WaitForResponse")
-                        //                self.present(WaitForResponse,animated: true)
-                        presentVC(sbName: "Main", identifier: "WaitForResponse", fromVC: self)
-                        
-                        self.updateDBAfterTxt()
-                        
-                    } else {
-                        let alert = UIAlertController(title: "Send Text Error", message: "Please check if your entered number is correct", preferredStyle: .alert)
-                        let ok = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
-                        alert.addAction(ok)
-                        self.present(alert, animated: true, completion: nil)
-                    }
-                })
-            }
-        })
+//        self.matchOrNo(num: num, completion: { (matched) in
+//            if matched == false {
+//                AlamofireRequest().twillioSendText(to: num, body: "Someone labeled you as his/her crush on 'Crush' app. Download the app to see.", completion: { (completion) in
+//                    self.removeSpinner()
+//                    if completion == true{
+//                        //                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//                        //                let WaitForResponse = storyboard.instantiateViewController(withIdentifier: "WaitForResponse")
+//                        //                self.present(WaitForResponse,animated: true)
+//                        presentVC(sbName: "Main", identifier: "WaitForResponse", fromVC: self)
+//
+//                        self.updateDBAfterTxt()
+//
+//                    } else {
+//                        let alert = UIAlertController(title: "Send Text Error", message: "Please check if your entered number is correct", preferredStyle: .alert)
+//                        let ok = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+//                        alert.addAction(ok)
+//                        self.present(alert, animated: true, completion: nil)
+//                    }
+//                })
+        
+        if let accountSID = ProcessInfo.processInfo.environment["TWILIO_ACCOUNT_SID"],
+            let authToken = ProcessInfo.processInfo.environment["TWILIO_AUTH_TOKEN"]{
+            
+            let url = "https://api.twilio.com/2010-04-01/Accounts/\(accountSID)/Messages"
+            let parameters = ["From": ProcessInfo.processInfo.environment["TWILIO_NUMBER"], "To": num, "Body": "Someone labeled you as his/her crush on 'Crush' app. Download the app to see."] as! [String: String]
+            
+            Alamofire.request(url, method: .post, parameters: parameters)
+                .authenticate(user: accountSID, password: authToken)
+                        .responseJSON { response in
+                            let status = response.response?.statusCode
+                            print(status)
+                            if status! > 200 && status! < 299{
+                                presentVC(sbName: "Main", identifier: "WaitForResponse", fromVC: self)
+        
+                                self.updateDBAfterTxt()
+                            }
+                            else{
+                                
+                                let alert = UIAlertController(title: "Send Text Error", message: "Please check if your entered number is correct", preferredStyle: .alert)
+                                let ok = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+                                alert.addAction(ok)
+                                self.present(alert, animated: true, completion: nil)
+                        }
+        }
+//            }
+//        })
+    }
     }
     
     func checkMatchAlert() {
@@ -133,7 +159,7 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
             ref.child("Users").child((user?.uid)!).child("CrushNumber").setValue(num)
             
             // receiver phone number in db with sender number under followers
-            ref.child("Loved").child(num).child("Followers").updateChildValues([(user?.phoneNumber)! : true])
+        ref.child("Loved").child(num).child("Followers").updateChildValues([(user?.phoneNumber)! : true])
             
         }
     }

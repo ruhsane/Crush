@@ -22,16 +22,16 @@ public class AlamofireRequest {
     
         Alamofire.request(url, method: .post, parameters: parameters)
             .authenticate(user: accountSID, password: authToken)
-            .responseJSON { response in
-                let status = response.response?.statusCode
-                print(status)
-                if status! > 200 && status! < 299{
-                    return completion(true)
-                }
-                else{
-                    return completion(false)
-                }
-            }
+//            .responseJSON { response in
+//                let status = response.response?.statusCode
+//                print(status)
+//                if status! > 200 && status! < 299{
+//                    return completion(true)
+//                }
+//                else{
+//                    return completion(false)
+//                }
+//            }
         }
     
         RunLoop.main.run()
