@@ -71,7 +71,8 @@ extension UIViewController {
         ref.child("Loved").child((user?.phoneNumber)!).child("Followers").observeSingleEvent(of: .value, with: { (snapshot) in
             self.removeSpinner()
             if snapshot.hasChild(num){
-                
+                ref.child("Loved").child(num).child("Followers").updateChildValues([(user?.phoneNumber)! : true])
+
                 print("matched")
                 // change status in db
                 ref.child("Users").child((user?.phoneNumber)!).child("Status").setValue("Matched")
