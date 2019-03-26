@@ -104,8 +104,8 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
             })
         }
         
-        alert.showInfo("Are you sure this is your crush's phone number? \n \(num)", subTitle: "you only have one chance to “check” who sent the message", closeButtonTitle: "Cancel",  colorStyle: 0x34C4F6)
-        
+        alert.showInfo("Are you sure this is your crush's phone number? \n \(num)", subTitle: "you only have one chance to “check” who sent the message. If numbers match, we will send text notification to the number informing you two have been matched", closeButtonTitle: "Cancel",  colorStyle: 0x34C4F6)
+
     }
     
     func updateDBAfterTxt() {
