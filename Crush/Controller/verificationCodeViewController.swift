@@ -38,16 +38,6 @@ class verificationCodeViewController: UIViewController {
                 print("Phone number: \(String(describing: user?.phoneNumber))")
                 let userInfo = user?.providerData[0]
                 print("Provider ID: \(String(describing: userInfo?.providerID))")
-//                self.performSegue(withIdentifier: "logged", sender: Any?.self)
-
-//                let userRef = Database.database().reference().child("Users").child((user?.uid)!)
-//
-//                let userAtt = ["myNumber": user?.phoneNumber]
-//                userRef.updateChildValues(userAtt)
-//                Database.database().reference().child("Users").setValue(user?.phoneNumber)
-
-//                let rootViewController = UIApplication.shared.keyWindow?.rootViewController
-//                guard let UserViewController = rootViewController as? UserViewController else{return}
                 
                 UserDefaults.standard.setIsLoggedIn(value: true)
                 let ref = Database.database().reference()

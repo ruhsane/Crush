@@ -26,9 +26,8 @@ class WaitForResponse: UIViewController, CountryPickerViewDelegate {
     @IBAction func SignOutButton(_ sender: Any) {
         do{
             try Auth.auth().signOut()
-            presentVC(sbName: "Main", identifier: "loginVC", fromVC: self)
+            dismiss(animated: true, completion: nil)
             UserDefaults.standard.setIsLoggedIn(value: false)
-
 
         }
         catch{

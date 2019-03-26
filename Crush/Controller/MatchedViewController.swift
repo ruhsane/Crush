@@ -15,10 +15,7 @@ class MatchedViewController: UIViewController {
         do{
             try Auth.auth().signOut()
             UserDefaults.standard.setIsLoggedIn(value: false)
-
-
-            presentVC(sbName: "Main", identifier: "loginVC", fromVC: self)
-//            dismiss(animated: true, completion: nil)
+            dismiss(animated: true, completion: nil)
         }
         catch{
             print(error)
