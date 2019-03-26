@@ -23,10 +23,7 @@ class NotMatchedViewController: UIViewController, CountryPickerViewDelegate {
         do{
             try Auth.auth().signOut()
             UserDefaults.standard.setIsLoggedIn(value: false)
-
-
-            view.window?.rootViewController = storyboard?.instantiateViewController(withIdentifier: "loginVC")
-            view.window?.makeKeyAndVisible()
+            dismiss(animated: true, completion: nil)
         }
         catch{
             
@@ -104,12 +101,11 @@ class NotMatchedViewController: UIViewController, CountryPickerViewDelegate {
         super.viewDidLoad()
         let user = Auth.auth().currentUser
         let currentUserRef = Database.database().reference().child("Users").child(user!.phoneNumber!)
-        currentUserRef.observe(.value) { (snapshot) in
+        currentUserRef.observeSingleEvent(of: .value, with: { (snapshot) in
             let currentUser = snapshot.value as! [String: String]
             self.phoneNumber = currentUser["CrushNumber"]!
             self.askToSendLabel.text = "Do you want to send anonymous text message to the number you entered?(" +  currentUser["CrushNumber"]! + ")"
-        }
-        
+        })
     }
 
     override func didReceiveMemoryWarning() {

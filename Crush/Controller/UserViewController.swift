@@ -33,7 +33,7 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
     @IBAction func SignOut(_ sender: UIButton) {
         do{
             try Auth.auth().signOut()
-            presentVC(sbName: "Main", identifier: "loginVC", fromVC: self)
+            dismiss(animated: true, completion: nil)
             UserDefaults.standard.setIsLoggedIn(value: false)
 
         }
@@ -105,7 +105,7 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
             })
         }
         
-        alert.showInfo("Are you sure this is your crush's phone number? \n \(num)", subTitle: "you only have one chance to “check” who sent the message", closeButtonTitle: "Cancel",  colorStyle: 0x34C4F6)
+        alert.showInfo("Are you sure this is your crush's phone number? \n \(num)", subTitle: "you only have one chance to “check” who sent the message. If numbers match, we will send text notification to the number informing you two have been matched", closeButtonTitle: "Cancel",  colorStyle: 0x34C4F6)
         
     }
     
@@ -115,36 +115,13 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
         // set status as wait
         ref.child("Users").child((user?.phoneNumber)!).child("Status").setValue("Wait")
 
-        let currentUserRef = Database.database().reference().child("Users").child((user?.phoneNumber)!)
-        currentUserRef.observeSingleEvent(of: .value) { (snapshot) in
-            let currentUser = snapshot.value as! [String: String]
-            
-            //if the currentUser has a crushNumber already, update db
-            if currentUser["CrushNumber"] != nil {
-                let oldCrush = currentUser["CrushNumber"] as! String
-                // go into old receiver in loved
-                ref.child("Loved").child(oldCrush).child("Followers").observe(.value, with: { (snapshot: DataSnapshot!) in
-                    print("old crush followers count", snapshot.childrenCount)
-                    if snapshot.childrenCount == 1 && snapshot.hasChild((user?.phoneNumber)!) {
-                        // if oldcrush only had current user as followers
-                        // delete the whole oldcrush object in loved
-                        Database.database().reference(withPath: "Loved").child(oldCrush).removeValue()
-                    } else if snapshot.hasChild((user?.phoneNumber)!) {
-                        // if oldcrush had multiple followers
-                        // only delete current user's number from followers list
-                        Database.database().reference(withPath: "Loved").child(oldCrush).child("Followers").child((user?.phoneNumber)!).removeValue()
-                    }
-                })
-            }
-            
-            // update/write crush number for user
-            let num = self.code + self.enterNumberTextField.text!
-            ref.child("Users").child((user?.phoneNumber)!).child("CrushNumber").setValue(num)
-            
-            // receiver phone number in db with sender number under followers
+        // write crush number for user
+        let num = self.code + self.enterNumberTextField.text!
+        ref.child("Users").child((user?.phoneNumber)!).child("CrushNumber").setValue(num)
+        
+        // receiver phone number in db with sender number under followers
         ref.child("Loved").child(num).child("Followers").updateChildValues([(user?.phoneNumber)! : true])
-            
-        }
+        
     }
     
     func hideButton() {

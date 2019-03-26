@@ -36,9 +36,6 @@ extension UIViewController {
         }
     }
     
-//    func logOut() {
-//    }
-    
     func twillioSendText(to: String, body: String, completion: @escaping(Bool)->()) {
         
         if let accountSID = ProcessInfo.processInfo.environment["TWILIO_ACCOUNT_SID"],
@@ -47,33 +44,35 @@ extension UIViewController {
             let url = "https://api.twilio.com/2010-04-01/Accounts/\(accountSID)/Messages"
             let parameters = ["From": ProcessInfo.processInfo.environment["TWILIO_NUMBER"], "To": to, "Body": body] as! [String: String]
             print(parameters)
-//            Alamofire.request(url, method: .post, parameters: parameters, encoding: parameters)
+            //            Alamofire.request(url, method: .post, parameters: parameters, encoding: parameters)
             Alamofire.request(url, method: .post, parameters: parameters)
-                    .authenticate(user: accountSID, password: authToken)
-                    .responseJSON { response in
-                        print(response)
-                        let status = response.response?.statusCode
-                        print(status)
-                        if status! > 200 && status! < 299{
-                            return completion(true)
-                        }
-                        else{
-                            return completion(false)
-                        }
+                .authenticate(user: accountSID, password: authToken)
+                .responseJSON { response in
+                    print(response)
+                    let status = response.response?.statusCode
+                    print(status)
+                    if status! > 200 && status! < 299{
+                        return completion(true)
+                    }
+                    else{
+                        return completion(false)
+                    }
+            }
         }
+        
+//        RunLoop.main.run()
     }
     
-    //RunLoop.main.run()
-}
     func matchOrNo(num: String, completion: @escaping(Bool)->()) {
         let ref = Database.database().reference()
         let user = Auth.auth().currentUser
         
         ref.child("Users").child((user?.phoneNumber)!).child("CrushNumber").setValue(num)
-        ref.child("Loved").child((user?.phoneNumber)!).child("Followers").observe(.value) { (snapshot) in
+        ref.child("Loved").child((user?.phoneNumber)!).child("Followers").observeSingleEvent(of: .value, with: { (snapshot) in
             self.removeSpinner()
             if snapshot.hasChild(num){
-                
+                ref.child("Loved").child(num).child("Followers").updateChildValues([(user?.phoneNumber)! : true])
+
                 print("matched")
                 // change status in db
                 ref.child("Users").child((user?.phoneNumber)!).child("Status").setValue("Matched")
@@ -91,7 +90,7 @@ extension UIViewController {
                 couple.updateChildValues(["B" : num])
                 
                 //notify B with text message saying you matched
-                self.twillioSendText(to: num, body: "You have matched with your crush.😍 re-open the 'Crush' app to see.", completion: { (completion) in
+                self.twillioSendText(to: num, body: "You have matched with your crush(" + num + ").😍 re-open the 'Crush' app to see.", completion: { (completion) in
                     if completion == true{
                         print("sent tonification to inform they got matched")
                     } else {
@@ -105,7 +104,7 @@ extension UIViewController {
                 return completion(false)
 
             }
-        }
+        })
     }
     
 }

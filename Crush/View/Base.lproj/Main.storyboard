@@ -243,7 +243,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="BYZ-38-t0r" kind="show" id="zs4-0Q-kId"/>
+                                            <action selector="backButton:" destination="qzj-Dj-0dB" eventType="touchUpInside" id="qNt-Ka-PNK"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -275,7 +275,7 @@
         <!--Verification Code View Controller-->
         <scene sceneID="kap-v6-2tH">
             <objects>
-                <viewController id="Mwl-jC-cBn" customClass="verificationCodeViewController" customModule="Crush" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="verificationVC" id="Mwl-jC-cBn" customClass="verificationCodeViewController" customModule="Crush" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="W8M-Bd-QOo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -408,15 +408,15 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                 <color key="tintColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Change Crush Number"/>
+                                <state key="normal" title="Un-Crush"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="7"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="changeCrushBtn:" destination="dXu-kS-aEj" eventType="touchUpInside" id="rJq-MY-PFs"/>
                                     <action selector="sendButton:" destination="W6X-Tq-Cko" eventType="touchUpInside" id="vv0-Lm-Lv2"/>
+                                    <action selector="unCrushBtn:" destination="dXu-kS-aEj" eventType="touchUpInside" id="2IY-2t-hwA"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -433,6 +433,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="J4D-OV-awB"/>
                     </view>
+                    <connections>
+                        <outlet property="StatusLabel" destination="DIc-vc-Uh2" id="ksx-mN-QuF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sDH-hA-mgk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -725,11 +728,34 @@
                                     <action selector="SignOutButton:" destination="HYy-el-8XB" eventType="touchUpInside" id="aYL-Sm-77u"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hdu-pq-j1Y">
+                                <rect key="frame" x="137.5" y="447" width="100" height="50"/>
+                                <color key="backgroundColor" red="1" green="0.60257024830000006" blue="0.73694082679999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="8mE-Mm-1PO"/>
+                                    <constraint firstAttribute="width" constant="100" id="ECo-6R-rpp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <color key="tintColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Un-match">
+                                    <color key="titleColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="7"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="unmatchBtn:" destination="HYy-el-8XB" eventType="touchUpInside" id="XAo-h5-nEF"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.203523115" green="0.76729655230000005" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="Hdu-pq-j1Y" firstAttribute="centerX" secondItem="bPL-AE-JBn" secondAttribute="centerX" id="Es0-sh-ykK"/>
                             <constraint firstItem="bPL-AE-JBn" firstAttribute="bottom" secondItem="UaV-j7-LUb" secondAttribute="bottom" constant="100" id="YPs-RC-qiw"/>
                             <constraint firstItem="UaV-j7-LUb" firstAttribute="centerX" secondItem="bPL-AE-JBn" secondAttribute="centerX" id="eNI-Bu-nUa"/>
+                            <constraint firstItem="UaV-j7-LUb" firstAttribute="top" secondItem="Hdu-pq-j1Y" secondAttribute="bottom" constant="20" id="l78-If-Mux"/>
                             <constraint firstItem="r4x-yL-ZIT" firstAttribute="centerX" secondItem="bPL-AE-JBn" secondAttribute="centerX" id="qo1-55-F1W"/>
                             <constraint firstItem="r4x-yL-ZIT" firstAttribute="leading" secondItem="bPL-AE-JBn" secondAttribute="leading" constant="102" id="xW9-2t-E5q"/>
                             <constraint firstItem="r4x-yL-ZIT" firstAttribute="top" secondItem="bPL-AE-JBn" secondAttribute="top" constant="197" id="y3l-6w-2HZ"/>
@@ -745,7 +771,4 @@
     <resources>
         <image name="icons8-cat_profile_filled" width="50" height="50"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="BqI-Q0-Zno"/>
-    </inferredMetricsTieBreakers>
 </document>

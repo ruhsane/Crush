@@ -5,8 +5,9 @@
 ### macOS ###
 # General
 .DS_Store
-.AppleDouble
-.LSOverride
+/.build
+/Packages
+/*.xcodeproj
 
 # Icon must end with two \r
 Icon
@@ -123,3 +124,11 @@ iOSInjectionProject/
 
 # End of https://www.gitignore.io/api/macos,swift,xcode
 Crush.xcodeproj
+
+/.build
+/Packages
+/*.xcodeproj
+Crush.xcworkspace/xcuserdata/ruhsane.xcuserdatad/UserInterfaceState.xcuserstate
+Crush.xcworkspace/xcuserdata/ruhsane.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
+.AppleDouble
+.LSOverride
