@@ -69,7 +69,7 @@ class NotMatchedViewController: UIViewController, CountryPickerViewDelegate {
     
     func sendText(num: String) {
         
-        self.twillioSendText(to: num, body: "Someone labeled you as his/her crush on 'Crush' app. Download the app to see.", completion: { (completion) in
+        self.twillioSendText(to: num, body: "Someone labeled you as his/her crush on 'Crush' app. 😯😍 Download the app to see.", completion: { (completion) in
             
             self.removeSpinner()
             

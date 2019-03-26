@@ -58,7 +58,7 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
 
         self.matchOrNo(num: num, completion: { (matched) in
             if matched == false {
-                self.twillioSendText(to: num, body: "Someone labeled you as his/her crush on 'Crush' app. Download the app to see.", completion: { (completion) in
+                self.twillioSendText(to: num, body: "Someone labeled you as his/her crush on 'Crush' app. 😯😍 Download the app to see.", completion: { (completion) in
                     self.removeSpinner()
                     if completion == true{
                         //                let storyboard = UIStoryboard(name: "Main", bundle: nil)
