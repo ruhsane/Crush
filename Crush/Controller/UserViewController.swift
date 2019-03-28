@@ -33,7 +33,7 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
     @IBAction func SignOut(_ sender: UIButton) {
         do{
             try Auth.auth().signOut()
-            dismiss(animated: true, completion: nil)
+            self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
             UserDefaults.standard.setIsLoggedIn(value: false)
 
         }

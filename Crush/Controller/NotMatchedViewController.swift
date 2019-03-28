@@ -23,7 +23,7 @@ class NotMatchedViewController: UIViewController, CountryPickerViewDelegate {
         do{
             try Auth.auth().signOut()
             UserDefaults.standard.setIsLoggedIn(value: false)
-            dismiss(animated: true, completion: nil)
+            self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
         }
         catch{
             
