@@ -510,7 +510,7 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                         <color key="tintColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="Send Ananyoumos Text"/>
+                                        <state key="normal" title="Send Anonymous Text"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                 <integer key="value" value="7"/>
@@ -728,9 +728,32 @@
                                     <action selector="SignOutButton:" destination="HYy-el-8XB" eventType="touchUpInside" id="aYL-Sm-77u"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ycU-2a-51V">
+                                <rect key="frame" x="137.5" y="437" width="100" height="50"/>
+                                <color key="backgroundColor" red="1" green="0.60257024830000006" blue="0.73694082679999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="3P4-6V-KqW"/>
+                                    <constraint firstAttribute="height" constant="50" id="bjD-FX-sJk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <color key="tintColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Unmatch">
+                                    <color key="titleColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="7"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="unmatchBtn:" destination="HYy-el-8XB" eventType="touchUpInside" id="DrY-zS-hBP"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.203523115" green="0.76729655230000005" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="ycU-2a-51V" firstAttribute="centerX" secondItem="bPL-AE-JBn" secondAttribute="centerX" id="BG3-Oc-YG4"/>
+                            <constraint firstItem="UaV-j7-LUb" firstAttribute="top" secondItem="ycU-2a-51V" secondAttribute="bottom" constant="30" id="KQD-cO-eG9"/>
                             <constraint firstItem="bPL-AE-JBn" firstAttribute="bottom" secondItem="UaV-j7-LUb" secondAttribute="bottom" constant="100" id="YPs-RC-qiw"/>
                             <constraint firstItem="UaV-j7-LUb" firstAttribute="centerX" secondItem="bPL-AE-JBn" secondAttribute="centerX" id="eNI-Bu-nUa"/>
                             <constraint firstItem="r4x-yL-ZIT" firstAttribute="centerX" secondItem="bPL-AE-JBn" secondAttribute="centerX" id="qo1-55-F1W"/>

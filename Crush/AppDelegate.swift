@@ -42,8 +42,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     let status = ref.child("Users").child((user?.phoneNumber)!).child("Status")
                     status.observeSingleEvent(of: .value, with: { (snapshot) in
                         let statusValue = snapshot.value as? String
-                        print(status)
-                        print(statusValue)
                         if statusValue == "Matched"{
                             self.setRootVC(identifier: "Matched", vc: MatchedViewController.self)
                         } else if statusValue == "Not Matched" {

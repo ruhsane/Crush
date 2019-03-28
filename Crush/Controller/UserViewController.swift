@@ -60,11 +60,7 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
             if matched == false {
                 self.twillioSendText(to: num, body: "Someone labeled you as his/her crush on 'Crush' app. 😯😍 Download the app to see.", completion: { (completion) in
                     self.removeSpinner()
-                    print(completion)
-                    if completion {
-                        //                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                        //                let WaitForResponse = storyboard.instantiateViewController(withIdentifier: "WaitForResponse")
-                        //                self.present(WaitForResponse,animated: true)
+                    if completion == true {
                         presentVC(sbName: "Main", identifier: "WaitForResponse", fromVC: self)
 
                         self.updateDBAfterTxt()
