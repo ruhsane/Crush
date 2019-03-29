@@ -52,7 +52,7 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
         self.showSpinner(onView: self.view)
 
         let str = enterNumberTextField.text ?? ""
-        let num = self.code + str
+        let num = self.code + str.readOnlyNumber
         
         //  if the number user sending message to is in user's followers, match them (takes care of matching in matchorno func). if not match, send text
 
@@ -86,7 +86,7 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
         
         // Initialize SCLAlertView using custom Appearance
         let alert = SCLAlertView(appearance: appearance)
-        let num = self.code + self.enterNumberTextField.text!
+        let num = self.code + self.enterNumberTextField.text!.readOnlyNumber
 
         alert.addButton("I am sure") {
             self.showSpinner(onView: self.view)
@@ -112,7 +112,7 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
         ref.child("Users").child((user?.phoneNumber)!).child("Status").setValue("Wait")
 
         // write crush number for user
-        let num = self.code + self.enterNumberTextField.text!
+        let num = self.code + self.enterNumberTextField.text!.readOnlyNumber
         ref.child("Users").child((user?.phoneNumber)!).child("CrushNumber").setValue(num)
         
         // receiver phone number in db with sender number under followers

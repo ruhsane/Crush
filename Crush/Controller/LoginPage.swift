@@ -35,7 +35,7 @@ class LoginPage: UIViewController, CountryPickerViewDelegate {
     }
     
     @IBAction func confirmButton(_ sender: Any) {
-        let num = self.code + self.enterPhoneNumber.text!
+        let num = self.code + enterPhoneNumber.text!.readOnlyNumber
         let alert = UIAlertController(title: "Phone number", message: "Is this your phone number? \n \(num)", preferredStyle: .alert)
         let action = UIAlertAction(title: "Yes", style: .default) { (UIAlertAction) in
             // check if phone number is proper and do stuff with it?

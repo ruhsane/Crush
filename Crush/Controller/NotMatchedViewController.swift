@@ -54,7 +54,7 @@ class NotMatchedViewController: UIViewController, CountryPickerViewDelegate {
         alert.addButton("Send Anonymous Text") {
             self.showSpinner(onView: self.view)
             let num = txt.text ?? ""
-            let fullNum = self.code + num
+            let fullNum = self.code + num.readOnlyNumber
             print(fullNum)
             // if the number is already in follower, go to matched, else sendtext
             self.matchOrNo(num: fullNum, completion: { (matched) in
