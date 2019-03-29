@@ -6,7 +6,7 @@ Workflow: User A logs in with A's phone number, enters A's crush (let's say user
 Users can only have one crush at a time, if they want to send the text message to a different number, they have to un-crush their current crush and then send the text message to another number. (to avoid catfishing)
 
 
-# Libraries Used:
+## Libraries Used:
 All MIT Licensed:
 - SCLAlertView (https://github.com/vikmeup/SCLAlertView-Swift)
 ```
