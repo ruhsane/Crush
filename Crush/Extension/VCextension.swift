@@ -90,7 +90,7 @@ extension UIViewController {
                 couple.updateChildValues(["B" : num])
                 
                 //notify B with text message saying you matched
-                self.twillioSendText(to: num, body: "You have matched with your crush(" + num + ").😍 re-open the 'Crush' app to see.", completion: { (completion) in
+                self.twillioSendText(to: num, body: "You have matched with your crush(" + num + ").😍 re-open the 'Crush' app to see. http://www.appstore.com/crushsendanonymoussignal", completion: { (completion) in
                     if completion == true{
                         print("sent tonification to inform they got matched")
                     } else {

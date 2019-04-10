@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="W6X-Tq-Cko">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -425,11 +425,11 @@
         <scene sceneID="Vs8-Hi-CF4">
             <objects>
                 <viewController storyboardIdentifier="mainVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="W6X-Tq-Cko" customClass="UserViewController" customModule="Crush" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="sRl-zb-Y4i">
+                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="sRl-zb-Y4i">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Nv-9e-Mnm">
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Nv-9e-Mnm">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(?) users have labeled you as their crush." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ae-Nf-qAy">
@@ -472,8 +472,8 @@
                                             <action selector="checkButton:" destination="W6X-Tq-Cko" eventType="touchUpInside" id="f1Z-Q8-oWg"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PGU-9p-pcq">
-                                        <rect key="frame" x="87.5" y="355" width="200" height="40"/>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PGU-9p-pcq">
+                                        <rect key="frame" x="30" y="355" width="315" height="40"/>
                                         <color key="backgroundColor" red="0.203523115" green="0.76729655230000005" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="KDX-yg-ALg"/>
@@ -491,7 +491,7 @@
                                             <action selector="sendButton:" destination="W6X-Tq-Cko" eventType="touchUpInside" id="SZM-fd-YCa"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MeS-0O-Zfv">
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MeS-0O-Zfv">
                                         <rect key="frame" x="112.5" y="455" width="150" height="40"/>
                                         <color key="backgroundColor" red="0.203523115" green="0.76729655230000005" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -516,15 +516,19 @@
                                 <constraints>
                                     <constraint firstItem="k08-YY-PCA" firstAttribute="top" secondItem="3Ae-Nf-qAy" secondAttribute="bottom" constant="30" id="3TK-g6-hbU"/>
                                     <constraint firstItem="PGU-9p-pcq" firstAttribute="top" secondItem="Y5C-qP-mmF" secondAttribute="bottom" constant="40" id="3t1-8E-cg9"/>
+                                    <constraint firstItem="PGU-9p-pcq" firstAttribute="centerX" secondItem="3Nv-9e-Mnm" secondAttribute="centerX" id="4Oi-Bd-EQK"/>
                                     <constraint firstItem="PGU-9p-pcq" firstAttribute="centerX" secondItem="Y5C-qP-mmF" secondAttribute="centerX" id="4bD-Ko-PNc"/>
                                     <constraint firstItem="Y5C-qP-mmF" firstAttribute="top" secondItem="k08-YY-PCA" secondAttribute="bottom" constant="40" id="8ir-nY-Ppg"/>
                                     <constraint firstItem="MeS-0O-Zfv" firstAttribute="centerX" secondItem="PGU-9p-pcq" secondAttribute="centerX" id="ANg-59-2Fa"/>
+                                    <constraint firstAttribute="bottom" secondItem="MeS-0O-Zfv" secondAttribute="bottom" constant="100" id="CUI-SD-rvr"/>
                                     <constraint firstAttribute="trailing" secondItem="k08-YY-PCA" secondAttribute="trailing" constant="30" id="HgM-v1-HmQ"/>
                                     <constraint firstItem="3Ae-Nf-qAy" firstAttribute="top" secondItem="3Nv-9e-Mnm" secondAttribute="top" constant="100" id="LV1-vZ-wCy"/>
-                                    <constraint firstItem="MeS-0O-Zfv" firstAttribute="top" secondItem="PGU-9p-pcq" secondAttribute="bottom" constant="60" id="hrt-6Z-ojG"/>
+                                    <constraint firstItem="Y5C-qP-mmF" firstAttribute="centerX" secondItem="3Nv-9e-Mnm" secondAttribute="centerX" id="ReA-qq-wjs"/>
+                                    <constraint firstItem="Y5C-qP-mmF" firstAttribute="centerY" secondItem="3Nv-9e-Mnm" secondAttribute="centerY" id="Sbi-yP-Gfl"/>
                                     <constraint firstAttribute="trailing" secondItem="3Ae-Nf-qAy" secondAttribute="trailing" constant="21" id="jNL-1v-hDW"/>
                                     <constraint firstAttribute="trailing" secondItem="Y5C-qP-mmF" secondAttribute="trailing" constant="30" id="kTi-yE-hKv"/>
                                     <constraint firstItem="k08-YY-PCA" firstAttribute="leading" secondItem="3Nv-9e-Mnm" secondAttribute="leading" constant="30" id="oaK-uD-I4t"/>
+                                    <constraint firstItem="PGU-9p-pcq" firstAttribute="centerY" secondItem="3Nv-9e-Mnm" secondAttribute="centerY" id="w31-m6-slq"/>
                                     <constraint firstItem="3Ae-Nf-qAy" firstAttribute="leading" secondItem="3Nv-9e-Mnm" secondAttribute="leading" constant="21" id="zok-Co-Wwh"/>
                                     <constraint firstItem="Y5C-qP-mmF" firstAttribute="leading" secondItem="3Nv-9e-Mnm" secondAttribute="leading" constant="30" id="zrP-44-GhA"/>
                                 </constraints>
