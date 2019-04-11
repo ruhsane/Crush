@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="W6X-Tq-Cko">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -492,11 +492,11 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MeS-0O-Zfv">
-                                        <rect key="frame" x="112.5" y="455" width="150" height="40"/>
+                                        <rect key="frame" x="112.5" y="527" width="150" height="40"/>
                                         <color key="backgroundColor" red="0.203523115" green="0.76729655230000005" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="2WS-i4-WWl"/>
                                             <constraint firstAttribute="width" constant="150" id="nKe-Nc-2Wb"/>
+                                            <constraint firstAttribute="height" constant="40" id="tir-FJ-mGg"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                         <color key="tintColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -519,7 +519,6 @@
                                     <constraint firstItem="PGU-9p-pcq" firstAttribute="centerX" secondItem="3Nv-9e-Mnm" secondAttribute="centerX" id="4Oi-Bd-EQK"/>
                                     <constraint firstItem="PGU-9p-pcq" firstAttribute="centerX" secondItem="Y5C-qP-mmF" secondAttribute="centerX" id="4bD-Ko-PNc"/>
                                     <constraint firstItem="Y5C-qP-mmF" firstAttribute="top" secondItem="k08-YY-PCA" secondAttribute="bottom" constant="40" id="8ir-nY-Ppg"/>
-                                    <constraint firstItem="MeS-0O-Zfv" firstAttribute="centerX" secondItem="PGU-9p-pcq" secondAttribute="centerX" id="ANg-59-2Fa"/>
                                     <constraint firstAttribute="bottom" secondItem="MeS-0O-Zfv" secondAttribute="bottom" constant="100" id="CUI-SD-rvr"/>
                                     <constraint firstAttribute="trailing" secondItem="k08-YY-PCA" secondAttribute="trailing" constant="30" id="HgM-v1-HmQ"/>
                                     <constraint firstItem="3Ae-Nf-qAy" firstAttribute="top" secondItem="3Nv-9e-Mnm" secondAttribute="top" constant="100" id="LV1-vZ-wCy"/>
@@ -540,6 +539,7 @@
                             <constraint firstAttribute="trailing" secondItem="3Nv-9e-Mnm" secondAttribute="trailing" id="4kd-X7-5DY"/>
                             <constraint firstItem="3Nv-9e-Mnm" firstAttribute="top" secondItem="sRl-zb-Y4i" secondAttribute="top" id="IjE-Hg-qtW"/>
                             <constraint firstItem="3Nv-9e-Mnm" firstAttribute="leading" secondItem="sRl-zb-Y4i" secondAttribute="leading" id="Ryk-JH-nxU"/>
+                            <constraint firstItem="MeS-0O-Zfv" firstAttribute="centerX" secondItem="ZYw-Sq-xRI" secondAttribute="centerX" id="bW3-Tt-Qm1"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ZYw-Sq-xRI"/>
                     </view>
