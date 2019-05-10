@@ -1,5 +1,11 @@
 # Crush
 
+<img src= "https://github.com/ruhsane/Crush/blob/develop/Screenshots/Artboard%20%E2%80%93%201.png" width = 250 height = 500></img>
+<img src= "https://github.com/ruhsane/Crush/blob/develop/Screenshots/Artboard%20%E2%80%93%202.png" width = 250 height = 500></img>
+<img src= "https://github.com/ruhsane/Crush/blob/develop/Screenshots/Artboard%20%E2%80%93%203.png" width = 250 height = 500></img>
+<img src= "https://github.com/ruhsane/Crush/blob/develop/Screenshots/Artboard%20%E2%80%93%204.png" width = 250 height = 500></img>
+<img src= "https://github.com/ruhsane/Crush/blob/develop/Screenshots/Artboard%20%E2%80%93%205.png" width = 250 height = 500></img>
+
 Do you have hard time telling your crush about your feelings? Well look no further!
 
 HOW IT WORKS?
