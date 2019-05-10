@@ -9,10 +9,12 @@ HOW IT WORKS?
 - Match if both of you entered each other's numbers. BOOM!
 
 NO RESPONSE?
+
 It is okay. Comfort yourself that your crush probably treated the text as a spam. Nothing awkward. We take the blame.
 
 GOT A TEXT?
-No, we will not tell you who sent the message. Enter your crush's number and see if it is your crush that sent the text message. You only have one chance to "check".
+
+No, we will not tell you who sent the message. Enter your crush's number and see if it is your crush that sent the text message. You only have one chance to "check", but you still have the chance to send your own anonymous message if it wasn't your crush.
 
 No excuse to hesitate anymore -- shoot your shot!
 
