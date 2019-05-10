@@ -1,7 +1,7 @@
 # Crush
 
-<img src= "https://github.com/ruhsane/Crush/blob/develop/Screenshots/Artboard%20%E2%80%93%201.png"</img>
-<img src= "https://github.com/ruhsane/Crush/blob/develop/Screenshots/Artboard%20%E2%80%93%202.png"</img>
+<img src= "https://github.com/ruhsane/Crush/blob/develop/Screenshots/Artboard%20%E2%80%93%201.png"> </img>
+<img src= "https://github.com/ruhsane/Crush/blob/develop/Screenshots/Artboard%20%E2%80%93%202.png"> </img>
 <img src= "https://github.com/ruhsane/Crush/blob/develop/Screenshots/Artboard%20%E2%80%93%203.png" width = 250 height = 600></img>
 <img src= "https://github.com/ruhsane/Crush/blob/develop/Screenshots/Artboard%20%E2%80%93%204.png" width = 250 height = 600></img>
 <img src= "https://github.com/ruhsane/Crush/blob/develop/Screenshots/Artboard%20%E2%80%93%205.png" width = 250 height = 600></img>
