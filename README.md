@@ -1,6 +1,6 @@
 # Crush
 
-#### :bangbang: Solving the issue of source not working on production... :bangbang:
+<h4 align="center">:bangbang: Solving the issue of source not working on production... :bangbang:</h4>
 
 <img src= "https://github.com/ruhsane/Crush/blob/develop/Screenshots/Artboard%20%E2%80%93%201.png" width = 250 height = 550> </img>
 <img src= "https://github.com/ruhsane/Crush/blob/develop/Screenshots/Artboard%20%E2%80%93%202.png" width = 250 height = 550> </img>
