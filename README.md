@@ -26,7 +26,7 @@ No, we will not tell you who sent the message. Enter your crush's number and see
 
 #### No excuse to hesitate anymore -- shoot your shot! :wink:
 
-## Workflow: 
+## Workflow
 User A logs in with A's phone number, enters A's crush (let's say user A's crush is user B)'s phone number and clicks send, it will automatically send an anonymous text message to userB saying someone labeled userB as his/her crush on the app. When userB downloads and logs in with B's phone number, B will be asked to enter B's crush’s number. If B's crush happens to be A, they will match; if the numbers don't match or userB does not have a crush at the moment, they will not match and B would not be able to know who sent the text message. If B enters C as B's crush, C will receive the message and it goes on. 
 Users can only have one crush at a time, if they want to send the text message to a different number, they have to un-crush their current crush and then send the text message to another number. (to avoid catfishing)
 
@@ -40,7 +40,7 @@ Users can only have one crush at a time, if they want to send the text message t
 - Xcode
 - UIKit
 
-## Libraries Used:
+## Libraries Used
 All MIT Licensed:
 - [SCLAlertView](https://github.com/vikmeup/SCLAlertView-Swift)
 ```
