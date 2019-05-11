@@ -8,21 +8,21 @@
 
 Do you have hard time telling your crush about your feelings? Well look no further!
 
-HOW IT WORKS?
+#### HOW IT WORKS?
 - Enter his/her number
 - He/she will get a text message saying someone labeled them as crush
 - He/she will be asked to enter THEIR crush's number
 - Match if both of you entered each other's numbers. BOOM!
 
-NO RESPONSE?
+#### NO RESPONSE?
 
 It is okay. Comfort yourself that your crush probably treated the text as a spam. Nothing awkward. We take the blame.
 
-GOT A TEXT?
+#### GOT A TEXT?
 
 No, we will not tell you who sent the message. Enter your crush's number and see if it is your crush that sent the text message. You only have one chance to "check", but you still have the chance to send your own anonymous message if it wasn't your crush.
 
-No excuse to hesitate anymore -- shoot your shot!
+### No excuse to hesitate anymore -- shoot your shot!
 
 ## Workflow: 
 User A logs in with A's phone number, enters A's crush (let's say user A's crush is user B)'s phone number and clicks send, it will automatically send an anonymous text message to userB saying someone labeled userB as his/her crush on the app. When userB downloads and logs in with B's phone number, B will be asked to enter B's crush’s number. If B's crush happens to be A, they will match; if the numbers don't match or userB does not have a crush at the moment, they will not match and B would not be able to know who sent the text message. If B enters C as B's crush, C will receive the message and it goes on. 
@@ -31,7 +31,7 @@ Users can only have one crush at a time, if they want to send the text message t
 
 ## Libraries Used:
 All MIT Licensed:
-- SCLAlertView (https://github.com/vikmeup/SCLAlertView-Swift)
+- [SCLAlertView](https://github.com/vikmeup/SCLAlertView-Swift)
 ```
 Copyright (c) 2013-2014 SCPopUpView by Viktor Radchenko
 
@@ -54,7 +54,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ```
 
-- CountryPickerView (https://github.com/kizitonwose/CountryPickerView)
+- [CountryPickerView](https://github.com/kizitonwose/CountryPickerView)
 ```
 The MIT License (MIT)
 
