@@ -95,7 +95,7 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
                     print("not matched")
                     let ref = Database.database().reference()
                     let user = Auth.auth().currentUser
-                    ref.child("Users").child((user?.phoneNumber)!).child("Status").setValue("Not Matched")
+                    ref.child(DatabaseKeys.Users).child((user?.phoneNumber)!).child(DatabaseKeys.Status).setValue("Not Matched")
                     presentVC(sbName: "Main", identifier: "notMatched", fromVC: self)
                 }
             })
@@ -109,14 +109,14 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
         let ref = Database.database().reference()
         let user = Auth.auth().currentUser
         // set status as wait
-        ref.child("Users").child((user?.phoneNumber)!).child("Status").setValue("Wait")
+        ref.child(DatabaseKeys.Users).child((user?.phoneNumber)!).child(DatabaseKeys.Status).setValue("Wait")
 
         // write crush number for user
         let num = self.code + self.enterNumberTextField.text!.readOnlyNumber
-        ref.child("Users").child((user?.phoneNumber)!).child("CrushNumber").setValue(num)
+        ref.child(DatabaseKeys.Users).child((user?.phoneNumber)!).child("CrushNumber").setValue(num)
         
         // receiver phone number in db with sender number under followers
-        ref.child("Loved").child(num).child("Followers").updateChildValues([(user?.phoneNumber)! : true])
+        ref.child(DatabaseKeys.Loved).child(num).child(DatabaseKeys.Followers).updateChildValues([(user?.phoneNumber)! : true])
         
     }
     
@@ -154,13 +154,11 @@ class UserViewController: UIViewController, CountryPickerViewDelegate {
     func showFollowersNum() {
         let ref = Database.database().reference()
         let user = Auth.auth().currentUser
-        ref.child("Loved").observe(.value) { (snapshot) in
+        ref.child(DatabaseKeys.Loved).observe(.value) { (snapshot) in
             
             if snapshot.hasChild((user?.phoneNumber)!){
-                ref.child("Loved").child((user?.phoneNumber)!).child("Followers").observe(.value, with: { (snapshot: DataSnapshot!) in
+                ref.child(DatabaseKeys.Loved).child((user?.phoneNumber)!).child(DatabaseKeys.Followers).observe(.value, with: { (snapshot: DataSnapshot!) in
                     
-                    print("Got snapshot");
-                    print("user followers count ", Int(snapshot.childrenCount))
                     self.followersCount = Int(snapshot.childrenCount)
                 })
             }

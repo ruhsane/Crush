@@ -13,5 +13,7 @@ struct DatabaseKeys {
     
     static let Users = "Users"
     static let Status = "Status"
-
+    static let Loved = "Loved"
+    static let Followers = "Followers"
+    
 }
