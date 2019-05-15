@@ -13,6 +13,7 @@ import FirebaseDatabase
 
 class verificationCodeViewController: UIViewController {
 
+
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var enterCode: UITextField!
     var window: UIWindow?
@@ -57,11 +58,11 @@ class verificationCodeViewController: UIViewController {
                 let user = Auth.auth().currentUser
                 
                 // go in to Users in database
-                ref.child("Users").child((user?.phoneNumber)!).observeSingleEvent(of: .value, with: { (snapshot) in
+                ref.child(DatabaseKeys.Users).child((user?.phoneNumber)!).observeSingleEvent(of: .value, with: { (snapshot) in
                     // if the user already has account and status
-                    if snapshot.hasChild("Status"){
+                    if snapshot.hasChild(DatabaseKeys.Status){
                         // check the status
-                        let status = ref.child("Users").child((user?.phoneNumber)!).child("Status")
+                        let status = ref.child(DatabaseKeys.Users).child((user?.phoneNumber)!).child(DatabaseKeys.Status)
                         status.observeSingleEvent(of: .value, with: { (snapshot) in
                             let statusValue = snapshot.value as? String
                             // if status = matched

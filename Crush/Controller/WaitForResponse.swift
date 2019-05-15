@@ -66,18 +66,18 @@ class WaitForResponse: UIViewController, CountryPickerViewDelegate {
         let currentUserRef = Database.database().reference().child("Users").child(user!.phoneNumber!)
         currentUserRef.observeSingleEvent(of: .value) { (snapshot) in
             let currentUser = snapshot.value as! [String: String]
-            let oldCrush = currentUser["CrushNumber"] as! String
+            let oldCrush = currentUser["CrushNumber"]
             // go into old receiver in loved
-            ref.child("Loved").child(oldCrush).child("Followers").observeSingleEvent(of: .value, with: { (snapshot) in
+            ref.child("Loved").child(oldCrush!).child("Followers").observeSingleEvent(of: .value, with: { (snapshot) in
                 print("old crush followers count", snapshot.childrenCount)
                 if snapshot.childrenCount == 1 && snapshot.hasChild((user?.phoneNumber)!) {
                     // if oldcrush only had current user as followers
                     // delete the whole oldcrush object in loved
-                    Database.database().reference(withPath: "Loved").child(oldCrush).removeValue()
+                    Database.database().reference(withPath: "Loved").child(oldCrush!).removeValue()
                 } else if snapshot.hasChild((user?.phoneNumber)!) {
                     // if oldcrush had multiple followers
                     // only delete current user's number from followers list
-                    Database.database().reference(withPath: "Loved").child(oldCrush).child("Followers").child((user?.phoneNumber)!).removeValue()
+                    Database.database().reference(withPath: "Loved").child(oldCrush!).child("Followers").child((user?.phoneNumber)!).removeValue()
                 }
             })
             

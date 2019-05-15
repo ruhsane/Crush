@@ -48,9 +48,7 @@ extension UIViewController {
             Alamofire.request(url, method: .post, parameters: parameters)
                 .authenticate(user: accountSID, password: authToken)
                 .responseJSON { response in
-                    print(response)
                     let status = response.response?.statusCode
-                    print(status)
                     if status! > 200 && status! < 299{
                         return completion(true)
                     }
@@ -60,7 +58,6 @@ extension UIViewController {
             }
         }
         
-//        RunLoop.main.run()
     }
     
     func matchOrNo(num: String, completion: @escaping(Bool)->()) {
@@ -68,6 +65,7 @@ extension UIViewController {
         let user = Auth.auth().currentUser
         
         ref.child("Users").child((user?.phoneNumber)!).child("CrushNumber").setValue(num)
+        
         ref.child("Loved").child((user?.phoneNumber)!).child("Followers").observeSingleEvent(of: .value, with: { (snapshot) in
             self.removeSpinner()
             if snapshot.hasChild(num){
