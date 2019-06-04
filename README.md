@@ -11,6 +11,7 @@
 ## App Description 
 
 #### HOW IT WORKS? :open_mouth:
+
 - Enter his/her number
 - He/she will get a text message saying someone labeled them as crush
 - He/she will be asked to enter THEIR crush's number
