@@ -37,25 +37,20 @@ extension UIViewController {
     }
     
     func twillioSendText(to: String, body: String, completion: @escaping(Bool)->()) {
+
+        let url = "https://api.twilio.com/2010-04-01/Accounts/\(TWILIO_ACCOUNT_SID)/Messages"
+        let parameters = ["From": TWILIO_NUMBER, "To": to, "Body": body]
         
-        if let accountSID = ProcessInfo.processInfo.environment["TWILIO_ACCOUNT_SID"],
-            let authToken = ProcessInfo.processInfo.environment["TWILIO_AUTH_TOKEN"] {
-            
-            let url = "https://api.twilio.com/2010-04-01/Accounts/\(accountSID)/Messages"
-            let parameters = ["From": ProcessInfo.processInfo.environment["TWILIO_NUMBER"], "To": to, "Body": body] as! [String: String]
-            print(parameters)
-            //            Alamofire.request(url, method: .post, parameters: parameters, encoding: parameters)
-            Alamofire.request(url, method: .post, parameters: parameters)
-                .authenticate(user: accountSID, password: authToken)
-                .responseJSON { response in
-                    let status = response.response?.statusCode
-                    if status! > 200 && status! < 299{
-                        return completion(true)
-                    }
-                    else{
-                        return completion(false)
-                    }
-            }
+        Alamofire.request(url, method: .post, parameters: parameters)
+            .authenticate(user: TWILIO_ACCOUNT_SID, password: TWILIO_AUTH_TOKEN)
+            .responseJSON { response in
+                let status = response.response?.statusCode
+                if status! > 200 && status! < 299{
+                    return completion(true)
+                }
+                else{
+                    return completion(false)
+                }
         }
         
     }
@@ -71,14 +66,12 @@ extension UIViewController {
             if snapshot.hasChild(num){
                 ref.child("Loved").child(num).child("Followers").updateChildValues([(user?.phoneNumber)! : true])
 
-                print("matched")
+                // print("matched")
                 // change status in db
                 ref.child("Users").child((user?.phoneNumber)!).child("Status").setValue("Matched")
                 // change the other one's status too
                 ref.child("Users").child(num).child("Status").setValue("Matched")
 
-
-//                ref.child("Users").child(num).child("Status").setValue("Matched")
 
                 //present matched vc
                 presentVC(sbName: "Main", identifier: "Matched", fromVC: self)
