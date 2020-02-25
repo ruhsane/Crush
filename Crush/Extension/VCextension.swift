@@ -39,7 +39,7 @@ extension UIViewController {
     func twillioSendText(to: String, body: String, completion: @escaping(Bool)->()) {
 
         let url = "https://api.twilio.com/2010-04-01/Accounts/\(TWILIO_ACCOUNT_SID)/Messages"
-        let parameters = ["From": TWILIO_NUMBER, "To": to, "Body": body]
+        let parameters = ["From": TWILIO_NUMBER, "To": to, "Body": body] as [String : Any]
         
         Alamofire.request(url, method: .post, parameters: parameters)
             .authenticate(user: TWILIO_ACCOUNT_SID, password: TWILIO_AUTH_TOKEN)

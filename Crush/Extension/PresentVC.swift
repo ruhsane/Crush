@@ -12,5 +12,6 @@ import UIKit
 public func presentVC(sbName: String, identifier: String, fromVC: UIViewController) {
     let storyboard = UIStoryboard(name: sbName, bundle: nil)
     let toVC = storyboard.instantiateViewController(withIdentifier: identifier)
+    toVC.modalPresentationStyle = .fullScreen
     fromVC.present(toVC,animated: true)
 }

@@ -27,8 +27,8 @@
 		9DAF898221191A4600DBF36B /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAF898121191A4600DBF36B /* UserViewController.swift */; };
 		9DC87BE12249AEF0003DDE9F /* UserDefaults+helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC87BE02249AEF0003DDE9F /* UserDefaults+helpers.swift */; };
 		9DC87BE3224D9C66003DDE9F /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC87BE2224D9C66003DDE9F /* StringExtension.swift */; };
+		9DEF588423A7949400C8CFC0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEF588323A7949400C8CFC0 /* Constants.swift */; };
 		9DF48414210BC17A00B46D27 /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF48413210BC17A00B46D27 /* LoginPage.swift */; };
-		9DF8BE14232B0D1B0070BC06 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF8BE13232B0D1B0070BC06 /* Constants.swift */; };
 		E77BEA1C02450A9D1D49B06F /* Pods_Crush.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34BC8388796A50937F95AE80 /* Pods_Crush.framework */; };
 /* End PBXBuildFile section */
 
@@ -78,8 +78,8 @@
 		9DAF898121191A4600DBF36B /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		9DC87BE02249AEF0003DDE9F /* UserDefaults+helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefaults+helpers.swift"; sourceTree = "<group>"; };
 		9DC87BE2224D9C66003DDE9F /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		9DEF588323A7949400C8CFC0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		9DF48413210BC17A00B46D27 /* LoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPage.swift; sourceTree = "<group>"; };
-		9DF8BE13232B0D1B0070BC06 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,7 +111,6 @@
 		9D1937EB2106899A007EE5EC = {
 			isa = PBXGroup;
 			children = (
-				9DF8BE13232B0D1B0070BC06 /* Constants.swift */,
 				9D1937F62106899A007EE5EC /* Crush */,
 				9D19380B2106899B007EE5EC /* CrushTests */,
 				9D1938162106899B007EE5EC /* CrushUITests */,
@@ -135,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				9D1937F72106899A007EE5EC /* AppDelegate.swift */,
+				9DEF588323A7949400C8CFC0 /* Constants.swift */,
 				9D4FF48C22445ECE009B8735 /* Extension */,
 				9DC340BA2238D5D70014EF50 /* Model */,
 				9DC340BB2238D5E40014EF50 /* View */,
@@ -427,7 +427,7 @@
 				9D37709E22427F4400F0827D /* PresentVC.swift in Sources */,
 				9DC87BE3224D9C66003DDE9F /* StringExtension.swift in Sources */,
 				9D64E05A210FA89E00386F69 /* verificationCodeViewController.swift in Sources */,
-				9DF8BE14232B0D1B0070BC06 /* Constants.swift in Sources */,
+				9DEF588423A7949400C8CFC0 /* Constants.swift in Sources */,
 				9DF48414210BC17A00B46D27 /* LoginPage.swift in Sources */,
 				9D1937F82106899A007EE5EC /* AppDelegate.swift in Sources */,
 			);
@@ -604,8 +604,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Crush/Crush.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P32V53W8H7;
 				INFOPLIST_FILE = Crush/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -614,7 +614,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ruhsane.Crush;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Crush-AdHoc";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -626,8 +626,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Crush/Crush.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P32V53W8H7;
 				INFOPLIST_FILE = Crush/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -636,7 +636,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ruhsane.Crush;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Crush-AdHoc";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
